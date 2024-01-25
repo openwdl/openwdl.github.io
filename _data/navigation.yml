@@ -12,4 +12,4 @@ main:
   - title: "Documentation"
     url: https://docs.openwdl.org
   - title: "Blog"
-    url: https://dev.to/openwdl
+    url: /blog

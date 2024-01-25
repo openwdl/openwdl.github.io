@@ -1,0 +1,15 @@
+John Didion:
+  name        : "John Didion"
+  avatar      : "/assets/images/jdidion.png"
+  links:
+    - label: "Website"
+      icon: "fas fa-fw fa-github"
+      url: "https://github.com/jdidion"
+
+Venkat Malladi:
+  name        : "Venkat Malladi"
+  avatar      : "/assets/images/vmalladi.png"
+  links:
+    - label: "Website"
+      icon: "fas fa-fw fa-github"
+      url: "https://github.com/vsmalladi"

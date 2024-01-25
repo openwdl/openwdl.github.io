@@ -25,9 +25,19 @@ Prefer trailing slashes e.g. `/community/` over `/community`
 
 New pages can be made in `_pages/`
 
+### Blog
+
+New blogs are made under `_posts` and named according to the YEAR-MONTH-DAY-title.markdown.
+
+Authors are linked under `_data/authors.yml`
+
 **Media:**
 
 All media is under `media`
+
+**Images:**
+
+All images is under `assets/images`
 
 **CSS Styles:**
  The pages styles can then be modified in `assets/css/main.scss`.
