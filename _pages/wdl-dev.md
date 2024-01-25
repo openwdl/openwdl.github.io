@@ -14,7 +14,7 @@ Please see the documentation associated with each tool/platform for information 
 
 | Implementation                                                                 | Requires Installation | Local Execution | HPC   | Cloud                 |
 | ------------------------------------------------------------------------------ | --------------------- | --------------- | ----- | --------------------- |
-| [AWS HealthOmics](https://docs.aws.amazon.com/omics/latest/dev/workflows.html) | Yes                   | No              | No    | AWS                   |
+| [AWS HealthOmics](https://docs.aws.amazon.com/omics/latest/dev/workflows.html) | No                   | No              | No    | AWS                   |
 | [Cromwell](https://github.com/broadinstitute/cromwell) *                       | Yes                   | Yes             | Many  | AWS Batch, Azure, GCP |
 | [dxCompiler](https://github.com/dnanexus/dxCompiler)                           | Yes                   | No              | No    | DNAnexus              |
 | [MiniWDL](https://github.com/chanzuckerberg/miniwdl)                           | Yes                   | Yes             | SLURM | AWS Batch             |
