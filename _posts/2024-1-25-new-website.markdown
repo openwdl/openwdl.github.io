@@ -33,6 +33,10 @@ Visit the [OpenWDL Website](https://www.openwdl.org) and experience the changes 
 
 ## Get Involved!
 
-As a community-driven project, OpenWDL thrives on collaboration and input from its users. If you have ideas for further improvements or if you spot any issues, please don't hesitate to reach out. Your involvement is crucial to the success and ongoing development of OpenWDL.  Interactions occur primarily on [GitHub](https://github.com/openwdl/openwdl.github.io) and [Slack](https://join.slack.com/t/openwdl/shared_invite/zt-ctmj4mhf-cFBNxIiZYs6SY9HgM9UAVw). 
+As a community-driven project, OpenWDL thrives on collaboration and input from its users. If you have ideas for further improvements or if you spot any issues, please don't hesitate to reach out. Your involvement is crucial to the success and ongoing development of OpenWDL. Interactions occur primarily on [GitHub](https://github.com/openwdl/wdl) and [Slack](https://join.slack.com/t/openwdl/shared_invite/zt-ctmj4mhf-cFBNxIiZYs6SY9HgM9UAVw). Please see the [README](https://github.com/openwdl/wdl/tree/wdl-1.1#community-and-support) for the full list of community resources.
+
+### Blog
+
+We have a new [Blog](https://www.openwdl.org/blog) that we will be putting more frequent updates. We encourage the community to add to their experience. 
 
 Stay tuned for more updates, and happy exploring on the redesigned OpenWDL website!
