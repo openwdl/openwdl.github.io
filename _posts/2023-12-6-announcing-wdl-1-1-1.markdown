@@ -31,7 +31,7 @@ We invite the community to contribute additional test cases to the [WDL Tests](h
 
 WDL is a strongly typed language - every variable, function parameter, and return value has a [type](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md#types), and implementations perform static analysis to ensure that assigned values are of the correct type. However, the WDL type system has some [quirks and inconsistencies](https://github.com/openwdl/wdl/issues/373) that the community has been working to address.
 
-[Hidden Types(https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md#hidden-types)] are a new concept added in this release to better explain some existing behavior that many users have found confusing. A hidden type is one that may only be instantiated by the execution engine and cannot be used in a declaration within a WDL file.
+[Hidden Types](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md#hidden-types) are a new concept added in this release to better explain some existing behavior that many users have found confusing. A hidden type is one that may only be instantiated by the execution engine and cannot be used in a declaration within a WDL file.
 
 Currently, there is only one hidden type, Union, that represents a value that may have any one of several concrete types. A Union value must always be coerced to a concrete type. There are two places where the Union type is used:
 
