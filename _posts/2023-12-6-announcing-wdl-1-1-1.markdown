@@ -7,7 +7,7 @@ categories: wdl bioinformatics workflows
 
 # Announcing WDL 1.1.1 Release
 
-The [OpenWDL](https://openwdl.org/) community is pleased to announce the release of W[orkflow Description Language (WDL) 1.1.1](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md)! This post highlights the most important changes in this release.
+The [OpenWDL](https://openwdl.org/) community is pleased to announce the release of [Workflow Description Language (WDL) 1.1.1](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md)! This post highlights the most important changes in this release.
 
 ## About WDL
 
