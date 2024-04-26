@@ -1,5 +1,5 @@
 ---
-title: "A Comprehensive Guide to Utilizing Workflow Templates in WDL Development"
+title: "Workflow Template Repository"
 author: Venkat Malladi
 date:   2024-4-26 16:01:01 -0600
 categories: wdl bioinformatics workflows ci cd testing
