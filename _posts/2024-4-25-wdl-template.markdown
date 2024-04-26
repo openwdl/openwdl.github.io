@@ -1,7 +1,7 @@
 ---
 title: "Workflow Template Repository"
 author: Venkat Malladi
-date:   2024-04-26 10:02:15 -0600
+date:   2024-04-25 10:02:15 -0600
 categories: wdl bioinformatics workflows ci cd testing
 ---
 
