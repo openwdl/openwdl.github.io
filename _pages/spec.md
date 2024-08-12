@@ -10,10 +10,11 @@ The WDL specification contains all relevant information for users and developers
 The WDL GitHub project uses the branch for the current version of the specification as its primary branch, so you will always see the current version of the specification so long as you visit[WDL root URL](https://github.com/openwdl/wdl).
 Users are strongly encouraged to use the current version of the specification unless absolutely necessary.
 
-The most recent released version, **1.1** of the [WDL language specification](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md).
+The most recent released version, **1.2** of the [WDL language specification](https://github.com/openwdl/wdl/blob/wdl-1.2/SPEC.md).
 
 Previous versions of the spec can be found here:
 
+- [1.1](https://github.com/openwdl/wdl/blob/main/versions/1.1/SPEC.md)
 - [1.0](https://github.com/openwdl/wdl/blob/main/versions/1.0/SPEC.md)
 
 There are a number of draft versions that correspond to initial efforts at creating WDL.
