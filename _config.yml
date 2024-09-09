@@ -98,9 +98,6 @@ social:
   links: # An array of links to social media profiles
 
 # Analytics
-# Google Analytics
-google_analytics: G-NWVW36W75S
-G-NWVW36W75S'
 analytics:
   provider               : google-gtag (default), "google", "google-universal", "google-gtag", "custom"
   google:
