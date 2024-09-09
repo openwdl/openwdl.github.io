@@ -101,7 +101,7 @@ social:
 analytics:
   provider               : "google-gtag" (default), "google", "google-universal", "google-gtag", "custom"
   google:
-    tracking_id          : "G-NWVW36W75S"
+    tracking_id          : G-NWVW36W75S
     anonymize_ip         : # true, false (default)
 
 
