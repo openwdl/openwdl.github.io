@@ -102,7 +102,7 @@ analytics:
   provider               : "google-gtag"
   google:
     tracking_id          : G-NWVW36W75S
-    anonymize_ip         : true
+    anonymize_ip         : false
 
 
 # Site Author
