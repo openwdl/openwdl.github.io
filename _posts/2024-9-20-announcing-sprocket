@@ -5,9 +5,10 @@ date:   2024-09-20 15:24:15 -0600
 categories: wdl bioinformatics workflows vscode lint
 ---
 
-# Introducing Sprocket: A WDL-Compatible Workflow Engine
+# Introducing Sprocket
 
-We are excited to announce **Sprocket**, a lightweight and efficient workflow engine for bioinformatics and computational research. Sprocket is designed to be highly compatible with the Workflow Description Language (WDL), making it a valuable addition to the growing ecosystem of WDL tools.
+We are excited to announce **Sprocket**, a linter and validity of Workflow Description Language (WDL). Additionally, it is underactive development to become a workflow engine for bioinformatics and computational research. Sprocket is designed to be highly compatible with WDL, making it a valuable addition to the growing ecosystem of WDL tools.
+
 
 ## What is Sprocket?
 
@@ -23,7 +24,7 @@ Sprocket aims for the following:
 
 ## Why Use Sprocket?
 
-Sprocket aims at providing a minimal yet robust alternative for running WDL workflows.
+Sprocket aims at providing a minimal yet robust alternative for testing and running WDL workflows.
 
 - **Simplicity**: For users who need to run WDL workflows quickly without complex infrastructure setup, Sprocket offers a straightforward solution.
 - **Speed**: Sprocket is optimized to run workflows with low overhead, helping users execute their tasks faster and more efficiently.
