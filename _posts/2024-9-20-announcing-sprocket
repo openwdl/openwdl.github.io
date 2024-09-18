@@ -7,7 +7,7 @@ categories: wdl bioinformatics workflows vscode lint
 
 # Introducing Sprocket
 
-We are excited to announce **Sprocket**, a linter and validity of Workflow Description Language (WDL). Additionally, it is underactive development to become a workflow engine for bioinformatics and computational research. Sprocket is designed to be highly compatible with WDL, making it a valuable addition to the growing ecosystem of WDL tools.
+We are excited to announce **Sprocket**, a validator and linter for the Workflow Description Language (WDL). Beyond just validation and linting, Sprocket is under active development towards becoming a workflow execution engine for bioinformatics and computational research. Sprocket uses WDL as it's workflow language of choice, making it a valuable addition to the growing ecosystem of WDL tools.
 
 
 ## What is Sprocket?
