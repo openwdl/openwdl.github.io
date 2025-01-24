@@ -2,7 +2,7 @@ main:
   - title: "About"
     url: /about
   - title: "Getting Started"
-    url: https://docs.openwdl.org/getting-started/overview.html
+    url: https://docs.openwdl.org/overview.html
   - title: "Specification"
     url: /spec
   - title: "Documentation"
