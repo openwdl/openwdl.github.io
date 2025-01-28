@@ -14,29 +14,3 @@ To reference the Workflow Description Language and the WDL project in scholarly 
 
 
 * Voss K, Van der Auwera G and Gentry J. Full-stack genomics pipelining with GATK4 + WDL + Cromwell [version 1; not peer reviewed]. F1000Research 2017, 6(ISCB Comm J):1381 (slides) [DOI:10.7490/f1000research.1114634.1](https://doi.org/10.7490/f1000research.1114634.1)
-
-## Governance
-
-The WDL specification is entirely community driven; however, it is overseen by a Governance committee.
-
-If you are interested in being involved in WDL governance, please join the [Slack](https://join.slack.com/t/openwdl/shared_invite/zt-ctmj4mhf-cFBNxIiZYs6SY9HgM9UAVw) and post a message in the `#general` channel.
-
-OpenWDL is led by a small core group who help govern the language specfication. Current members include:
-
-* **Jeff Gentry**, Fulcrum Genomics 
-* **Mike Lin**, Chan Zuckerberg Initiative
-* **Patrick Magee**, DNAstack  
-* **Brian O'Connor**, Sage Bionetworks  
-* **Christopher Llanwarne**, Broad Institute  
-* **John Didion**, Fulcrum Genomics   
-* **Michael Franklin**, Centre for Population Genomics   
-* **Amy Paguirigan**, Fred Hutch  
-* **Ruben Vorderman**, Leiden University Medical Center  
-* **Venkat Malladi**, Microsoft   
-* **Lee Pang**, Amazon
-* **Mark Schreiber**, Amazon
-
-### Former Members
-* Brad Chapman
-* Abirami Prabhakaran
-* Geraldine Van der Auwera
