@@ -3,6 +3,8 @@ main:
     url: /about
   - title: "Getting Started"
     url: https://docs.openwdl.org/getting-started/quickstart.html
+  - title: "Governance"
+    url: https://github.com/openwdl/governance/blob/main/README.md
   - title: "Specification"
     url: /spec
   - title: "Documentation"
