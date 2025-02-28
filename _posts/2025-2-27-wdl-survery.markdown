@@ -83,4 +83,4 @@ The WDL Usage and Adoption Survey provides valuable insights into the current st
 
 ## Future of WDL
 The [WDL Governance Committee](https://github.com/openwdl/governance/blob/main/README.md) is considering this feedback. As
-part of our discussions we are aiming to increase community engagment over the next few months through [Slack](https://join.slack.com/t/openwdl/shared_invite/zt-ctmj4mhf-cFBNxIiZYs6SY9HgM9UAVw) and [WDL git repo](https://github.com/openwdl/).
+part of our discussions we are aiming to increase community engagement over the next few months through [Slack](https://join.slack.com/t/openwdl/shared_invite/zt-ctmj4mhf-cFBNxIiZYs6SY9HgM9UAVw) and [WDL git repo](https://github.com/openwdl/).
