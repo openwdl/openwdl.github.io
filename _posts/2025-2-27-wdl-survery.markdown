@@ -1,5 +1,5 @@
 ---
-title: "WDL Survery Report"
+title: "WDL Survey Report"
 author: Venkat Malladi
 date:   2025-02-27 15:24:15 -0600
 categories: wdl bioinformatics workflows 
