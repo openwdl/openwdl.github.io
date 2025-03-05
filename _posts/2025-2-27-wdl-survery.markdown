@@ -11,7 +11,7 @@ categories: wdl bioinformatics workflows
 
 ## Introduction  
 
-In January 20024, we sent our first WDL Usage and Adoption Survey aimed to gather insights and feedback from the [WDL](https://openwdl.org/) user community. The survey received responses from professionals working in academia and the biotech/pharma industries. By sharing these findings and trends, we aim to drive evolution of the [WDL spec](https://github.com/openwdl/wdl), enable the community of researchers and developers to build new innovations and collaborations around WDL best practices. This report summarizes the key findings and trends observed from the survey responses.
+In January 2024, we sent our first WDL Usage and Adoption Survey aimed to gather insights and feedback from the [WDL](https://openwdl.org/) user community. The survey received responses from professionals working in academia and the biotech/pharma industries. By sharing these findings and trends, we aim to drive evolution of the [WDL spec](https://github.com/openwdl/wdl), enable the community of researchers and developers to build new innovations and collaborations around WDL best practices. This report summarizes the key findings and trends observed from the survey responses.
 
 ## Key Findings  
 
