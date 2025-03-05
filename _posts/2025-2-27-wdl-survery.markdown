@@ -25,7 +25,7 @@ To build and foster a sense of community, we wanted to know how our users intera
 
 ![Fig 4](/assets/images/survery_jan2024/engagement.png)
 
-![Fig 5](/assets/images/survery_jan2024/wdl_formums.png)
+![Fig 5](/assets/images/survery_jan2024/wdl_forums.png)
 
 ### Workflow Deployment and Usage  
 
