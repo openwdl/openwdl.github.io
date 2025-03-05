@@ -71,6 +71,5 @@ Additionally, users would like to see an increase in tutorials, best practice gu
 The WDL Usage and Adoption Survey provides valuable insights into the current state of WDL usage and adoption. The findings highlight the strengths and areas for improvement, offering guidance for future development and support. By addressing the community's needs and preferences, WDL can continue to evolve and support the bioinformatics community effectively. We acknowledge that this survery doesn't capture the full community perceptives. As a result, over the the next couple of months we plan on reaching more out to the community and then conducting another survery in the later half of the year.
 
 ## Future of WDL
-
-The [WDL Governance Comitte](https://github.com/openwdl/governance/blob/main/README.md) is considering this feedback. As
-part of our discussions we are aiming to increase community engagment over the next few months through [Slack](https://join.slack.com/t/openwdl/shared_invite/zt-ctmj4mhf-cFBNxIiZYs6SY9HgM9UAVw) and [WDL git repo](https://github.com/openwdl/).
+The [WDL Governance Committee](https://github.com/openwdl/governance/blob/main/README.md) is considering this feedback. As
+part of our discussions we are aiming to increase community engagement over the next few months through [Slack](https://join.slack.com/t/openwdl/shared_invite/zt-ctmj4mhf-cFBNxIiZYs6SY9HgM9UAVw) and [WDL git repo](https://github.com/openwdl/).
