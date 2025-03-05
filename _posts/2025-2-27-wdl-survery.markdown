@@ -53,7 +53,7 @@ Most users write their own WDL workflows. However, with a growing community, we 
 
 ## Future of WDL  
 
-The future of WDL is seen with mixed opinions. While **50%** of users expect it to stay the same, **19%** foresee increasing usage, and another **22%** foresee switching to another workflow language (Fig 12).  
+The future of WDL is seen with mixed opinions. While **50%** of users expect their usage of WDL to stay the same, **19%** foresee increasing usage, and another **22%** foresee switching to another workflow language (Fig 12).  
 
 
 ![Fig 12](/assets/images/survery_jan2024/wdl_evolution.png)
