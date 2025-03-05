@@ -5,10 +5,6 @@ date:   2025-02-27 15:24:15 -0600
 categories: wdl bioinformatics workflows 
 ---
 
-# WDL Usage and Adoption Survey Report  
-
-# WDL Usage and Adoption Survey Report
-
 ## Introduction  
 
 In January 20024, we sent our first WDL Usage and Adoption Survey aimed to gather insights and feedback from the [WDL](https://openwdl.org/) user community. The survey received responses from professionals working in academia and the biotech/pharma industries. By sharing these findings and trends, we aim to drive evolution of the [WDL spec](https://github.com/openwdl/wdl), enable the community of researchers and developers to build new innovations and collaborations around WDL best practices. This report summarizes the key findings and trends observed from the survey responses.
@@ -17,7 +13,7 @@ In January 20024, we sent our first WDL Usage and Adoption Survey aimed to gathe
 
 ### Community  
 
-The WDL community is very active and vibrant. Our community primarily considers themselves either a **bioinformatician (47%) or software engineer (37%)** (Fig 1). Of these users, 77% identify as from academia (Fig 2). While the WDL spec has been around for nearly a decade, it is clear that our community is growing. We see that **31% of users have picked it up in the last 1-3 years** (Fig 3).  
+The WDL community is growing. Our community primarily considers themselves either a **bioinformatician (47%) or software engineer (37%)** (Fig 1). Of these users, 77% identify as from academia (Fig 2). While the WDL spec has been around for nearly a decade, it is clear that our community is growing. We see that **31% of users have picked it up in the last 1-3 years** (Fig 3).  
 
 ![Fig 1](/assets/images/survery_jan2024/demographics.png)
 
