@@ -1,7 +1,7 @@
 ---
 title: "Announcing WDL 1.1.3"
 author: Venkat Malladi
-date:   2025-12-19 12:00:00 -0600
+date:   2026-1-10 12:00:00 -0600
 categories: wdl bioinformatics workflows
 ---
 
@@ -32,6 +32,8 @@ This release includes several bug fixes, clarifications, and improvements to the
 * Added CI/CD pipelines for MiniWDL, Sprocket, Toil, and Cromwell to ensure spec compliance.
 
 * Removed Advanced Task Examples to clearly distinguish what is in scope for testing.
+
+* Updates the compliance suite to use [spectool](https://github.com/openwdl/spectool)
 
 If you find other areas of the specification that you think need improvement, we welcome
 [issues](https://github.com/openwdl/wdl/issues) and [pull requests](https://github.com/openwdl/wdl/pulls).
