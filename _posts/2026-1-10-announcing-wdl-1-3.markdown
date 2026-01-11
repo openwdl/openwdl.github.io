@@ -332,7 +332,7 @@ Beyond new features, WDL v1.3 includes clarifications that make the language mor
 
 ### Path Resolution and File Existence
 
-Prior to WDL v1.3, the specification was ambiguous about how `File` and `Directory` declarations behave. As reported in [#673](https://github.com/openwdl/wdl/issues/673) and [#676](https://github.com/openwdl/wdl/issues/676), identical code could produce different results depending on where it appeared: a declaration like `Array[File?] files = ["example.txt"]` would behave differently in private declarations versus output sections.
+Prior to WDL v1.3, the specification was ambiguous about how `File` and `Directory` declarations behave. As reported in [#673](https://github.com/openwdl/wdl/issues/673) and [#676](https://github.com/openwdl/wdl/issues/676), identical code could produce different results depending on where it appeared: a declaration like `Array[File?] files = ["example.txt"]` might behave unexpectedly in private declarations versus output sections.
 
 The clarifications in [#735](https://github.com/openwdl/wdl/pull/735) resolve this by explicitly defining:
 
