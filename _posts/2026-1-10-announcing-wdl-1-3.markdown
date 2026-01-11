@@ -312,9 +312,9 @@ task count_primes {
       # First attempt: use `starting_memory` parameter
       if !defined(task.previous.memory) then starting_memory
       # Under `8 GB`: double it
-      else if select_first([task.previous.memory]) < 8000000000
+      else if select_first([task.previous.memory]) <= 8000000000
         then "~{floor(select_first([task.previous.memory]) / 500000000)} GB"
-      # At `8 GB` or above: cap at `16 GB`
+      # Above `8 GB`: cap at `16 GB`
       else "16 GB"
     )
     max_retries: 3
