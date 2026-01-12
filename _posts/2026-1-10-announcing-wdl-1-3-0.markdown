@@ -1,11 +1,11 @@
 ---
-title: "Announcing WDL v1.3"
+title: "Announcing WDL 1.3.0"
 author: Clay McLeod
 date:   2026-1-10 12:00:00 -0600
 categories: wdl bioinformatics workflows
 ---
 
-It's been a while since our last release! WDL v1.2 introduced features like the `Directory` type, multi-line strings, and the `requirements`/`hints` sections, but that was several years ago. Since then, execution engines have been steadily improving, and [Sprocket](https://github.com/stjude-rust-labs/sprocket) recently became the first engine to [fully support the 1.2 spec](https://github.com/openwdl/wdl#execution-engines). With a complete implementation now available, we have the foundation to confidently move forward. Throughout this period, the community has continued to file issues, propose enhancements, and—reasonably—wonder what's next for WDL.
+It's been a while since our last release! WDL v1.2 introduced features like the `Directory` type, multi-line strings, and the `requirements`/`hints` sections, but that was several years ago. Since then, execution engines have been steadily improving, and [Sprocket](https://github.com/stjude-rust-labs/sprocket) recently became the first engine to [fully support the 1.2 spec](https://github.com/openwdl/wdl/blob/wdl-1.2/README.md). With a complete implementation now available, we have the foundation to confidently move forward. Throughout this period, the community has continued to file issues, propose enhancements, and—reasonably—wonder what's next for WDL.
 
 Today, we're happy to announce the answer to that question—[WDL v1.3](https://github.com/openwdl/wdl/blob/wdl-1.3/SPEC.md). This release focuses on quality-of-life improvements: features that reduce friction in everyday workflow development and clarifications that make WDL's behavior more predictable across execution engines. There are no breaking changes, just refinements that address long-standing requests.
 
