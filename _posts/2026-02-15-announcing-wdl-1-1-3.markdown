@@ -46,7 +46,7 @@ Additionally, as we implemented our new Continuous Integration (CI) testing pipe
     * Python heredoc examples with indentation errors causing `IndentationError` ([#668](https://github.com/openwdl/wdl/issues/668)) - part of [#669](https://github.com/openwdl/wdl/pull/669).
     * `read_json()` fails on Python-stringified output due to single quotes - fixed by ensuring valid JSON format ([#671](https://github.com/openwdl/wdl/issues/671)) - part of [#669](https://github.com/openwdl/wdl/pull/669).
     * Various examples with parsing issues, invalid inputs/outputs, or runtime failures - fixed by correcting syntax and logic ([#701](https://github.com/openwdl/wdl/issues/701)) - part of [#706](https://github.com/openwdl/wdl/pull/706).
-    * Removed Advanced Task Examples to cleary identify the goals and scope of the testing.  - part of [#706](https://github.com/openwdl/wdl/pull/706).
+    * Removed Advanced Task Examples to clearly identify the goals and scope of the testing.  - part of [#706](https://github.com/openwdl/wdl/pull/706).
     * Fixed the unit test for `round()` to properly test for round-half-up behavior as described in the specification - fixed by [#715](https://github.com/openwdl/wdl/pull/715).
     * Removed Advanced Task Examples to clearly distinguish what is in scope for testing ([#730](https://github.com/openwdl/wdl/issues/730)).
 
