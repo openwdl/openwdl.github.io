@@ -14,7 +14,7 @@ release of [Workflow Description Language (WDL)
 
 ## What's new?
 
-This patch release addresses many issues with the clarity of the specification that have been raised by the community and also adds some improvements to its testing infrastrucutre and some bug fixes. Note that this release does not introduce any new features or change any existing functionality.
+This patch release addresses many issues with the clarity of the specification that have been raised by the community and also adds some improvements to its testing infrastructure and some bug fixes. Note that this release does not introduce any new features or change any existing functionality.
 
 
 ### Testing Infrastrucutre and Improvements
