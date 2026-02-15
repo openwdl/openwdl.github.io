@@ -19,7 +19,7 @@ This patch release addresses many issues with the clarity of the specification t
 
 ### Testing Infrastructure and Improvements
 
-The biggest improvement introduced in this release is that we have switched our compliance suite to use [spectool](https://github.com/openwdl/spectool). This new tools allows you to parse the examples in a [standardized format](https://github.com/openwdl/spectool/blob/main/docs/SPEC.md) and test cases in the spec into descrete testable WDL files that can be verified by your engine of choice. 
+The biggest improvement introduced in this release is that we have switched our compliance suite to use [spectool](https://github.com/openwdl/spectool). This new tools allows you to parse the examples in a [standardized format](https://github.com/openwdl/spectool/blob/main/docs/SPEC.md) and test cases in the spec into discrete testable WDL files that can be verified by your engine of choice. 
 
 #### Engine compatibility
 
