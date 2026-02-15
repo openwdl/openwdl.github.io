@@ -1,7 +1,7 @@
 ---
 title: "Announcing WDL 1.1.3"
 author: Venkat Malladi
-date:   2026-01-12 12:00:00 -0600
+date:   2026-02-15 12:00:00 -0600
 categories: wdl bioinformatics workflows
 ---
 
