@@ -17,7 +17,7 @@ release of [Workflow Description Language (WDL)
 This patch release addresses many issues with the clarity of the specification that have been raised by the community and also adds some improvements to its testing infrastructure and some bug fixes. Note that this release does not introduce any new features or change any existing functionality.
 
 
-### Testing Infrastrucutre and Improvements
+### Testing Infrastructure and Improvements
 
 The biggest improvement introduced in this release is that we have switched our compliance suite to use [spectool](https://github.com/openwdl/spectool). This new tools allows you to parse the examples in a [standardized format](https://github.com/openwdl/wdl-tests/blob/main/docs/MarkdownTests.md) and test cases in the spec into descrete testable WDL files that can be verified by your engine of choice. 
 
