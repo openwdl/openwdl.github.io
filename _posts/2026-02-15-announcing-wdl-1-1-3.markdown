@@ -30,7 +30,7 @@ We have improved our testing infrastructure so that when anyone in the community
 * [Toil](https://toil.ucsc-cgl.org/)
 * [Sprocket](https://sprocket.bio/)
 
-We have created [badges](https://github.com/openwdl/wdl/blob/wdl-1.1/README.md#workflow-description-language-wdl) that hilight how many of thests pass for each engine. Full compliance will be at 100% pass rate.
+We have created [badges](https://github.com/openwdl/wdl/blob/wdl-1.1/README.md#workflow-description-language-wdl) that highlight how many of the tests pass for each engine. Full compliance will be at 100% pass rate.
 
 #### Test Case Bug Fixes and Corrections
 
