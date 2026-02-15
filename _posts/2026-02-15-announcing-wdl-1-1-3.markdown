@@ -34,7 +34,7 @@ We have created [badges](https://github.com/openwdl/wdl/blob/wdl-1.1/README.md#w
 
 #### Test Case Bug Fixes and Corrections
 
-Additionally, as we implemented our new Continuous Integration (CI) testing pipeline, we discovered many test cases needed to be fixed or clarified in order to just be executed. Many of these fixes were implemented thanks to [@stxue1](https://github.com/stxue1) and [@vsmalladi](https://github.com/vsmalladi), with contributions from [@jdidion](https://github.com/jdidion) and reviews from [@adamnovak](https://github.com/adamnovak) and [@claymcleod](https://github.com/claymcleod). Below is a summary of some of the big fixes and clarrification 
+Additionally, as we implemented our new Continuous Integration (CI) testing pipeline, we discovered many test cases needed to be fixed or clarified in order to just be executed. Many of these fixes were implemented thanks to [@stxue1](https://github.com/stxue1) and [@vsmalladi](https://github.com/vsmalladi), with contributions from [@jdidion](https://github.com/jdidion) and reviews from [@adamnovak](https://github.com/adamnovak) and [@claymcleod](https://github.com/claymcleod). Below is a summary of some of the big fixes and clarifications.
 
 ##### Fixes
 
