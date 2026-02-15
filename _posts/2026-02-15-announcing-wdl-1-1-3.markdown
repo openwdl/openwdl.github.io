@@ -51,7 +51,7 @@ Additionally, as we implemented our new Continuous Integration (CI) testing pipe
     * Removed Advanced Task Examples to clearly distinguish what is in scope for testing ([#730](https://github.com/openwdl/wdl/issues/730)).
 
 * **Specification Clarifications**:
-  * Clarrification around `File` - part of [#669](https://github.com/openwdl/wdl/pull/669).
+  * Clarification around `File` - part of [#669](https://github.com/openwdl/wdl/pull/669).
     * The path assigned to a `File` is not required to be valid unless and until it is accessed.
       * To read from a file, it must exist and be assigned appropriate permissions.
       * To write to a file, the parent directory must be assigned appropriate permissions.
