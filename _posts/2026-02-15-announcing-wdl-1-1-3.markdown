@@ -21,7 +21,7 @@ This patch release addresses many issues with the clarity of the specification t
 
 The biggest improvement introduced in this release is that we have switched our compliance suite to use [spectool](https://github.com/openwdl/spectool). This new tools allows you to parse the examples in a [standardized format](https://github.com/openwdl/spectool/blob/main/docs/SPEC.md) and test cases in the spec into descrete testable WDL files that can be verified by your engine of choice. 
 
-#### Engine compabitibilty
+#### Engine compatibility
 
 We have improved our testing infrastrucutre so that when anyone in the community wants to make a change we have automatic [Github Actions](https://github.com/openwdl/wdl/tree/wdl-1.1/.github/workflows) that run for the current major engines:
 
