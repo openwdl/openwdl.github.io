@@ -23,7 +23,7 @@ The biggest improvement introduced in this release is that we have switched our 
 
 #### Engine compatibility
 
-We have improved our testing infrastrucutre so that when anyone in the community wants to make a change we have automatic [Github Actions](https://github.com/openwdl/wdl/tree/wdl-1.1/.github/workflows) that run for the current major engines:
+We have improved our testing infrastructure so that when anyone in the community wants to make a change we have automatic [Github Actions](https://github.com/openwdl/wdl/tree/wdl-1.1/.github/workflows) that run for the current major engines:
 
 * [Cromwell](https://cromwell.readthedocs.io/en/latest/)
 * [miniwdl](https://miniwdl.readthedocs.io/en/latest/)
