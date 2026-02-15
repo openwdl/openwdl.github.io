@@ -56,7 +56,7 @@ Additionally, as we implemented our new Continuous Integration (CI) testing pipe
       * To read from a file, it must exist and be assigned appropriate permissions.
       * To write to a file, the parent directory must be assigned appropriate permissions.
     * Remote files must be treated as read-only.
-    * A remote file is only required to be vaild at the time that the execution engine needs to localize it.
+    * A remote file is only required to be valid at the time that the execution engine needs to localize it.
 
 If you find other areas of the specification that you think need improvement, we welcome
 [issues](https://github.com/openwdl/wdl/issues) and [pull requests](https://github.com/openwdl/wdl/pulls).
