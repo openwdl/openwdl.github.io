@@ -9,7 +9,7 @@ categories: wdl bioinformatics workflows
 
 The [OpenWDL](https://openwdl.org/) community is pleased to announce the
 release of [Workflow Description Language (WDL)
-1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md)!
+1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md)! The full list of issues and PR's can be found in [1.1.3 milestone](https://github.com/openwdl/wdl/milestone/5?closed=1)
 
 
 ## What's new?
