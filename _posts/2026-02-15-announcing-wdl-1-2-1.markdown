@@ -9,16 +9,16 @@ categories: wdl bioinformatics workflows
 
 The [OpenWDL](https://openwdl.org/) community is pleased to announce the
 release of [Workflow Description Language (WDL)
-1.2.1](https://github.com/openwdl/wdl/blob/wdl-1.2/SPEC.md)!
+1.2.1](https://github.com/openwdl/wdl/blob/wdl-1.2/SPEC.md)! The full list of issues and PR's can be found in [1.2.1 milestone](https://github.com/openwdl/wdl/milestone/6?closed=1)
 
 ## What's new?
 
-This patch release addresses many issues with the clarity of the specification that have been raised by the community and also adds some improvements to its testing infrastructure and some bug fixes. Note that this release does not introduce any new features or change any existing functionality.
+[Workflow Description Language (WDL)
+1.2.1](https://github.com/openwdl/wdl/blob/wdl-1.2/SPEC.md) is a patch release that primarily brings forward specification clarifications, test corrections, and infrastructure improvements that were first introduced in [v1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md). Additionally, this patch addresses many issues with the clarity of the specification around `Directory` and `join_paths`.
 
 ### Testing Infrastructure and Improvements
 
-The biggest improvement brought into this release from [Workflow Description Language (WDL)
-1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md) is that we have switched our compliance suite to use [spectool](https://github.com/openwdl/spectool). This new tools allows you to parse the examples in a [standardized format](https://github.com/openwdl/spectool/blob/main/docs/SPEC.md) and test cases in the spec into discrete testable WDL files that can be verified by your engine of choice. 
+The biggest improvement brought into this release from [v1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md) is that we have switched our compliance suite to use [spectool](https://github.com/openwdl/spectool). This new tool allows you to parse the examples in a [standardized format](https://github.com/openwdl/spectool/blob/main/docs/SPEC.md) and test cases in the spec into discrete testable WDL files that can be verified by your engine of choice. 
 
 #### Engine compatibility
 
@@ -33,8 +33,7 @@ We have created [badges](https://github.com/openwdl/wdl/blob/wdl-1.2/README.md#w
 
 #### Test Case Bug Fixes and Corrections
 
-Additionally, as we implemented our new Continuous Integration (CI) testing pipeline, we discovered many test cases needed to be fixed or clarified in order to just be executed. Many of these fixes were implemented in [Workflow Description Language (WDL)
-1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md) and ported over to this release thanks to [@stxue1](https://github.com/stxue1) and [@vsmalladi](https://github.com/vsmalladi), with contributions from [@jdidion](https://github.com/jdidion) and reviews from [@adamnovak](https://github.com/adamnovak) and [@claymcleod](https://github.com/claymcleod). Below is a summary of some of the big fixes and clarifications.
+Additionally, as we implemented our new Continuous Integration (CI) testing pipeline, we discovered many test cases needed to be fixed or clarified in order to just be executed. Many of these fixes were implemented in [Workflow Description Language (WDL) [v1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md) and ported over to this release thanks to [@stxue1](https://github.com/stxue1) and [@vsmalladi](https://github.com/vsmalladi), with contributions from [@jdidion](https://github.com/jdidion) and reviews from [@adamnovak](https://github.com/adamnovak) and [@claymcleod](https://github.com/claymcleod). Below is a summary of some of the big fixes and clarifications.
 
 
 ##### Example and Test Fixes
@@ -80,7 +79,6 @@ Additionally, as we implemented our new Continuous Integration (CI) testing pipe
 ##### Relative Path Resolution
 
   * Clarified that relative paths in `File` and `Directory` declarations are resolved relative to the WDL document's parent directory outside the `output` section, and relative to the task's execution directory inside the `output` section. Also clarified that optional files evaluate to `None` in both contexts if the path does not exist ([#735](https://github.com/openwdl/wdl/pull/735)).
-  * Deprecated the use of relative path literals in input and private variable declarations.
 
 ##### Disk Mount Semantics
 
