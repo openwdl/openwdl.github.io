@@ -54,7 +54,7 @@ Together, these updates tighten type semantics and make task evaluation rules mo
 
 ##### File, Directory, and Path Behavior
 
-A substantial portion of this release focuses on clarifying the behavior of `File` and `Directory` values.
+A substantial portion of this release focused on clarifying the behavior of `File` and `Directory` values.
 
 We explicitled state that `File` values cannot refer to directories and `Directory` values cannot refer to files—assigning the wrong kind of path is an error. Paths are not required to exist until they are accessed, but when they are accessed, clear rules apply - clarrified in ([#748](https://github.com/openwdl/wdl/pull/748)) and ([#745](https://github.com/openwdl/wdl/pull/745)):
 
