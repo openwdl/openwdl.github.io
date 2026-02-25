@@ -22,7 +22,7 @@ The biggest improvement brought into this release from [v1.1.3](https://github.c
 
 #### Engine compatibility
 
-The improved testing infrastructure alows anyone in the community can make a change and have [Github Actions](https://github.com/openwdl/wdl/tree/wdl-1.2/.github/workflows) that run for the current major engines:
+The improved testing infrastructure allows anyone in the community to make a change and have [Github Actions](https://github.com/openwdl/wdl/tree/wdl-1.2/.github/workflows) that run for the current major engines:
 
 * [Cromwell](https://cromwell.readthedocs.io/en/latest/)
 * [miniwdl](https://miniwdl.readthedocs.io/en/latest/)
@@ -31,59 +31,78 @@ The improved testing infrastructure alows anyone in the community can make a cha
 
 We have created [badges](https://github.com/openwdl/wdl/blob/wdl-1.2/README.md#workflow-description-language-wdl) that highlight how many of the tests pass for each engine. Full compliance will be at 100% pass rate.
 
-#### Test Case Bug Fixes and Corrections
+### Test Case Bug Fixes and Corrections
 
-Additionally, as we implemented our new Continuous Integration (CI) testing pipeline, we discovered many test cases needed to be fixed or clarified in order to just be executed. Many of these fixes were implemented in [Workflow Description Language (WDL) [v1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md) and ported over to this release thanks to [@stxue1](https://github.com/stxue1) and [@vsmalladi](https://github.com/vsmalladi), with contributions from [@jdidion](https://github.com/jdidion) and reviews from [@adamnovak](https://github.com/adamnovak) and [@claymcleod](https://github.com/claymcleod). Below is a summary of some of the big fixes and clarifications.
+Additionally, as we implemented our new Continuous Integration (CI) testing pipeline, we discovered many test cases needed to be fixed or clarified in order to just be executed. Many of these fixes were implemented in [v1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md) and ported over to this release thanks to [@stxue1](https://github.com/stxue1) and [@vsmalladi](https://github.com/vsmalladi), with contributions from [@jdidion](https://github.com/jdidion) and reviews from [@adamnovak](https://github.com/adamnovak) and [@claymcleod](https://github.com/claymcleod). Below is a summary of some of the big fixes and clarifications.
 
-
-##### Example and Test Fixes
-
-  * Include fixes to examples that don't complie in `wdl-tests` and fixed in [v1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md)  ([#702](https://github.com/openwdl/wdl/pull/702)).
+  * Fixed examples that didn't compile in `wdl-tests` included once that were fixed in [v1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md) ([#702](https://github.com/openwdl/wdl/pull/702)).
   * Removed Advanced Task Examples to clearly distinguish what is in scope for testing ([#730](https://github.com/openwdl/wdl/issues/730)).
-  * Fix `change_extension_task.wdl` example to use string interpolation when passing `File` to `sub()` function ([#747](https://github.com/openwdl/wdl/issues/747)).
+  * Fixed `change_extension_task.wdl` example to use string interpolation when passing `File` to `sub()` function ([#747](https://github.com/openwdl/wdl/issues/747)).
 
 
-##### Specification Clarifications
+### Specification Clarifications
 
-##### Task Semantics
+While this release does not introduce new language features, it significantly improves clarity in several areas of the specification. These changes help ensure consistent behavior across engines and remove ambiguities that had led to confusion or inconsistent implementations.
 
-  *  Clarified that `task.return_code` is only available in the `output` section, where it has type `Int` rather than `Int?` ([#742](https://github.com/openwdl/wdl/pull/742)).
+#### Task and Type Semantics
 
-##### String and `sub()` Function Behavior
-  
-  *  Formalize replacement string syntax for `sub()` function to specify backreference support (`\1` through `\9`) matching the limit of POSIX ERE. Named capture groups are not currently supported ([#749](https://github.com/openwdl/wdl/pull/749)).
+We clarified several aspects of task evaluation and type behavior. Most notably, `task.return_code` is now explicitly defined as being available only within the `output` section, where it has type `Int` (not `Int?`). This removes ambiguity about when it can be accessed and whether it may be undefined ([#742](https://github.com/openwdl/wdl/pull/742)).
 
+We also clarified that multi-level optionals are not allowed. Optional types must resolve to a concrete underlying type, preventing constructions that were previously underspecified and difficult for engines to handle consistently. For example, `Int??` is not a valid type. However, nested optionals within compound types are allowed, such as `Array[String?]?`, where each `?` applies to a different structural level of the type ([#743](https://github.com/openwdl/wdl/pull/743)).
 
-##### Optional Types
+Together, these updates tighten type semantics and make task evaluation rules more predictable.
 
-  * Clarified multi-level optionals are not allowed in the "Optional Types" section ([#743](https://github.com/openwdl/wdl/pull/743)).
+##### File, Directory, and Path Behavior
 
-##### `File` and `Directory` Semantics
+A substantial portion of this release focuses on clarifying the behavior of `File` and `Directory` values.
 
-  * Clarification around `File` and `Directory` - part of ([#748](https://github.com/openwdl/wdl/pull/748)).
-    * `File` values cannot refer to directories and `Directory` values cannot refer to files; attempting to assign the wrong type of path is an error.
-    * The path assigned to a `File` and `Directory` is not required to be valid unless and until it is accessed.
-      * To read from a `File` or `Directory`, it must exist and be assigned appropriate permissions.
-      * To write to a file, the path's parent directory must be accessible for writing.
-      * To write to a directory, it must exist and be accessible for writing.
-    * Remote files or directories must be treated as read-only.
-    * A remote file is only required to be valid at the time that the execution engine needs to localize it.
-    * When comparing a `File` or `Directory` to a `String`, the `String` is first coerced to `File` or `Directory` (and thus canonicalized) before the comparison is performed.
-    *  Update `join_paths` function: change return type from `File` to `String` (since the result can be either a file or directory path), and change first argument from `File` to `Directory` for the first two overloads.
-  * Clarified that when a `Directory` is converted to a `String`, the resulting string does not have a trailing slash ([#745](https://github.com/openwdl/wdl/pull/745)).
-  
-##### `glob()` Behavior
+We explicitled state that `File` values cannot refer to directories and `Directory` values cannot refer to files—assigning the wrong kind of path is an error. Paths are not required to exist until they are accessed, but when they are accessed, clear rules apply - clarrified in ([#748](https://github.com/openwdl/wdl/pull/748)) and ([#745](https://github.com/openwdl/wdl/pull/745)):
 
-  * Clarified symlink handling behavior in the `glob` function. Symlinks that point to files are included in the results, while symlinks that point to directories are excluded. Broken symlinks (those that point to non-existent targets) are included ([#744](https://github.com/openwdl/wdl/pull/744)).
+- Reading requires the path to exist with appropriate permissions.
+- Writing requires the appropriate directory to be writable.
+- Remote paths must be treated as read-only and only need to be valid at localization time.
 
-##### Relative Path Resolution
+We also clarified how paths behave when compared or converted:
 
-  * Clarified that relative paths in `File` and `Directory` declarations are resolved relative to the WDL document's parent directory outside the `output` section, and relative to the task's execution directory inside the `output` section. Also clarified that optional files evaluate to `None` in both contexts if the path does not exist ([#735](https://github.com/openwdl/wdl/pull/735)).
+- When comparing a `File` or `Directory` to a `String`, the string is first coerced and canonicalized.
+- Converting a `Directory` to a `String` does not append a trailing slash.
+- The `join_paths` function now returns a `String` (rather than `File`) and expects a `Directory` as its first argument in the relevant overloads.
 
-##### Disk Mount Semantics
+Relative path resolution is now more precisely defined as well. Outside the `output` section, relative paths resolve relative to the WDL document’s parent directory; inside `output`, they resolve relative to the task’s execution directory. Optional files evaluate to `None` if the referenced path does not exist. We also deprecated relative path literals in input and private variable declarations to reduce ambiguity ([#735](https://github.com/openwdl/wdl/pull/735)).
 
-  * Clarified that `disk` mount points are ephemeral and should not already exist in the host environment, or it must be empty and have at least the requested amount of space available ([#670](https://github.com/openwdl/wdl/pull/670)).
+Finally, we clarified that `disk` mount points are ephemeral: they should not pre-exist in the host environment, or must be empty and have sufficient available space if they do ([#670](https://github.com/openwdl/wdl/pull/670)).
 
+#### Function and Runtime Behavior
 
-If you find other areas of the specification that you think need improvement, we welcome
-[issues](https://github.com/openwdl/wdl/issues) and [pull requests](https://github.com/openwdl/wdl/pulls).
+Function behavior was clarified in a few important places.
+
+The `sub()` function now has formally defined replacement string syntax. Backreferences `\1` through `\9` are supported, matching the limits of POSIX extended regular expressions. Named capture groups are not currently supported. This removes ambiguity around how replacement strings should be interpreted.
+
+We also clarified `glob()` behavior with respect to symlinks ([#744](https://github.com/openwdl/wdl/pull/744)):
+
+- Symlinks to files are included in results.
+- Symlinks to directories are excluded.
+- Broken symlinks are included.
+
+These updates help ensure that filesystem-related behavior is consistent and predictable across engines.
+
+### Conclusion
+
+WDL 1.2.1 is a stabilization release for the 1.2.x line. By incorporating the clarifications and test fixes from v1.1.3 and strengthening the compliance infrastructure, this patch improves consistency across engines and reduces ambiguity in key areas of the specification—particularly around `Directory`, path resolution, and `join_paths`.
+
+No new language features were introduced, and no existing functionality was changed. Instead, this release focuses on making the specification clearer, the test suite more reliable, and engine behavior more predictable. These improvements help ensure that WDL workflows behave consistently across implementations and are easier to validate and maintain.
+
+Thank you to everyone who contributed to this milestone, including:
+
+- [@stxue1](https://github.com/stxue1)  
+- [@vsmalladi](https://github.com/vsmalladi)  
+- [@jdidion](https://github.com/jdidion)  
+- [@adamnovak](https://github.com/adamnovak)  
+- [@claymcleod](https://github.com/claymcleod)  
+- [@peterhuene](https://github.com/peterhuene)  
+- [@a-frantz](https://github.com/a-frantz)  
+- [@markjschreiber](https://github.com/markjschreiber)
+
+and others who participated in discussion, review, and testing.
+
+As always, we welcome community feedback. If you find areas of the specification that could be improved, please open an [issue](https://github.com/openwdl/wdl/issues) or submit a [pull request](https://github.com/openwdl/wdl/pulls).
