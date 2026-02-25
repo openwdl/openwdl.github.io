@@ -68,7 +68,7 @@ We also clarified how paths behave when compared or converted:
 - Converting a `Directory` to a `String` does not append a trailing slash.
 - The `join_paths` function now returns a `String` (rather than `File`) and expects a `Directory` as its first argument in the relevant overloads.
 
-Relative path resolution is now more precisely defined as well. Outside the `output` section, relative paths resolve relative to the WDL document’s parent directory; inside `output`, they resolve relative to the task’s execution directory. Optional files evaluate to `None` if the referenced path does not exist. We also deprecated relative path literals in input and private variable declarations to reduce ambiguity ([#735](https://github.com/openwdl/wdl/pull/735)).
+Relative path resolution is now more precisely defined as well. Outside the `output` section, relative paths resolve relative to the WDL document’s parent directory; inside `output`, they resolve relative to the task’s execution directory. Optional files evaluate to `None` if the referenced path does not exist. 
 
 Finally, we clarified that `disk` mount points are ephemeral: they should not pre-exist in the host environment, or must be empty and have sufficient available space if they do ([#670](https://github.com/openwdl/wdl/pull/670)).
 
