@@ -9,7 +9,7 @@ categories: wdl bioinformatics workflows
 
 The [OpenWDL](https://openwdl.org/) community is pleased to announce the
 release of [Workflow Description Language (WDL)
-1.2.1](https://github.com/openwdl/wdl/blob/wdl-1.2/SPEC.md)! The full list of issues and PR's can be found in [1.2.1 milestone](https://github.com/openwdl/wdl/milestone/6?closed=1)
+1.2.1](https://github.com/openwdl/wdl/blob/wdl-1.2/SPEC.md)! The full list of issues and PRs can be found in the [1.2.1 milestone](https://github.com/openwdl/wdl/milestone/6?closed=1).
 
 ## What's new?
 
@@ -35,7 +35,7 @@ We have created [badges](https://github.com/openwdl/wdl/blob/wdl-1.2/README.md#w
 
 Additionally, as we implemented our new Continuous Integration (CI) testing pipeline, we discovered many test cases needed to be fixed or clarified in order to just be executed. Many of these fixes were implemented in [v1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md) and ported over to this release thanks to [@stxue1](https://github.com/stxue1) and [@vsmalladi](https://github.com/vsmalladi), with contributions from [@jdidion](https://github.com/jdidion) and reviews from [@adamnovak](https://github.com/adamnovak) and [@claymcleod](https://github.com/claymcleod). Below is a summary of some of the big fixes and clarifications.
 
-  * Fixed examples that didn't compile in `wdl-tests` included once that were fixed in [v1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md) ([#702](https://github.com/openwdl/wdl/pull/702)).
+  * Fixed examples that didn't compile in `wdl-tests`, including ones that were fixed in [v1.1.3](https://github.com/openwdl/wdl/blob/wdl-1.1/SPEC.md) ([#702](https://github.com/openwdl/wdl/pull/702)).
   * Removed Advanced Task Examples to clearly distinguish what is in scope for testing ([#730](https://github.com/openwdl/wdl/issues/730)).
   * Fixed `change_extension_task.wdl` example to use string interpolation when passing `File` to `sub()` function ([#747](https://github.com/openwdl/wdl/issues/747)).
 
@@ -52,11 +52,11 @@ We also clarified that multi-level optionals are not allowed. Optional types mus
 
 Together, these updates tighten type semantics and make task evaluation rules more predictable.
 
-##### File, Directory, and Path Behavior
+#### File, Directory, and Path Behavior
 
 A substantial portion of this release focused on clarifying the behavior of `File` and `Directory` values.
 
-We explicitled state that `File` values cannot refer to directories and `Directory` values cannot refer to files—assigning the wrong kind of path is an error. Paths are not required to exist until they are accessed, but when they are accessed, clear rules apply - clarrified in ([#748](https://github.com/openwdl/wdl/pull/748)) and ([#745](https://github.com/openwdl/wdl/pull/745)):
+We explicitly stated that `File` values cannot refer to directories and `Directory` values cannot refer to files—assigning the wrong kind of path is an error. Paths are not required to exist until they are accessed, but when they are accessed, clear rules apply—clarified in [#748](https://github.com/openwdl/wdl/pull/748) and [#745](https://github.com/openwdl/wdl/pull/745):
 
 - Reading requires the path to exist with appropriate permissions.
 - Writing requires the appropriate directory to be writable.
