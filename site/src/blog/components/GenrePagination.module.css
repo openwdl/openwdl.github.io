@@ -1,0 +1,6 @@
+/* The shared Pagination fills its container, but this pager trails the article
+   body, which is capped at 72ch. Without a matching cap it would overrun the
+   reading measure on wide viewports. */
+.pager {
+  max-width: 72ch;
+}

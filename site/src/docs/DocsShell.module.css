@@ -1,0 +1,196 @@
+.page {
+  --docs-section-nav-h: 3.5rem;
+
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.page > :global(footer) {
+  margin-top: 0;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip:focus {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1.25rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  z-index: 100;
+  border-radius: 0 0 var(--radius) 0;
+}
+
+/* Section nav */
+.sectionNav {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: calc(var(--z-nav) - 1);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.sectionBar {
+  display: flex;
+  align-items: center;
+  min-height: var(--docs-section-nav-h);
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 0 1.5rem;
+}
+
+.sectionList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  align-items: center;
+}
+
+.sectionSearch {
+  margin-left: auto;
+  padding: 0.4rem 0;
+}
+
+.sectionLink {
+  display: block;
+  padding: 0.85rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.sectionLink:hover {
+  color: var(--text);
+}
+
+.sectionLink[aria-current] {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Three-column layout */
+.layout {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr) var(--sidebar-w);
+  width: 100%;
+  max-width: none;
+  min-height: calc(100vh - 10rem);
+}
+
+.main {
+  display: flex;
+  grid-column: 2;
+  grid-row: 1;
+  justify-content: center;
+  padding: 3rem 2.5rem;
+  min-width: 0;
+}
+
+.article {
+  width: 100%;
+  max-width: 75ch;
+  font-size: 1.0625rem;
+  letter-spacing: 0.005em;
+}
+
+.article > h1 {
+  max-width: 18ch;
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.5rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+/* Page outline placement — the kit `Toc` styles itself but leaves placement
+   and breakpoint policy to the consumer. Qualified by the grid parent so
+   these rules outrank the kit's own single-class rules whatever order the
+   two stylesheets land in. */
+.layout > .toc {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+/* Mobile controls — the wrapper owns the breakpoint policy, because the kit
+   `Disclosure` renders unconditionally at every viewport width. */
+.mobileControls {
+  display: none;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Each Disclosure child fills an equal share of the flex row. */
+.mobileControls > * {
+  flex: 1;
+}
+
+@media (max-width: 900px) {
+  .sectionBar {
+    flex-wrap: wrap;
+    padding: 0.25rem 0.75rem 0.75rem;
+  }
+
+  .sectionList {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .sectionSearch {
+    width: 100%;
+    margin-left: 0;
+    padding-top: 0.5rem;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .main {
+    grid-column: auto;
+    grid-row: auto;
+    padding: 2rem 1rem;
+  }
+
+  /* Unstick the outline and let it flow above the article as a bordered card. */
+  .layout > .toc {
+    position: static;
+    grid-column: auto;
+    grid-row: auto;
+    height: auto;
+    max-height: min(60vh, 30rem);
+    margin: 0.75rem 1rem 0;
+    border: 1px solid var(--chrome-border);
+    border-radius: var(--radius);
+  }
+
+  .mobileControls {
+    display: flex;
+    margin: 1rem 1rem 0;
+  }
+
+  /* Hide left rail and toc on mobile by default; JS adds data-open to show them */
+  .layout > :global([aria-label="Documentation pages"]):not([data-open="true"]) {
+    display: none;
+  }
+
+  .layout > :global([aria-label="On this page"]):not([data-open="true"]) {
+    display: none;
+  }
+}

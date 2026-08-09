@@ -1,0 +1,386 @@
+/* Signature-card treatment for the standard library reference pages. Every
+   colour, radius, and duration comes from the `@openwdl/ui` theme, so the
+   cards follow the light/dark switch with no local palette. */
+
+.root {
+  /* Cards scroll under the global navbar *and* the sticky docs section bar. */
+  --stdlib-scroll-offset: calc(var(--docs-section-nav-h) + 1rem);
+}
+
+/* ── Search ──────────────────────────────────────────────────────────────── */
+
+.search {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1.5rem;
+  max-width: 32rem;
+}
+
+.searchLabel {
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  transition: border-color var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+.searchInput:hover {
+  border-color: var(--accent);
+}
+
+.searchInput:focus-visible {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.status {
+  margin: 0;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+/* ── Signature pills: the compact replacement for the old bullet index ───── */
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 2.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.pills a {
+  padding: 0.24rem 0.6rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition:
+    color var(--motion-control-duration) var(--motion-control-ease),
+    border-color var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.pills a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.pills a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── Cards ───────────────────────────────────────────────────────────────── */
+
+/* Cards always span the article column. The reading measure lives on the prose
+   inside instead, so a full-width card never produces an unreadable line. */
+.card {
+  margin-bottom: 1rem;
+  padding: 1.15rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  scroll-margin-top: var(--stdlib-scroll-offset);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* The signature is the headline, so the heading carries no separate title. */
+.signatures {
+  display: grid;
+  gap: 0.1rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+.signature {
+  display: block;
+}
+
+.returnType {
+  color: var(--text-muted);
+}
+
+.fnName {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.args {
+  color: var(--text);
+}
+
+.version {
+  flex: none;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.description {
+  margin: 0 0 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  /* Cards are full width, so the prose carries the reading measure. */
+  max-width: 70ch;
+}
+
+/* ── Parameter and return definition lists ───────────────────────────────── */
+
+.params,
+.returns {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+}
+
+/* Each pair is its own grid row, so a long type never drags its prose along. */
+.row {
+  display: grid;
+  grid-template-columns: minmax(5rem, 11rem) 1fr;
+  column-gap: 1.1rem;
+}
+
+.params dt,
+.returns dt {
+  font-size: 0.74rem;
+  word-break: break-word;
+}
+
+/* Parameter terms are WDL types; the accent keeps them AA-legible in both
+   themes, unlike a fixed teal step. */
+.params dt {
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+
+/* "returns" is a label, not a type, so it reads as a quiet section eyebrow. */
+.returns dt {
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.params dd,
+.returns dd {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* ── Example disclosure ──────────────────────────────────────────────────── */
+
+.example {
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--border);
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  list-style: none;
+  cursor: pointer;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary:hover {
+  color: var(--accent);
+}
+
+.summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.chevron {
+  flex: none;
+  transition: transform var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.example[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.exampleBody {
+  margin-top: 0.7rem;
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+
+.empty {
+  max-width: 48ch;
+  padding: 1.5rem;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.empty strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.empty p {
+  margin: 0 0 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+}
+
+.clear {
+  padding: 0.35rem 0.7rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  transition:
+    color var(--motion-control-duration) var(--motion-control-ease),
+    border-color var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.clear:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.clear:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── Cross-page results ──────────────────────────────────────────────────────
+   Deliberately not cards: a ruled-off group of quiet link rows, so matches
+   that live on another page can never be mistaken for this page's functions. */
+
+.elsewhere {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.elsewhereTitle {
+  margin: 0 0 0.75rem;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.elsewhereList {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.elsewhereList a {
+  display: grid;
+  grid-template-columns: minmax(7rem, auto) 1fr auto;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  padding: 0.4rem 0.6rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  transition:
+    color var(--motion-control-duration) var(--motion-control-ease),
+    border-color var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.elsewhereList a:hover {
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.elsewhereList a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.elsewhereName {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.elsewhereSignature {
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.elsewherePage {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 720px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+
+  .elsewhereList a {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+
+  .elsewhereSignature {
+    white-space: normal;
+  }
+}

@@ -1,0 +1,273 @@
+.container {
+  position: relative;
+}
+
+/* Trigger button — visible at all times (SSR-safe) */
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4rem;
+  min-width: 14rem;
+  padding: 0.55rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    color var(--motion-control-duration) var(--motion-control-ease),
+    border-color var(--motion-control-duration) var(--motion-control-ease),
+    transform var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.trigger:hover {
+  transition-delay: var(--motion-control-delay);
+  transform: translateY(var(--motion-control-lift));
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.trigger:active {
+  transition-delay: 0ms;
+  transition-duration: var(--motion-control-press-duration);
+  transform: translateY(0);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.searchIcon,
+.dialogSearchIcon {
+  flex: none;
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.kbd {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-left: auto;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  padding: 0.1rem 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--surface);
+  color: var(--text-muted);
+}
+
+/* Dialog — only rendered after user interaction */
+.dialog {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  right: 0;
+  z-index: 200;
+  width: min(90vw, 32rem);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.12);
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.input {
+  flex: 1;
+  padding: 0.3rem 0.25rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  outline: none;
+}
+
+.dialogSearchIcon {
+  color: var(--text-muted);
+}
+
+.closeBtn {
+  padding: 0.25rem 0.4rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-control);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  line-height: 1;
+  transition:
+    color var(--motion-control-duration) var(--motion-control-ease),
+    transform var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.closeBtn:hover {
+  transition-delay: var(--motion-control-delay);
+  transform: translateY(var(--motion-control-lift));
+  color: var(--accent);
+}
+
+.closeBtn:active {
+  transition-delay: 0ms;
+  transition-duration: var(--motion-control-press-duration);
+  transform: translateY(0);
+}
+
+.closeBtn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Results listbox */
+.results {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  max-height: 20rem;
+  overflow-y: auto;
+}
+
+.result {
+  padding: 0;
+}
+
+.result[aria-selected="true"] {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.resultLink {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.resultLink:hover {
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.resultTitle {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.resultSection {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.resultContext {
+  overflow: hidden;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.resultContext mark {
+  padding: 0;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.error {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: var(--color-error, #c0392b);
+  border-bottom: 1px solid var(--border);
+}
+
+.emptyState {
+  display: flex;
+  min-height: 12rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.emptyState > svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: var(--accent);
+}
+
+.emptyState strong {
+  color: var(--text);
+  font-size: 0.9375rem;
+}
+
+.emptyState p {
+  margin: 0.35rem 0 0.9rem;
+  font-size: 0.8rem;
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.examples code {
+  padding: 0.2rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+
+.examples button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.examples button:hover code {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.examples button:focus-visible {
+  border-radius: var(--radius-sm);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .container,
+  .trigger {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .dialog {
+    width: 100%;
+  }
+}

@@ -1,0 +1,124 @@
+.page {
+  color: var(--text);
+  background: var(--bg);
+}
+
+.hero,
+.involvement {
+  width: min(100% - 2rem, 70rem);
+  margin-inline: auto;
+}
+
+.hero {
+  padding-block: clamp(4rem, 10vw, 7rem);
+}
+
+.hero h1 {
+  max-width: 50rem;
+  margin: 0.75rem 0 1rem;
+  font-size: clamp(2.5rem, 7vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+  text-wrap: balance;
+}
+
+.hero > p:last-child {
+  max-width: 45rem;
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.involvement {
+  padding-block: clamp(3rem, 7vw, 5rem);
+  border-top: 1px solid var(--border);
+}
+
+.involvement h2 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.media {
+  aspect-ratio: 16 / 9;
+  background-color: var(--gray-700);
+  background-image:
+    radial-gradient(circle at 22% 30%, rgb(255 255 255 / 0.24) 0 7%, transparent 8%),
+    linear-gradient(135deg, transparent 38%, rgb(255 255 255 / 0.16) 39% 55%, transparent 56%);
+}
+
+.slack { background-color: var(--teal-700); }
+.meetings { background-color: color-mix(in srgb, var(--danger) 72%, var(--gray-700)); }
+.workflows { background-color: color-mix(in srgb, var(--warning) 78%, var(--gray-700)); }
+.contribute { background-color: var(--teal-800); }
+.engines { background-color: color-mix(in srgb, var(--info) 58%, var(--gray-700)); }
+.rfcs { background-color: var(--danger); }
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  min-height: 13rem;
+  padding: 1.25rem;
+}
+
+.cardBody h3 {
+  margin: 0;
+}
+
+.cardBody p {
+  flex: 1;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.cardBody a {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 0.45rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.cardBody a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}

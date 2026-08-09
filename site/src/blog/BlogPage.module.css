@@ -1,0 +1,330 @@
+/* The OpenWDL blog index.
+   Three zones, deliberately unequal: the masthead names the page, the featured
+   card promotes one post, the register is the complete record. Intervals
+   between zones are generous (4-5rem, the design's primary-section range);
+   intervals inside a row are tight. That contrast is what separates the zones,
+   so no zone needs its own container to be legible. */
+
+.page {
+  padding: 3.5rem 0 6rem;
+}
+
+/* ── Masthead ─────────────────────────────────────────────────────────────── */
+
+.masthead {
+  margin-bottom: 4rem;
+}
+
+/* Headline role: this is the page's own title, not a kicker above one. */
+.pageTitle {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* Body Large. */
+.description {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+/* ── Section headings ─────────────────────────────────────────────────────── */
+
+/* Label role. Naming both zones is what makes the featured post's reappearance
+   in the register read as the full record rather than a duplicate. */
+.sectionHeading {
+  margin: 0 0 1.25rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Featured entry ───────────────────────────────────────────────────────── */
+
+.featuredSection {
+  margin-bottom: 5rem;
+}
+
+.featured {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
+  grid-template-areas:
+    "chip chip"
+    "title author"
+    "summary author"
+    "meta author"
+    "action author";
+  column-gap: 3rem;
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.featuredChip {
+  grid-area: chip;
+  margin-bottom: 1.25rem;
+  justify-self: start;
+}
+
+/* Largest thing in the content zone, but still under the page title. */
+.featuredTitle {
+  grid-area: title;
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.standfirst {
+  grid-area: summary;
+  margin: 0 0 1rem;
+  max-width: 60ch;
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+/* The promoted post is not always the newest, so the card must be dated or its
+   position in the register below looks like a sorting bug. */
+.featuredMeta {
+  grid-area: meta;
+  margin: 0 0 1.75rem;
+}
+
+.featuredLink {
+  grid-area: action;
+  justify-self: start;
+  margin-top: 0.75rem;
+}
+
+.featuredByline {
+  grid-area: author;
+  align-self: start;
+  max-width: max-content;
+}
+
+/* ── Complete register ────────────────────────────────────────────────────── */
+
+.register {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.registerItem {
+  border-top: 1px solid var(--border);
+}
+
+.registerItem:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+/* The row is the target. Only the title text was clickable before, which made
+   roughly 4% of a 124px band actionable and left the summary, chip, author, and
+   date inert. The stretched link below keeps that a single tab stop with one
+   accessible name. */
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr) 13rem max-content;
+  grid-template-areas: "record entry author meta";
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  transition: background-color var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.row:hover {
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+/* The featured post appears here too; mark it so the repeat is legible. */
+.row[data-featured] {
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.recordCell {
+  grid-area: record;
+  padding-left: 0.75rem;
+}
+
+.entryCell {
+  grid-area: entry;
+  min-width: 0;
+}
+
+.authorCell {
+  grid-area: author;
+}
+
+/* Label role — mono, matching the chip and section headings. Dates and reading
+   times are metadata, not reading copy. */
+.metaCell {
+  grid-area: meta;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* The "Featured" mark sits beside the heading, never inside it: nesting it in
+   the h3 appended the word to the heading's accessible name. */
+.titleRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Title role. */
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Stretched link: covers the row without adding a second tab stop. */
+.title a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.title a:hover {
+  color: var(--accent);
+}
+
+.title a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-control);
+}
+
+.featuredMark {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Body role. The entry column is wide, so the summary carries its own measure
+   rather than running the full width of the grid track. */
+.summary {
+  margin: 0.35rem 0 0;
+  max-width: 68ch;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+/* Code role. */
+.chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.2rem 0.5rem;
+}
+
+.meta {
+  margin: 0;
+}
+
+.empty {
+  margin: 0;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  max-width: 60ch;
+}
+
+/* ── Narrow ───────────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .row {
+    grid-template-columns: 5rem minmax(0, 1fr) max-content;
+    grid-template-areas:
+      "record entry entry"
+      "record author meta";
+    align-items: start;
+    row-gap: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 2.5rem 0 4rem;
+  }
+
+  .masthead {
+    margin-bottom: 2.5rem;
+  }
+
+  .featuredSection {
+    margin-bottom: 3rem;
+  }
+
+  .featured {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "chip"
+      "title"
+      "summary"
+      "meta"
+      "author"
+      "action";
+    padding: 1.75rem;
+  }
+
+  .featuredByline {
+    margin-bottom: 1.75rem;
+  }
+
+  /* The record rail held 28% of a 342px viewport to show a 53px chip, cutting
+     the summary to roughly 33 characters per line. It folds into the stack. */
+  .row {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "record"
+      "entry"
+      "author"
+      "meta";
+    row-gap: 0.6rem;
+    padding: 1.25rem 0;
+  }
+
+  .recordCell {
+    padding-left: 0;
+    justify-self: start;
+  }
+}
