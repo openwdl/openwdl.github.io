@@ -4,7 +4,14 @@ import remarkGfm from "remark-gfm";
 import remarkDirective from "remark-directive";
 import rehypeSlug from "rehype-slug";
 import type { Element } from "hast";
-import { Callout, type CalloutVariant, Code, CodeBlock } from "@openwdl/ui";
+import {
+  Callout,
+  type CalloutVariant,
+  Code,
+  CodeBlock,
+  Prose,
+  TableScroll,
+} from "@openwdl/ui";
 import { DocsTabs } from "./DocsTabs";
 import { docHref } from "./docHref";
 import { markdownDirectives } from "./markdownDirectives";
@@ -29,6 +36,11 @@ export interface MarkdownBodyProps {
  * plugin stack: remark-gfm, remark-directive, markdownDirectives,
  * rehype-slug. Maps fenced code to {@link CodeBlock}, inline code to
  * {@link Code}, callout/tab directives to their design-system equivalents.
+ *
+ * Typography comes from {@link Prose} and tabular styling from
+ * {@link TableScroll}, which also supplies the keyboard-scrollable region
+ * around every table. Only the site-specific pieces — heading aliases, the
+ * WDL `import` keyword, and base-aware local image sources — live here.
  */
 export function MarkdownBody({ source, headingAliases = {} }: MarkdownBodyProps) {
   // Build target-id → alias list for inline anchor injection.
@@ -126,14 +138,9 @@ export function MarkdownBody({ source, headingAliases = {} }: MarkdownBodyProps)
       table({ node, children, ...props }) {
         void node;
         return (
-          <div
-            className={styles.tableScroll}
-            role="region"
-            aria-label="Scrollable table"
-            tabIndex={0}
-          >
+          <TableScroll>
             <table {...props}>{children}</table>
-          </div>
+          </TableScroll>
         );
       },
       img({ node, src, ...props }) {
@@ -156,7 +163,7 @@ export function MarkdownBody({ source, headingAliases = {} }: MarkdownBodyProps)
   }, [aliasByTarget]);
 
   return (
-    <div className={styles.body}>
+    <Prose as="div" className={styles.markdown}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkDirective, markdownDirectives]}
         rehypePlugins={[rehypeSlug]}
@@ -164,6 +171,6 @@ export function MarkdownBody({ source, headingAliases = {} }: MarkdownBodyProps)
       >
         {source}
       </ReactMarkdown>
-    </div>
+    </Prose>
   );
 }

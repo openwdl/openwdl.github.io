@@ -1,4 +1,4 @@
-import { CodeBlock } from "@openwdl/ui";
+import { Button, CodeBlock } from "@openwdl/ui";
 import type { ChecklistStep } from "../model/types";
 import styles from "./Wizard.module.css";
 
@@ -115,13 +115,14 @@ export function InstallChecklist({ steps, onBack }: InstallChecklistProps) {
 
       {onBack && (
         <div className={styles.actions}>
-          <button
+          <Button
             type="button"
+            variant="secondary"
+            className={styles.touchTarget}
             onClick={onBack}
-            className={styles.backButton}
           >
             Back
-          </button>
+          </Button>
         </div>
       )}
     </div>

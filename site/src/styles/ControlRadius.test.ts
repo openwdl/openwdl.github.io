@@ -11,31 +11,32 @@ function expectControlRadius(path: string, selector: RegExp) {
   );
 }
 
+/**
+ * Stylesheets whose action controls are now kit `Button`s. The kit owns the
+ * control radius, so these files must not re-declare control chrome of their
+ * own — a reappearing `--radius-control` here means a hand-rolled button crept
+ * back in.
+ */
+const migratedToKitButton = [
+  "../sections/Hero.module.css",
+  "../about/AboutPage.module.css",
+  "../not-found/NotFoundPage.module.css",
+  "../blog/BlogPostPage.module.css",
+  "../get-started/components/Wizard.module.css",
+];
+
 describe("site action control radius", () => {
-  it("uses the control token for site actions", () => {
-    expectControlRadius("../sections/Hero.module.css", /\.primary,\s*\.secondary/);
+  it("uses the control token for the remaining hand-rolled actions", () => {
     expectControlRadius("../sections/Downloads.module.css", /\.all/);
-    expectControlRadius("../sections/DesignSystem.module.css", /\.storybookLink/);
     expectControlRadius("../components/LogoPreview.module.css", /\.presets button/);
-    expectControlRadius("../components/ChapterNav.module.css", /\.toggle/);
-    expectControlRadius("../docs/DocsDisclosure.module.css", /\.toggle/);
     expectControlRadius("../docs/DocsSearch.module.css", /\.trigger/);
     expectControlRadius("../docs/DocsSearch.module.css", /\.closeBtn/);
-    expectControlRadius("../about/AboutPage.module.css", /\.action/);
-    expectControlRadius(
-      "../not-found/NotFoundPage.module.css",
-      /\.primaryAction,\s*\.secondaryAction/,
-    );
   });
 
-  it("uses the control token for setup wizard actions", () => {
-    const path = "../get-started/components/Wizard.module.css";
-    expectControlRadius(path, /\.backButton/);
-    expectControlRadius(path, /\.continueButton/);
-    expectControlRadius(path, /\.changeAnswersButton/);
-    expectControlRadius(path, /\.setupRequestLink/);
-    expectControlRadius(path, /\.startOverButton/);
-    expectControlRadius(path, /\.startOverConfirmButton,\s*\.startOverCancelButton/);
+  it("leaves control chrome to the kit Button where actions were migrated", () => {
+    for (const path of migratedToKitButton) {
+      expect(stylesheet(path)).not.toContain("--radius-control");
+    }
   });
 
   it("keeps content surfaces on their existing radius tokens", () => {

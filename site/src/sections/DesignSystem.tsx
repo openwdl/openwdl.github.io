@@ -108,13 +108,15 @@ export function DesignSystem() {
             <h3>Inspect every variant and interaction in Storybook.</h3>
             <p>Explore controls, responsive examples, themes, and accessibility behavior.</p>
           </div>
-          <a
-            className={styles.storybookLink}
+          <Button
+            as="a"
             href="https://openwdl.github.io/ui/"
+            variant="secondary"
+            className={styles.storybookLink}
+            leadingIcon={<FiExternalLink />}
           >
-            <FiExternalLink aria-hidden="true" />
             Explore Storybook
-          </a>
+          </Button>
         </div>
       </div>
     </section>

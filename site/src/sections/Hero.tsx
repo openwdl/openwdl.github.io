@@ -1,3 +1,4 @@
+import { Button } from "@openwdl/ui";
 import { FiBookOpen, FiDownload } from "react-icons/fi";
 import { logoAssets } from "../data/brand";
 import styles from "./Hero.module.css";
@@ -25,14 +26,17 @@ export function Hero() {
           consistent across environments, and developed in the open.
         </p>
         <div className={styles.actions}>
-          <a className={styles.primary} href="#downloads">
-            <FiDownload aria-hidden="true" />
+          <Button as="a" href="#downloads" leadingIcon={<FiDownload />}>
             Download brand assets
-          </a>
-          <a className={styles.secondary} href="#foundation">
-            <FiBookOpen aria-hidden="true" />
+          </Button>
+          <Button
+            as="a"
+            href="#foundation"
+            variant="secondary"
+            leadingIcon={<FiBookOpen />}
+          >
             Read the guidelines
-          </a>
+          </Button>
         </div>
       </div>
     </section>

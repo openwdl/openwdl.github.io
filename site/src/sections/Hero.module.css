@@ -16,12 +16,4 @@
 .hero h1 { max-width: none; margin: 1rem 0; font-size: clamp(2.25rem, 9.5vw, 6rem); line-height: 0.9; letter-spacing: -0.055em; }
 .hero h1 span { display: block; white-space: nowrap; }
 .mission { color: var(--text-muted); max-width: 65ch; font-size: 1.05rem; }
-.actions { display: flex; gap: 1rem; margin-top: 2rem; }
-.primary, .secondary { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.9rem; text-decoration: none; border-radius: var(--radius-control); padding: 0.7rem 1.3rem; transition: color var(--motion-control-duration) var(--motion-control-ease), border-color var(--motion-control-duration) var(--motion-control-ease), filter var(--motion-control-duration) var(--motion-control-ease), transform var(--motion-control-duration) var(--motion-control-ease), box-shadow var(--motion-control-duration) var(--motion-control-ease); }
-.actions { flex-wrap: wrap; }
-.primary { background: var(--accent); color: var(--gray-900); }
-.secondary { border: 1px solid var(--border); color: var(--text); }
-.primary:hover, .secondary:hover { transition-delay: var(--motion-control-delay); transform: translateY(var(--motion-control-lift)); box-shadow: 0 5px 14px color-mix(in srgb, var(--accent) 22%, transparent); }
-.primary:hover { filter: brightness(1.08); }
-.secondary:hover { border-color: var(--accent); color: var(--accent); }
-.primary:active, .secondary:active { transition-delay: 0ms; transition-duration: var(--motion-control-press-duration); transform: translateY(0); }
+.actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; }

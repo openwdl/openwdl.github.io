@@ -312,8 +312,12 @@ describe("GetStartedWizard — Start over", () => {
     render(<GetStartedWizard catalog={eligibleCatalog} history={history} />);
 
     await userEvent.click(screen.getByRole("button", { name: /start over/i }));
-    expect(screen.getByRole("button", { name: /yes.*start over/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /cancel/i })).toBeInTheDocument();
+    // The destructive action reads as destructive: the kit's `danger` variant
+    // carries the on-palette `--danger` role, not a hardcoded red.
+    expect(screen.getByRole("button", { name: /yes.*start over/i }).className)
+      .toContain("Button_danger");
+    expect(screen.getByRole("button", { name: /cancel/i }).className)
+      .toContain("Button_secondary");
   });
 
   it("resets wizard to beginning when confirm is clicked", async () => {

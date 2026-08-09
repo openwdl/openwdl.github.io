@@ -1,6 +1,20 @@
-import { render, screen } from "@testing-library/react";
+import type { ReactElement } from "react";
+import { cleanup, render, screen } from "@testing-library/react";
+import { Prose, TableScroll } from "@openwdl/ui";
 import { MarkdownBody } from "./MarkdownBody";
 import styles from "./MarkdownBody.module.css";
+
+/**
+ * Class the kit puts on `element`'s own root, read from a throwaway render so
+ * these tests assert delegation to the kit rather than a literal class name.
+ * Unmounts what it rendered, so call it before rendering the subject.
+ */
+function kitRootClass(element: ReactElement): string {
+  const { container } = render(element);
+  const className = (container.firstElementChild as HTMLElement).className;
+  cleanup();
+  return className;
+}
 
 const tabsSource = [
   ":::tip",
@@ -56,11 +70,25 @@ it("renders a note callout", () => {
   expect(screen.getByText("This is a note.")).toBeInTheDocument();
 });
 
-it("wraps tables in a keyboard-scrollable region", () => {
+it("styles the rendered markdown with the kit prose container", () => {
+  const proseClass = kitRootClass(<Prose as="div" />);
+  const { container } = render(<MarkdownBody source={"A paragraph.\n"} />);
+
+  const root = container.firstElementChild;
+  expect(root?.tagName).toBe("DIV");
+  expect(root).toHaveClass(proseClass);
+  // Carries the docs `--prose-scroll-offset` override; see MarkdownBody.module.css.
+  expect(root).toHaveClass(styles.markdown);
+  expect(root?.querySelector("p")?.textContent).toBe("A paragraph.");
+});
+
+it("wraps tables in the kit's keyboard-scrollable region", () => {
+  const scrollClass = kitRootClass(<TableScroll />);
   render(<MarkdownBody source={"| Name | Type |\n| --- | --- |\n| Sprocket | Engine |"} />);
 
   const region = screen.getByRole("region", { name: "Scrollable table" });
   expect(region).toHaveAttribute("tabindex", "0");
+  expect(region).toHaveClass(scrollClass);
   expect(region.querySelector("table")).toBeInTheDocument();
 });
 

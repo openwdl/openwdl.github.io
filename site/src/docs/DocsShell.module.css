@@ -108,14 +108,24 @@
   font-size: 1.0625rem;
 }
 
-/* Mobile controls — hidden on desktop, visible on mobile */
+/* Page outline placement — the kit `Toc` styles itself but leaves placement
+   and breakpoint policy to the consumer. Qualified by the grid parent so
+   these rules outrank the kit's own single-class rules whatever order the
+   two stylesheets land in. */
+.layout > .toc {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+/* Mobile controls — the wrapper owns the breakpoint policy, because the kit
+   `Disclosure` renders unconditionally at every viewport width. */
 .mobileControls {
   display: none;
   gap: 0.5rem;
   margin-bottom: 1.25rem;
 }
 
-/* Each DocsDisclosure child fills equal share of the flex row. */
+/* Each Disclosure child fills an equal share of the flex row. */
 .mobileControls > * {
   flex: 1;
 }
@@ -145,6 +155,18 @@
     grid-column: auto;
     grid-row: auto;
     padding: 2rem 1rem;
+  }
+
+  /* Unstick the outline and let it flow above the article as a bordered card. */
+  .layout > .toc {
+    position: static;
+    grid-column: auto;
+    grid-row: auto;
+    height: auto;
+    max-height: min(60vh, 30rem);
+    margin: 0.75rem 1rem 0;
+    border: 1px solid var(--chrome-border);
+    border-radius: var(--radius);
   }
 
   .mobileControls {

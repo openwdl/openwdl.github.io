@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen, within } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { BlogPostPage } from "./BlogPostPage";
 
 function renderRoute(slug: string) {
@@ -18,6 +19,9 @@ describe("BlogPostPage", () => {
     expect(topic).toBeInTheDocument();
     const backLink = screen.getByRole("link", { name: "Back to the blog" });
     expect(backLink).toHaveAttribute("href", "/blog/");
+    expect(backLink.className).toContain("Button_secondary");
+    // The back arrow is decorative and must stay out of the accessible name.
+    expect(backLink.querySelector("[aria-hidden='true']")?.textContent).toBe("←");
     expect(
       backLink.compareDocumentPosition(topic) & Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
@@ -66,17 +70,38 @@ describe("BlogPostPage", () => {
     const compatibilityNote = screen.getByText("Compatibility note").closest("blockquote");
     expect(compatibilityNote).not.toBeNull();
 
-    // Same-genre navigation (adjacent releases).
-    expect(screen.getByRole("link", { name: /Announcing WDL 1\.1\.3/ }))
-      .toHaveAttribute("href", "/blog/announcing-wdl-1-1-3/");
-    expect(screen.getByRole("link", { name: /Announcing WDL 1\.2\.0/ }))
-      .toHaveAttribute("href", "/blog/announcing-wdl-1-2-0/");
+    // Same-genre navigation (adjacent releases), oldest as `prev`.
+    const genreNav = screen.getByRole("navigation", { name: "More in this genre" });
+    const older = within(genreNav).getByRole("link", { name: "Older Announcing WDL 1.2.0" });
+    expect(older).toHaveAttribute("href", "/blog/announcing-wdl-1-2-0/");
+    expect(older).toHaveAttribute("rel", "prev");
+    const newer = within(genreNav).getByRole("link", { name: "Newer Announcing WDL 1.1.3" });
+    expect(newer).toHaveAttribute("href", "/blog/announcing-wdl-1-1-3/");
+    expect(newer).toHaveAttribute("rel", "next");
   });
 
   it("renders the shared not-found page for an unknown slug", () => {
     renderRoute("does-not-exist");
     expect(screen.getByRole("heading", { name: "Workflow route failed" }))
       .toBeInTheDocument();
+  });
+
+  it("collapses the mobile table of contents behind a closed disclosure", async () => {
+    const user = userEvent.setup();
+    renderRoute("announcing-wdl-1-3-0");
+
+    const toggle = screen.getByRole("button", { name: "Table of contents" });
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    const panel = document.getElementById("article-toc-mobile");
+    expect(panel).not.toBeNull();
+    expect(panel).toHaveAttribute("hidden");
+
+    await user.click(toggle);
+
+    expect(toggle).toHaveAttribute("aria-expanded", "true");
+    expect(panel).not.toHaveAttribute("hidden");
+    expect(within(panel as HTMLElement).getByRole("link", { name: "Type Safety" }))
+      .toHaveAttribute("href", "#type-safety");
   });
 
   it("omits release facts for non-release posts", () => {

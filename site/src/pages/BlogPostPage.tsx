@@ -1,4 +1,4 @@
-import { Container } from "@openwdl/ui";
+import { Button, Container, Disclosure } from "@openwdl/ui";
 import { getPost, getPosts } from "../content/blogContent";
 import { getAdjacentPosts } from "../content/blogSchema";
 import { extractTableOfContents } from "../content/tableOfContents";
@@ -28,7 +28,7 @@ function splitAfterParagraphs(body: string, count: number): [first: string, rest
 /**
  * A single long-form blog article: the record label, title, standfirst,
  * byline, publication facts, an optional release facts panel, a table of
- * contents (a sticky rail on desktop, a `<details>` disclosure on mobile),
+ * contents (a sticky rail on desktop, a disclosure on mobile),
  * the rendered Markdown body, and same-genre "newer/older" navigation.
  *
  * Renders the shared `NotFoundPage` for any slug that doesn't resolve to a
@@ -52,10 +52,16 @@ export function BlogPostPage({ slug }: { slug: string }) {
         <Container>
           <div className={styles.layout}>
             <article className={styles.article}>
-              <a href={docHref("/blog/")} className={styles.backLink}>
-                <span aria-hidden="true">&larr;</span>
+              <Button
+                as="a"
+                href={docHref("/blog/")}
+                variant="secondary"
+                size="sm"
+                className={styles.backLink}
+                leadingIcon={<span>&larr;</span>}
+              >
                 Back to the blog
-              </a>
+              </Button>
             <div className={styles.topicRow}>
               <p className={styles.eyebrow}>
                 OpenWDL blog · {post.genre.charAt(0).toUpperCase() + post.genre.slice(1)}
@@ -76,10 +82,11 @@ export function BlogPostPage({ slug }: { slug: string }) {
             </div>
 
             {toc.length > 0 && (
-              <details className={styles.tocMobile}>
-                <summary>Table of contents</summary>
-                <ArticleToc items={toc} className={styles.tocList} />
-              </details>
+              <div className={styles.tocMobile}>
+                <Disclosure controlsId="article-toc-mobile" label="Table of contents">
+                  <ArticleToc items={toc} className={styles.tocList} />
+                </Disclosure>
+              </div>
             )}
 
             <div className={styles.body}>
@@ -94,7 +101,7 @@ export function BlogPostPage({ slug }: { slug: string }) {
               )}
             </div>
 
-              <GenrePagination newer={newer} older={older} className={styles.pagination} />
+            <GenrePagination newer={newer} older={older} />
             </article>
 
             {toc.length > 0 && (

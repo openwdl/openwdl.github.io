@@ -9,7 +9,7 @@ import {
 import { getAuthor } from "../../content/authors";
 import type { AuthorSocialPlatform } from "../../content/authors";
 import type { AuthorId } from "../../content/authorIds";
-import { AuthorAvatar, type AuthorAvatarSize } from "./AuthorAvatar";
+import { Avatar, AvatarGroup } from "@openwdl/ui";
 import styles from "../Authors.module.css";
 
 const socialPlatforms: Record<
@@ -27,8 +27,8 @@ const socialPlatforms: Record<
 export interface AuthorBylineProps {
   /** Author identifiers, in authored order (never re-sorted). */
   ids: readonly AuthorId[];
-  /** Portrait diameter shared by every author in the byline. */
-  size: AuthorAvatarSize;
+  /** Portrait diameter shared by every author in the byline, in pixels. */
+  size: number;
   /** Optional label rendered above the byline, e.g. `"Written by"`. */
   label?: string;
   /** Additional class name applied to the root element. */
@@ -48,11 +48,11 @@ export interface AuthorBylineProps {
 
 /**
  * Renders every author's portrait and full name for a post, preserving
- * authored order. Names are always visible text and never depend on
- * portrait alternative text or hover state. When more than one author is
- * present, adjacent portraits overlap by 14px via CSS only; keyboard and
- * reading order are unaffected. Each name links to the author's registered
- * profile URL only when `linkProfiles` is set.
+ * authored order. Names are always visible text, so the byline reads the
+ * same whether or not a portrait loads. When more than one author is
+ * present, `AvatarGroup` overlaps adjacent portraits purely visually;
+ * keyboard and reading order are unaffected. Each name links to the
+ * author's registered profile URL only when `linkProfiles` is set.
  */
 export function AuthorByline({
   ids,
@@ -68,13 +68,17 @@ export function AuthorByline({
   return (
     <div className={[styles.byline, className].filter(Boolean).join(" ")}>
       {label && <span className={styles.bylineLabel}>{label}</span>}
-      <div className={styles.portraits}>
+      <AvatarGroup>
         {authorList.map((author) => (
-          <span key={author.id} className={styles.portraitWrap}>
-            <AuthorAvatar author={author} size={size} accentRing={accentRing} />
-          </span>
+          <Avatar
+            key={author.id}
+            name={author.name}
+            src={author.avatar}
+            size={size}
+            ring={accentRing}
+          />
         ))}
-      </div>
+      </AvatarGroup>
       <p className={styles.names}>
         {authorList.map((author, index) => (
           <span key={author.id} className={styles.name}>

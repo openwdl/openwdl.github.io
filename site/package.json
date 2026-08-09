@@ -18,7 +18,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@openwdl/ui": "git+https://github.com/openwdl/ui.git#v0.0.1",
+    "@openwdl/ui": "git+https://github.com/openwdl/ui.git#v0.1.0",
     "github-slugger": "^2.0.0",
     "gray-matter": "^4.0.3",
     "jszip": "^3.10.1",

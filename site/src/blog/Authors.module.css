@@ -1,35 +1,5 @@
-/* Shared styles for AuthorAvatar and AuthorByline. */
-
-.avatar {
-  position: relative;
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  overflow: hidden;
-  background: var(--surface);
-  border: 2px solid var(--bg);
-}
-
-.accentRing {
-  border-color: var(--accent);
-}
-
-.portrait {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.initials {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  user-select: none;
-}
+/* Shared styles for AuthorByline. Portrait circles and their overlapping
+   cluster come from the kit's Avatar / AvatarGroup. */
 
 .byline {
   display: flex;
@@ -43,18 +13,6 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--text-muted);
-}
-
-.portraits {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-/* A negative trailing margin preserves the 14px overlap without pulling the
-   first portrait on a wrapped line outside the byline. */
-.portraitWrap:not(:last-child) {
-  margin-right: -14px;
 }
 
 .names {

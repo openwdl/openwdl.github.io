@@ -174,12 +174,12 @@ it("presents WDL source as the homepage product object", () => {
     name: "View the specification",
   });
   expect(primaryAction).toHaveAttribute("href", "/docs/start/overview/");
-  expect(primaryAction.className).toContain("primaryAction");
+  expect(primaryAction.className).toContain("Button_primary");
   expect(secondaryAction).toHaveAttribute(
     "href",
     "https://github.com/openwdl/wdl/blob/wdl-1.3/SPEC.md",
   );
-  expect(secondaryAction.className).toContain("secondaryAction");
+  expect(secondaryAction.className).toContain("Button_secondary");
 
   expect(screen.getByText(
     "WDL is an openly governed language for describing tasks, inputs, dependencies, and runtime requirements. Different execution engines can interpret the same description on laptops, clusters, and cloud platforms.",
@@ -303,19 +303,20 @@ it("uses sourced milestones and base-aware next steps", () => {
   ]);
   expect(within(today as HTMLElement).getByRole("link", {
     name: "Explore the WDL ecosystem",
-  }).className).toContain("action");
+  }).className).toContain("Button_secondary");
   expect(within(today as HTMLElement).getByRole("link", { name: "Start learning WDL" }))
     .toHaveAttribute("href", "/docs/start/your-first-workflow/");
   expect(within(today as HTMLElement).getByRole("link", { name: "Meet the community" }))
     .toHaveAttribute("href", "/community/");
-  expect(within(today as HTMLElement).getByRole("link", {
-    name: "Start learning WDL",
-  }).querySelector("svg"))
-    .toHaveAttribute("aria-hidden", "true");
-  expect(within(today as HTMLElement).getByRole("link", {
-    name: "Meet the community",
-  }).querySelector("svg"))
-    .toHaveAttribute("aria-hidden", "true");
+  // Each resource link carries a decorative glyph hidden from assistive tech by
+  // the kit Button's aria-hidden icon wrapper.
+  for (const name of ["Start learning WDL", "Meet the community"]) {
+    const icon = within(today as HTMLElement)
+      .getByRole("link", { name })
+      .querySelector("svg");
+    expect(icon).not.toBeNull();
+    expect(icon!.closest("[aria-hidden='true']")).not.toBeNull();
+  }
   expect(screen.queryByRole("region", { name: "Next steps" })).not.toBeInTheDocument();
 });
 

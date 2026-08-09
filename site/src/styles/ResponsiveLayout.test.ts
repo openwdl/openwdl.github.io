@@ -1,8 +1,21 @@
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { readFileSync, readdirSync } from "node:fs";
+import { relative, resolve } from "node:path";
+import { tokens } from "@openwdl/ui";
+
+const SRC = resolve(__dirname, "..");
+const KIT_THEME = resolve(SRC, "../node_modules/@openwdl/ui/dist/theme.css");
 
 function stylesheet(path: string) {
   return readFileSync(resolve(__dirname, path), "utf8");
+}
+
+/** Every stylesheet the site owns, recursively under `src/`. */
+function siteStylesheets(dir = SRC): string[] {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = resolve(dir, entry.name);
+    if (entry.isDirectory()) return siteStylesheets(full);
+    return entry.name.endsWith(".css") ? [full] : [];
+  });
 }
 
 describe("responsive specimen grids", () => {
@@ -34,11 +47,30 @@ describe("responsive specimen grids", () => {
   });
 });
 
-describe("site layout tokens", () => {
-  it("keeps the site max width in rem units", () => {
-    const siteTokens = stylesheet("./tokens.css");
+describe("site token ownership", () => {
+  it("takes the page width from the kit theme, in rem units", () => {
+    expect(tokens.layout.maxw).toBe("75rem");
+  });
 
-    expect(siteTokens).toMatch(/--maxw:\s*75rem/);
-    expect(siteTokens).not.toMatch(/--maxw:\s*1200px/);
+  it("re-declares no kit-owned custom property in an unscoped :root block", () => {
+    const kitOwned = new Set(
+      [...readFileSync(KIT_THEME, "utf8").matchAll(/(--[a-z0-9-]+)\s*:/g)].map((m) => m[1]),
+    );
+    // The dot grid is the sharp edge: site CSS loads after theme.css, so a bare
+    // `:root { --dot-color }` wins on source order at equal specificity and
+    // silently clobbers the light theme's dot color with the dark one.
+    expect([...kitOwned]).toContain("--dot-color");
+
+    const clobbered: string[] = [];
+    for (const file of siteStylesheets()) {
+      const css = readFileSync(file, "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+      for (const [, body] of css.matchAll(/:root\s*\{([^}]*)\}/g)) {
+        for (const [, prop] of body.matchAll(/(--[a-z0-9-]+)\s*:/g)) {
+          if (kitOwned.has(prop)) clobbered.push(`${relative(SRC, file)} ${prop}`);
+        }
+      }
+    }
+
+    expect(clobbered).toEqual([]);
   });
 });

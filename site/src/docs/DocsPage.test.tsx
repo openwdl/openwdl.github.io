@@ -151,11 +151,18 @@ it("renders globally ordered previous and next page links", () => {
   const pagination = screen.getByRole("navigation", {
     name: "Documentation pagination",
   });
+  const previous = within(pagination).getByRole("link", { name: "Previous Variables" });
+  expect(previous).toHaveAttribute("href", "/docs/start/language/variables/");
+  expect(previous).toHaveAttribute("rel", "prev");
+  const next = within(pagination).getByRole("link", { name: "Next Workflows" });
+  expect(next).toHaveAttribute("href", "/docs/start/language/workflows/");
+  expect(next).toHaveAttribute("rel", "next");
+});
+
+it("omits the pagination landmark when neither neighbour resolves", () => {
+  render(<DocsPage page={tasksPage} pages={[tasksPage]} />);
+
   expect(
-    screen.getByRole("link", { name: "Previous Variables" }),
-  ).toHaveAttribute("href", "/docs/start/language/variables/");
-  expect(
-    screen.getByRole("link", { name: "Next Workflows" }),
-  ).toHaveAttribute("href", "/docs/start/language/workflows/");
-  expect(pagination).toBeInTheDocument();
+    screen.queryByRole("navigation", { name: "Documentation pagination" }),
+  ).not.toBeInTheDocument();
 });

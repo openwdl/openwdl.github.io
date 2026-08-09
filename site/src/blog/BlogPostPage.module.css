@@ -16,26 +16,9 @@
   min-width: 0;
 }
 
+/* Kit Button supplies the control chrome; the article only owns its spacing. */
 .backLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
   margin-bottom: 1.25rem;
-  padding: 0.55rem 0.8rem;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.backLink:hover,
-.backLink:focus-visible {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
 }
 
 .topicRow {
@@ -170,22 +153,16 @@
 }
 
 /* Mobile table-of-contents disclosure — hidden on desktop, where the
-   sticky rail (`.tocDesktop`) takes over instead. */
+   sticky rail (`.tocDesktop`) takes over instead. The wrapper owns the
+   breakpoint policy; the kit `Disclosure` inside carries the control chrome
+   and always renders. */
 .tocMobile {
   display: none;
   max-width: 68ch;
   margin-bottom: 2rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 0.75rem 1rem;
 }
 
-.tocMobile summary {
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.tocMobile[open] .tocList {
+.tocMobile .tocList {
   margin-top: 0.75rem;
 }
 
@@ -338,65 +315,6 @@
   margin: 1.75rem 0 2.25rem;
 }
 
-/* Same-genre "newer/older" navigation. */
-.pagination {
-  display: flex;
-  justify-content: space-between;
-  gap: 1.5rem;
-  max-width: 68ch;
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-}
-
-.pagination a {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  max-width: 45%;
-  padding: 1rem 1.1rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--text);
-  text-decoration: none;
-  transition:
-    background-color 150ms ease,
-    border-color 150ms ease,
-    box-shadow 150ms ease,
-    transform 150ms ease;
-}
-
-.pagination a:hover,
-.pagination a:focus-visible {
-  border-color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
-  box-shadow: 0 0.4rem 1rem color-mix(in srgb, var(--accent) 12%, transparent);
-  transform: translateY(-1px);
-}
-
-.pagination a span:first-child {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-}
-
-.pagination a span:last-child {
-  font-weight: 600;
-}
-
-.pagination a[rel="prev"] {
-  margin-right: auto;
-  text-align: left;
-}
-
-.pagination a[rel="next"] {
-  text-align: right;
-  margin-left: auto;
-}
-
 /* Desktop sticky table-of-contents rail. */
 .tocDesktop {
   position: sticky;
@@ -497,28 +415,6 @@
 
   .body :global(.blog-heading-3) {
     margin-top: 2rem;
-  }
-
-  .pagination {
-    flex-direction: row;
-    gap: 0.75rem;
-  }
-
-  .pagination a {
-    flex: 0 0 calc(50% - 0.375rem);
-    max-width: calc(50% - 0.375rem);
-    text-align: left;
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .pagination a[rel="prev"] {
-    margin-right: auto;
-  }
-
-  .pagination a[rel="next"] {
-    margin-left: auto;
-    text-align: right;
   }
 }
 

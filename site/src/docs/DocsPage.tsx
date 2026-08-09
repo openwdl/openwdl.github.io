@@ -1,3 +1,4 @@
+import { Pagination } from "@openwdl/ui";
 import type { CompiledDocPage } from "../../scripts/docs/types";
 import { DocsShell } from "./DocsShell";
 import { MarkdownBody } from "./MarkdownBody";
@@ -73,33 +74,23 @@ export function DocsPage({ page, pages }: DocsPageProps) {
       ))}
       <h1 id={titleId}>{page.title}</h1>
       <MarkdownBody source={page.body} headingAliases={page.headingAliases} />
-      {(previousPage || nextPage) && (
-        <nav
-          aria-label="Documentation pagination"
-          className={styles.pagination}
-        >
-          {previousPage && (
-            <a
-              href={docHref(previousPage.slug)}
-              className={styles.paginationLink}
-              aria-label={`Previous ${previousPage.title}`}
-            >
-              <span className={styles.paginationDirection}>Previous</span>
-              <span className={styles.paginationTitle}>{previousPage.title}</span>
-            </a>
-          )}
-          {nextPage && (
-            <a
-              href={docHref(nextPage.slug)}
-              className={`${styles.paginationLink} ${styles.next}`}
-              aria-label={`Next ${nextPage.title}`}
-            >
-              <span className={styles.paginationDirection}>Next</span>
-              <span className={styles.paginationTitle}>{nextPage.title} →</span>
-            </a>
-          )}
-        </nav>
-      )}
+      <Pagination
+        aria-label="Documentation pagination"
+        prev={
+          previousPage && {
+            href: docHref(previousPage.slug),
+            label: "Previous",
+            title: previousPage.title,
+          }
+        }
+        next={
+          nextPage && {
+            href: docHref(nextPage.slug),
+            label: "Next",
+            title: nextPage.title,
+          }
+        }
+      />
     </DocsShell>
   );
 }

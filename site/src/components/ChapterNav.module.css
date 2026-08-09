@@ -15,7 +15,9 @@
   text-transform: uppercase;
 }
 
-.toggle {
+/* Wrapper owns the breakpoint policy: the kit `Disclosure` inside always
+   renders, and carries its own control chrome. */
+.disclosure {
   display: none;
 }
 
@@ -56,35 +58,13 @@
     display: none;
   }
 
-  .toggle {
-    display: flex;
-    width: 100%;
+  .disclosure {
+    display: block;
+  }
+
+  /* Comfortable touch target on the viewports where the control is shown. */
+  .disclosure button {
     min-height: 44px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-control);
-    background: var(--surface);
-    color: var(--text);
-    font-family: var(--font-mono);
-    transition:
-      color var(--motion-control-duration) var(--motion-control-ease),
-      border-color var(--motion-control-duration) var(--motion-control-ease),
-      transform var(--motion-control-duration) var(--motion-control-ease);
-  }
-
-  .toggle:hover {
-    transition-delay: var(--motion-control-delay);
-    transform: translateY(var(--motion-control-lift));
-    color: var(--accent);
-    border-color: var(--accent);
-  }
-
-  .toggle:active {
-    transition-delay: 0ms;
-    transition-duration: var(--motion-control-press-duration);
-    transform: translateY(0);
   }
 
   .links {

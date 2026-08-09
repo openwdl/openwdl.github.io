@@ -1,3 +1,4 @@
+import { Button } from "@openwdl/ui";
 import { useState, useEffect } from "react";
 import type { WizardStage } from "../model/types";
 import styles from "./Wizard.module.css";
@@ -166,22 +167,23 @@ export function WizardQuestion<T extends string | boolean>({
 
       <div className={styles.actions}>
         {onBack && (
-          <button
+          <Button
             type="button"
+            variant="secondary"
+            className={styles.touchTarget}
             onClick={onBack}
-            className={styles.backButton}
           >
             Back
-          </button>
+          </Button>
         )}
-        <button
+        <Button
           type="button"
+          className={styles.touchTarget}
           aria-disabled={!hasValue ? "true" : undefined}
           onClick={handleContinue}
-          className={styles.continueButton}
         >
           Continue
-        </button>
+        </Button>
       </div>
     </div>
   );

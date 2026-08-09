@@ -1,3 +1,4 @@
+import { Button } from "@openwdl/ui";
 import { useRef, useState, useEffect, useMemo, useCallback } from "react";
 import type { SetupCatalog, OsId, EditorId } from "./catalog/types";
 import type { SetupState, WizardStage } from "./model/types";
@@ -63,7 +64,8 @@ export function GetStartedWizard({ catalog, history }: GetStartedWizardProps) {
   // ── Refs ──────────────────────────────────────────────────────────────────
   const headingRef = useRef<HTMLHeadingElement>(null);
   const liveRef = useRef<HTMLDivElement>(null);
-  const startOverBtnRef = useRef<HTMLButtonElement>(null);
+  // Widened to the kit Button's ref union; only `.focus()` is used.
+  const startOverBtnRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
   // Pending focus closure to execute after a DOM update (e.g. after the Start
   // over confirmation closes and the button re-mounts into the DOM).
   const pendingFocusRef = useRef<(() => void) | null>(null);
@@ -257,14 +259,14 @@ export function GetStartedWizard({ catalog, history }: GetStartedWizardProps) {
       {/* Start over section (hidden when state is empty or confirmation is open) */}
       {hasAnswers && !showConfirm && (
         <div className={styles.startOver}>
-          <button
+          <Button
             ref={startOverBtnRef}
             type="button"
+            variant="ghost"
             onClick={handleStartOver}
-            className={styles.startOverButton}
           >
             Start over
-          </button>
+          </Button>
         </div>
       )}
 
@@ -278,20 +280,20 @@ export function GetStartedWizard({ catalog, history }: GetStartedWizardProps) {
             All your answers will be cleared. Are you sure?
           </p>
           <div className={styles.startOverConfirmActions}>
-            <button
+            <Button
               type="button"
+              variant="danger"
               onClick={handleConfirmStartOver}
-              className={styles.startOverConfirmButton}
             >
               Yes, start over
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
+              variant="secondary"
               onClick={handleCancelStartOver}
-              className={styles.startOverCancelButton}
             >
               Cancel
-            </button>
+            </Button>
           </div>
         </div>
       )}

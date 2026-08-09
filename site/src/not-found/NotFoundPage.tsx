@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Footer, NavBar, ToastProvider } from "@openwdl/ui";
+import { Button, Footer, NavBar, ToastProvider } from "@openwdl/ui";
 import { FiArrowRight, FiBookOpen, FiHome } from "react-icons/fi";
 import { docHref } from "../docs/docHref";
 import styles from "./NotFoundPage.module.css";
@@ -48,18 +48,25 @@ export function NotFoundPage() {
                 Choose a known entry point to continue.
               </p>
               <div className={styles.actions}>
-                <a className={styles.primaryAction} href={docHref("/")}>
-                  <FiHome aria-hidden="true" />
+                <Button as="a" href={docHref("/")} leadingIcon={<FiHome />}>
                   OpenWDL home
-                </a>
-                <a className={styles.secondaryAction} href={docHref("/docs/")}>
-                  <FiBookOpen aria-hidden="true" />
+                </Button>
+                <Button
+                  as="a"
+                  href={docHref("/docs/")}
+                  variant="secondary"
+                  leadingIcon={<FiBookOpen />}
+                >
                   Browse docs
-                </a>
-                <a className={styles.secondaryAction} href={docHref("/get-started/")}>
-                  <FiArrowRight aria-hidden="true" />
+                </Button>
+                <Button
+                  as="a"
+                  href={docHref("/get-started/")}
+                  variant="secondary"
+                  leadingIcon={<FiArrowRight />}
+                >
                   Get started
-                </a>
+                </Button>
               </div>
             </section>
 

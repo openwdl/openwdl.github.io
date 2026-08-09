@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Disclosure, useActiveHeading } from "@openwdl/ui";
 import styles from "./ChapterNav.module.css";
 
 const chapters = [
@@ -11,55 +12,41 @@ const chapters = [
   { id: "downloads", label: "Downloads" },
 ] as const;
 
-type ChapterId = (typeof chapters)[number]["id"];
+const chapterIds = chapters.map(({ id }) => id);
 
-/** Page-local chapter navigation, presented as a disclosure on small screens. */
+/** Id of the chapter list, revealed by the small-screen disclosure. */
+const LINKS_ID = "brand-chapter-links";
+
+/**
+ * Page-local chapter navigation. The list is a sticky rail on wide screens
+ * and collapses behind a disclosure below 1100px; the wrapper owns that
+ * breakpoint policy because the kit `Disclosure` renders unconditionally.
+ *
+ * The current chapter comes from the shared `useActiveHeading` scroll-spy at
+ * its default activation line.
+ */
 export function ChapterNav() {
-  const [active, setActive] = useState<ChapterId>(chapters[0].id);
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const sections = chapters
-      .map(({ id }) => document.getElementById(id))
-      .filter((section): section is HTMLElement => section !== null);
-
-    if (typeof IntersectionObserver === "undefined") return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (visible) setActive(visible.target.id as ChapterId);
-      },
-      { rootMargin: "-20% 0px -70% 0px" },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
+  const active = useActiveHeading(chapterIds);
 
   return (
     <nav className={styles.nav} aria-label="On this page">
-      <button
-        type="button"
-        className={styles.toggle}
-        aria-expanded={open}
-        aria-controls="brand-chapter-links"
-        onClick={() => setOpen((value) => !value)}
-      >
-        On this page
-        <span aria-hidden>{open ? "−" : "+"}</span>
-      </button>
+      <div className={styles.disclosure}>
+        <Disclosure
+          controlsId={LINKS_ID}
+          label="On this page"
+          open={open}
+          onToggle={() => setOpen((value) => !value)}
+        />
+      </div>
       <strong className={styles.title}>On this page</strong>
-      <ol id="brand-chapter-links" className={styles.links} data-open={open}>
+      <ol id={LINKS_ID} className={styles.links} data-open={open}>
         {chapters.map(({ id, label }, index) => (
           <li key={id}>
             <a
               href={`#${id}`}
               aria-current={active === id ? "location" : undefined}
-              onClick={() => {
-                setActive(id);
-                setOpen(false);
-              }}
+              onClick={() => setOpen(false)}
             >
               <span aria-hidden>{String(index + 1).padStart(2, "0")}</span>
               {label}

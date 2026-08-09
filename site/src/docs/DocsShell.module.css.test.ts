@@ -6,7 +6,6 @@ const shellCss = readFileSync(
   "utf8",
 );
 const navCss = readFileSync(resolve(__dirname, "DocsNav.module.css"), "utf8");
-const tocCss = readFileSync(resolve(__dirname, "DocsToc.module.css"), "utf8");
 const bodyCss = readFileSync(
   resolve(__dirname, "MarkdownBody.module.css"),
   "utf8",
@@ -36,9 +35,6 @@ it("uses quiet navigation rails around an open reading column", () => {
   expect(navCss).toMatch(
     /\.link\[aria-current="page"\]\s*\{(?=[^}]*border-left-color:\s*var\(--accent\))(?=[^}]*background:\s*transparent)[^}]*\}/s,
   );
-  expect(tocCss).toMatch(
-    /\.toc\s*\{(?=[^}]*border-left:\s*1px solid var\(--chrome-border\))(?=[^}]*background:\s*var\(--surface\))[^}]*\}/s,
-  );
 });
 
 it("pins fixed rails to the viewport edges around broader centered prose", () => {
@@ -48,11 +44,12 @@ it("pins fixed rails to the viewport edges around broader centered prose", () =>
   expect(shellCss).toMatch(
     /\.article\s*\{(?=[^}]*width:\s*100%)(?=[^}]*max-width:\s*82ch)[^}]*\}/s,
   );
-  expect(bodyCss).toMatch(
-    /\.body\s*\{(?=[^}]*max-width:\s*82ch)[^}]*\}/s,
-  );
+  // The markdown column's own measure is the kit `Prose` default
+  // (`--prose-measure: 82ch`), matched by `.article` above.
   expect(navCss).toMatch(/@media\s*\(max-width:\s*900px\)/);
-  expect(tocCss).toMatch(/@media\s*\(max-width:\s*900px\)/);
+  expect(shellCss).toMatch(
+    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.layout > \.toc\s*\{(?=[^}]*position:\s*static)(?=[^}]*grid-column:\s*auto)[^}]*\}/s,
+  );
 });
 
 it("uses comfortable documentation and rail text sizes", () => {
@@ -61,9 +58,6 @@ it("uses comfortable documentation and rail text sizes", () => {
   );
   expect(navCss).toMatch(
     /\.nav\s*\{(?=[^}]*font-size:\s*0\.9375rem)[^}]*\}/s,
-  );
-  expect(tocCss).toMatch(
-    /\.toc\s*\{(?=[^}]*font-size:\s*0\.875rem)[^}]*\}/s,
   );
 });
 
@@ -76,43 +70,28 @@ it("separates sidebar section headings from their menu items", () => {
   );
 });
 
-it("gives multi-line list items the same readable rhythm as paragraphs", () => {
-  expect(bodyCss).toMatch(
-    /\.body :global\(li\)\s*\{(?=[^}]*margin:\s*0\.5rem\s+0)(?=[^}]*line-height:\s*1\.7)[^}]*\}/s,
+it("leaves markdown typography and table styling to the kit", () => {
+  // `Prose` owns typography and `TableScroll` owns every table rule, so the
+  // old `.body` container and `.tableScroll` region keep no local rules.
+  expect(bodyCss).not.toMatch(/\.body\b/);
+  expect(bodyCss).not.toMatch(/\.tableScroll\b/);
+  expect(bodyCss).not.toMatch(
+    /:global\((?:p|h2|h3|ul|ol|li|a|hr|blockquote|table|th|td|tbody)\b/,
   );
 });
 
-it("makes local documentation images fill the content width without distortion", () => {
-  expect(bodyCss).toMatch(
-    /\.localImage\s*\{(?=[^}]*display:\s*block)(?=[^}]*width:\s*100%)(?=[^}]*height:\s*auto)[^}]*\}/s,
-  );
+it("stretches local documentation images to the full content width", () => {
+  // `Prose` supplies display/max-width/height for every image; the stretch to
+  // the full measure is the only declaration that is still ours.
+  expect(bodyCss).toMatch(/\.localImage\s*\{(?=[^}]*width:\s*100%)[^}]*\}/s);
 });
 
-it("presents documentation tables as responsive bordered surfaces", () => {
-  expect(bodyCss).toMatch(
-    /\.tableScroll\s*\{(?=[^}]*overflow-x:\s*auto)(?=[^}]*border:\s*1px solid var\(--border\))(?=[^}]*border-radius:\s*var\(--radius\))[^}]*\}/s,
-  );
-  expect(bodyCss).toMatch(
-    /\.body :global\(th\)\s*\{(?=[^}]*background:\s*var\(--surface\))(?=[^}]*font-weight:\s*600)[^}]*\}/s,
-  );
-  expect(bodyCss).toMatch(
-    /\.body :global\(th\),\s*\.body :global\(td\)\s*\{(?=[^}]*padding:\s*0\.75rem\s+0\.875rem)(?=[^}]*border-bottom:\s*1px solid var\(--border\))[^}]*\}/s,
-  );
-});
-
-it("uses quiet wayfinding with left-aligned pagination content", () => {
+it("keeps breadcrumb wayfinding quiet and leaves pagination to the kit", () => {
   expect(pageCss).toMatch(
     /\.breadcrumbs\s*\{(?=[^}]*font-family:\s*var\(--font-mono\))(?=[^}]*color:\s*var\(--text-muted\))[^}]*\}/s,
   );
-  expect(pageCss).toMatch(
-    /\.pagination\s*\{(?=[^}]*display:\s*grid)(?=[^}]*border-top:\s*1px solid var\(--border\))[^}]*\}/s,
-  );
-  expect(pageCss).toMatch(
-    /\.paginationLink\s*\{(?=[^}]*text-align:\s*left)(?=[^}]*text-decoration:\s*none)[^}]*\}/s,
-  );
-  expect(pageCss).toMatch(
-    /\.next\s*\{(?=[^}]*grid-column:\s*2)(?=[^}]*text-align:\s*right)[^}]*\}/s,
-  );
+  // The docs pager is `@openwdl/ui`'s `Pagination`; no local rules survive.
+  expect(pageCss).not.toMatch(/\.pagination/);
 });
 
 it("keeps the section bar and desktop rails visible while reading", () => {
@@ -125,20 +104,24 @@ it("keeps the section bar and desktop rails visible while reading", () => {
   expect(navCss).toMatch(
     /\.nav\s*\{(?=[^}]*position:\s*sticky)(?=[^}]*top:\s*calc\(var\(--nav-h\) \+ var\(--docs-section-nav-h\)\))(?=[^}]*height:\s*calc\(100vh - var\(--nav-h\) - var\(--docs-section-nav-h\)\))[^}]*\}/s,
   );
-  expect(tocCss).toMatch(
-    /\.toc\s*\{(?=[^}]*top:\s*calc\(var\(--nav-h\) \+ var\(--docs-section-nav-h\)\))(?=[^}]*height:\s*calc\(100vh - var\(--nav-h\) - var\(--docs-section-nav-h\)\))[^}]*\}/s,
-  );
+  // Anchored headings clear nav + section bar through the kit's
+  // `--prose-scroll-offset`, which `Prose` adds to `--nav-h`. It has to be
+  // declared on the `Prose` element (element-qualified so it outranks the
+  // kit's own `--prose-scroll-offset: 0px` on that same element).
   expect(bodyCss).toMatch(
-    /\.body :global\(h2\),\s*\.body :global\(h3\)\s*\{[^}]*scroll-margin-top:\s*calc\(var\(--nav-h\) \+ var\(--docs-section-nav-h\) \+ 1rem\)[^}]*\}/s,
+    /div\.markdown\s*\{[^}]*--prose-scroll-offset:\s*calc\(var\(--docs-section-nav-h\) \+ 1rem\)[^}]*\}/s,
   );
   expect(shellCss).toMatch(
     /\.page > :global\(footer\)\s*\{[^}]*margin-top:\s*0[^}]*\}/s,
   );
 });
 
-it("highlights the active page-outline heading", () => {
-  expect(tocCss).toMatch(
-    /\.link\[aria-current="location"\]\s*\{(?=[^}]*border-left-color:\s*var\(--accent\))(?=[^}]*color:\s*var\(--accent\))[^}]*\}/s,
+it("places the kit page outline in the third documentation column", () => {
+  expect(shellCss).toMatch(
+    /\.layout > \.toc\s*\{(?=[^}]*grid-column:\s*3)(?=[^}]*grid-row:\s*1)[^}]*\}/s,
+  );
+  expect(shellCss).toMatch(
+    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.layout > \.toc\s*\{(?=[^}]*max-height:\s*min\(60vh, 30rem\))(?=[^}]*border:\s*1px solid var\(--chrome-border\))[^}]*\}/s,
   );
 });
 
@@ -163,5 +146,20 @@ it("gives mobile documentation search a full-width labeled row", () => {
   );
   expect(searchCss).not.toMatch(
     /@media\s*\(max-width:\s*900px\)\s*\{[\s\S]*?\.trigger > span\s*\{[^}]*display:\s*none/s,
+  );
+});
+
+it("confines the mobile disclosure controls to the collapsed layout", () => {
+  // The kit `Disclosure` renders at every viewport width, so the whole
+  // breakpoint policy has to live on this wrapper: hidden by default, shown
+  // exactly where the three-column layout collapses to one column.
+  expect(shellCss).toMatch(
+    /\.mobileControls\s*\{(?=[^}]*display:\s*none)[^}]*\}/s,
+  );
+  expect(shellCss).toMatch(
+    /@media\s*\(max-width:\s*900px\)\s*\{[\s\S]*?\.mobileControls\s*\{(?=[^}]*display:\s*flex)[^}]*\}/s,
+  );
+  expect(shellCss).toMatch(
+    /@media\s*\(max-width:\s*900px\)\s*\{[\s\S]*?\.layout\s*\{(?=[^}]*grid-template-columns:\s*1fr)[^}]*\}/s,
   );
 });

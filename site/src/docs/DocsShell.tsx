@@ -1,12 +1,10 @@
 import { useState } from "react";
-import type { ReactNode } from "react";
-import { ToastProvider, NavBar, Footer } from "@openwdl/ui";
+import type { CSSProperties, ReactNode } from "react";
+import { ToastProvider, NavBar, Footer, Disclosure, Toc } from "@openwdl/ui";
 import type { CompiledDocPage } from "../../scripts/docs/types";
 import { docHref } from "./docHref";
-import { DocsDisclosure } from "./DocsDisclosure";
 import { DocsNav } from "./DocsNav";
 import { DocsSearch } from "./DocsSearch";
-import { DocsToc } from "./DocsToc";
 import { DOC_SECTIONS } from "./docsSections";
 import styles from "./DocsShell.module.css";
 
@@ -82,13 +80,13 @@ export function DocsShell({ page, pages, children }: DocsShellProps) {
       {/* Three-column content area */}
       <div className={styles.layout}>
         <div className={styles.mobileControls}>
-          <DocsDisclosure
+          <Disclosure
             controlsId={NAV_ID}
             label="Docs menu"
             open={navOpen}
             onToggle={() => setNavOpen((o) => !o)}
           />
-          <DocsDisclosure
+          <Disclosure
             controlsId={TOC_ID}
             label="On this page"
             open={tocOpen}
@@ -105,14 +103,23 @@ export function DocsShell({ page, pages, children }: DocsShellProps) {
 
         {/*
          * 6. Sticky page outline — rendered once.
-         * Desktop: sticky in the right column.
+         * Desktop: sticky in the right column. The kit `Toc` styles itself
+         * but does not place itself, so `styles.toc` supplies the grid slot
+         * and the narrow-screen treatment.
          * Mobile: hidden via data-open until tocOpen=true.
+         *
+         * `--toc-offset` clears the sticky section nav below the global
+         * navbar. The kit self-defaults that property on the component root,
+         * which beats any ancestor declaration, so the override has to be
+         * inline on the element itself.
          */}
-        <DocsToc
+        <Toc
           key={page.slug}
           id={TOC_ID}
           headings={page.headings}
           open={tocOpen}
+          className={styles.toc}
+          style={{ "--toc-offset": "var(--docs-section-nav-h)" } as CSSProperties}
         />
 
         {/* 5. Main column */}

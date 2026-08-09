@@ -40,19 +40,11 @@ describe("homepage hero specimen layout", () => {
     );
   });
 
-  it("styles the introduction links as restrained primary and secondary actions", () => {
+  it("leaves the introduction actions to the kit Button, keeping only their row", () => {
     expect(css).toMatch(
-      /\.primaryAction,\s*\.secondaryAction\s*\{(?=[^}]*display:\s*inline-flex)(?=[^}]*min-height:\s*2\.5rem)(?=[^}]*border-radius:\s*var\(--radius-control\))[^}]*\}/s,
+      /\.links\s*\{(?=[^}]*display:\s*flex)(?=[^}]*flex-wrap:\s*wrap)(?=[^}]*justify-content:\s*center)(?=[^}]*gap:\s*0\.75rem)[^}]*\}/s,
     );
-    expect(css).toMatch(
-      /\.primaryAction\s*\{(?=[^}]*background:\s*var\(--accent\))(?=[^}]*color:\s*var\(--accent-contrast\))[^}]*\}/s,
-    );
-    expect(css).toMatch(
-      /\.secondaryAction\s*\{(?=[^}]*border-color:\s*var\(--chrome-border,\s*var\(--border\)\))(?=[^}]*color:\s*var\(--text\))[^}]*\}/s,
-    );
-    expect(css).not.toMatch(
-      /\.(?:primaryAction|secondaryAction):hover\s*\{[^}]*(?:transform|box-shadow):/s,
-    );
+    expect(css).not.toMatch(/\.(?:primaryAction|secondaryAction)\b/);
   });
 
   it("lays out the specimen as two equal columns on desktop", () => {

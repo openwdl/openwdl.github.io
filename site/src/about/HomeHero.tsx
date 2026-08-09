@@ -1,3 +1,4 @@
+import { Button } from "@openwdl/ui";
 import { docHref } from "../docs/docHref";
 import styles from "./HomeHero.module.css";
 
@@ -123,18 +124,16 @@ export function HomeHero() {
           platforms.
         </p>
         <div className={styles.links}>
-          <a
-            className={styles.primaryAction}
-            href={docHref("/docs/start/overview/")}
-          >
+          <Button as="a" href={docHref("/docs/start/overview/")}>
             Read the language guide
-          </a>
-          <a
-            className={styles.secondaryAction}
+          </Button>
+          <Button
+            as="a"
             href="https://github.com/openwdl/wdl/blob/wdl-1.3/SPEC.md"
+            variant="secondary"
           >
             View the specification
-          </a>
+          </Button>
         </div>
       </div>
       <div className={styles.specimen}>

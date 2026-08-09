@@ -237,52 +237,12 @@
   margin-top: 0.5rem;
 }
 
-.backButton {
+/*
+ * Kit Button supplies the control chrome. The wizard keeps only the 44px
+ * minimum touch target its primary flow controls have always had.
+ */
+.touchTarget {
   min-height: 44px;
-  padding-inline: 1.25rem;
-  border-radius: var(--radius-control);
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text-muted);
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  cursor: pointer;
-  transition:
-    border-color var(--motion-control-duration) var(--motion-control-ease),
-    color var(--motion-control-duration) var(--motion-control-ease),
-    transform var(--motion-control-duration) var(--motion-control-ease);
-}
-
-.backButton:hover {
-  border-color: var(--text-muted);
-  color: var(--text);
-}
-
-.continueButton {
-  min-height: 44px;
-  padding-inline: 1.5rem;
-  border-radius: var(--radius-control);
-  border: none;
-  background: var(--accent);
-  color: var(--bg);
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    background var(--motion-control-duration) var(--motion-control-ease),
-    transform var(--motion-control-duration) var(--motion-control-ease),
-    box-shadow var(--motion-control-duration) var(--motion-control-ease);
-}
-
-.continueButton:hover:not([aria-disabled="true"]) {
-  background: var(--teal-400);
-}
-
-.continueButton[aria-disabled="true"] {
-  background: var(--gray-500);
-  color: var(--text-muted);
-  cursor: not-allowed;
 }
 
 /* ── Result card ─────────────────────────────────────────────────────────── */
@@ -388,46 +348,6 @@
   flex-wrap: wrap;
   gap: 0.75rem;
   align-items: center;
-}
-
-.changeAnswersButton {
-  min-height: 44px;
-  padding-inline: 1.25rem;
-  border-radius: var(--radius-control);
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
-  font-family: var(--font-sans);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition:
-    border-color var(--motion-control-duration) var(--motion-control-ease),
-    transform var(--motion-control-duration) var(--motion-control-ease);
-}
-
-.changeAnswersButton:hover {
-  border-color: var(--text-muted);
-}
-
-.setupRequestLink {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding-inline: 1.25rem;
-  border-radius: var(--radius-control);
-  border: 1px solid var(--teal-700);
-  color: var(--accent);
-  font-size: 0.9375rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition:
-    background var(--motion-control-duration) var(--motion-control-ease),
-    transform var(--motion-control-duration) var(--motion-control-ease);
-}
-
-.setupRequestLink:hover {
-  background: var(--gray-700);
 }
 
 /* ── Checklist ───────────────────────────────────────────────────────────── */
@@ -564,23 +484,9 @@
     flex-direction: column;
   }
 
-  .backButton,
-  .continueButton {
-    width: 100%;
-    text-align: center;
-    min-height: 44px;
-  }
-
   .unsupportedActions {
     flex-direction: column;
     align-items: stretch;
-  }
-
-  .changeAnswersButton,
-  .setupRequestLink {
-    width: 100%;
-    justify-content: center;
-    min-height: 44px;
   }
 
   .checklistLink,
@@ -597,10 +503,6 @@
   .progressStep,
   .progressStep::before,
   .optionLabel,
-  .backButton,
-  .continueButton,
-  .changeAnswersButton,
-  .setupRequestLink,
   .resultLink {
     transition: none;
   }
@@ -642,25 +544,6 @@
   text-align: center;
 }
 
-.startOverButton {
-  background: none;
-  border: none;
-  color: var(--text-muted, #666);
-  font-size: 0.875rem;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  border-radius: var(--radius-control);
-  transition:
-    color var(--motion-control-duration) var(--motion-control-ease),
-    transform var(--motion-control-duration) var(--motion-control-ease);
-}
-
-.startOverButton:hover {
-  color: var(--text, #1a1a1a);
-}
-
 .startOverConfirm {
   margin-top: 2rem;
   padding: 1rem 1.25rem;
@@ -681,61 +564,4 @@
   gap: 0.75rem;
   justify-content: center;
   flex-wrap: wrap;
-}
-
-.startOverConfirmButton,
-.startOverCancelButton {
-  padding: 0.5rem 1.25rem;
-  border-radius: var(--radius-control);
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition:
-    background var(--motion-control-duration) var(--motion-control-ease),
-    color var(--motion-control-duration) var(--motion-control-ease),
-    transform var(--motion-control-duration) var(--motion-control-ease);
-}
-
-.backButton:hover,
-.continueButton:hover:not([aria-disabled="true"]),
-.changeAnswersButton:hover,
-.setupRequestLink:hover,
-.startOverButton:hover,
-.startOverConfirmButton:hover,
-.startOverCancelButton:hover {
-  transition-delay: var(--motion-control-delay);
-  transform: translateY(var(--motion-control-lift));
-}
-
-.backButton:active,
-.continueButton:active,
-.changeAnswersButton:active,
-.setupRequestLink:active,
-.startOverButton:active,
-.startOverConfirmButton:active,
-.startOverCancelButton:active {
-  transition-delay: 0ms;
-  transition-duration: var(--motion-control-press-duration);
-  transform: translateY(0);
-}
-
-.startOverConfirmButton {
-  background: var(--danger-bg, #dc3545);
-  color: #fff;
-  border-color: var(--danger-bg, #dc3545);
-}
-
-.startOverConfirmButton:hover {
-  background: var(--danger-hover, #b02a37);
-}
-
-.startOverCancelButton {
-  background: transparent;
-  color: var(--text, #1a1a1a);
-  border-color: var(--border, #ddd);
-}
-
-.startOverCancelButton:hover {
-  background: var(--surface-hover, #f5f5f5);
 }

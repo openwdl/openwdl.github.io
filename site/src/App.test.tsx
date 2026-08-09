@@ -69,10 +69,16 @@ describe("App brand field guide", () => {
     expect(chapters).toHaveLength(7);
     expect(chapters.every((chapter) => chapter.getAttribute("data-revealed") === "true"))
       .toBe(true);
-    expect(screen.getByRole("link", { name: "Download brand assets" }).querySelector("svg"))
-      .toHaveAttribute("aria-hidden", "true");
-    expect(screen.getByRole("link", { name: "Read the guidelines" }).querySelector("svg"))
-      .toHaveAttribute("aria-hidden", "true");
+    // Kit Button hides a leadingIcon behind an aria-hidden wrapper.
+    for (const name of ["Download brand assets", "Read the guidelines"]) {
+      const icon = screen.getByRole("link", { name }).querySelector("svg");
+      expect(icon).not.toBeNull();
+      expect(icon!.closest("[aria-hidden='true']")).not.toBeNull();
+    }
+    expect(screen.getByRole("link", { name: "Download brand assets" }))
+      .toHaveAttribute("href", "#downloads");
+    expect(screen.getByRole("link", { name: "Read the guidelines" }))
+      .toHaveAttribute("href", "#foundation");
   });
 
   it("shows the full design-system preview and Storybook handoff", () => {
@@ -90,8 +96,10 @@ describe("App brand field guide", () => {
     }
     expect(screen.getByRole("link", { name: /explore storybook/i }))
       .toHaveAttribute("href", "https://openwdl.github.io/ui/");
-    expect(screen.getByRole("link", { name: /explore storybook/i }).querySelector("svg"))
-      .toHaveAttribute("aria-hidden", "true");
+    expect(
+      screen.getByRole("link", { name: /explore storybook/i })
+        .querySelector("svg")!.closest("[aria-hidden='true']"),
+    ).not.toBeNull();
     expect(screen.getByText("{ greeting }")).toBeInTheDocument();
   });
 });
@@ -107,9 +115,12 @@ describe("App footer", () => {
     expect(screen.getByText(/brand guidelines and assets licensed under/i))
       .toBeInTheDocument();
     expect(screen.getByRole("link", { name: /cc by 4\.0/i })).toBeInTheDocument();
-    expect(screen.getByRole("contentinfo").querySelector(
-      'img[alt="OpenWDL"]',
-    ))
-      .toBeInTheDocument();
+    // The footer logo is theme-derived: a `role="img"` wrapper holds the
+    // accessible name so it survives the light/dark swap, while both inner
+    // images are `aria-hidden` and CSS reveals whichever suits the theme.
+    const footerLogo = within(screen.getByRole("contentinfo"))
+      .getByRole("img", { name: "OpenWDL" });
+    expect(footerLogo).toBeInTheDocument();
+    expect(footerLogo.querySelectorAll("img")).toHaveLength(2);
   });
 });

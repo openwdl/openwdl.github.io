@@ -19,8 +19,12 @@ it("renders the branded site-wide recovery page", () => {
     .toHaveAttribute("href", "/docs/");
   expect(within(main).getByRole("link", { name: "Get started" }))
     .toHaveAttribute("href", "/get-started/");
+  // The kit Button wraps a leadingIcon in an aria-hidden span, so the glyph
+  // stays decorative without polluting the link's accessible name.
   for (const link of within(main).getAllByRole("link")) {
-    expect(link.querySelector("svg")).toHaveAttribute("aria-hidden", "true");
+    const icon = link.querySelector("svg");
+    expect(icon).not.toBeNull();
+    expect(icon!.closest("[aria-hidden='true']")).not.toBeNull();
   }
 });
 

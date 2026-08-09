@@ -1,5 +1,7 @@
+import { Pagination } from "@openwdl/ui";
 import type { BlogPost } from "../../content/blogSchema";
 import { docHref } from "../../docs/docHref";
+import styles from "./GenrePagination.module.css";
 
 /** Props for {@link GenrePagination}. */
 export interface GenrePaginationProps {
@@ -7,34 +9,21 @@ export interface GenrePaginationProps {
   newer?: BlogPost;
   /** The next-older post in the same genre, if one exists. */
   older?: BlogPost;
-  /** Additional class name applied to the root element. */
-  className?: string;
 }
 
 /**
  * Renders "newer/older" navigation between posts in the same genre (see
  * `getAdjacentPosts`), never crossing into a different genre. Either side
- * is omitted when there is no adjacent post in that direction.
+ * is omitted when there is no adjacent post in that direction; the shared
+ * {@link Pagination} renders nothing when both are.
  */
-export function GenrePagination({ newer, older, className }: GenrePaginationProps) {
-  if (!newer && !older) {
-    return null;
-  }
-
+export function GenrePagination({ newer, older }: GenrePaginationProps) {
   return (
-    <nav aria-label="More in this genre" className={className}>
-      {older && (
-        <a href={docHref(`/blog/${older.slug}/`)} rel="prev">
-          <span>Older</span>
-          <span>{older.title}</span>
-        </a>
-      )}
-      {newer && (
-        <a href={docHref(`/blog/${newer.slug}/`)} rel="next">
-          <span>Newer</span>
-          <span>{newer.title}</span>
-        </a>
-      )}
-    </nav>
+    <Pagination
+      className={styles.pager}
+      aria-label="More in this genre"
+      prev={older && { href: docHref(`/blog/${older.slug}/`), label: "Older", title: older.title }}
+      next={newer && { href: docHref(`/blog/${newer.slug}/`), label: "Newer", title: newer.title }}
+    />
   );
 }

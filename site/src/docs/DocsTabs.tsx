@@ -1,6 +1,5 @@
-import { useState, useRef, useId, type ReactNode } from "react";
-import React from "react";
-import styles from "./DocsTabs.module.css";
+import React, { type ReactNode } from "react";
+import { Tabs, type TabItem } from "@openwdl/ui";
 
 /** Hast element properties shape — a subset of the `hast` Element type. */
 interface HastProperties {
@@ -35,65 +34,37 @@ function extractTabs(children: ReactNode): Array<{ label: string; children: Reac
   });
 }
 
-/** Tablist, tab, and tabpanel keyboard contract for docs tab groups. */
+/** Slugifies a label into an id fragment; labels with no usable characters fall back to the index. */
+function slugify(label: string, idx: number): string {
+  const slug = label
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  return slug || String(idx);
+}
+
+/**
+ * Adapts `:::tabs` / `:::tab{label=...}` markdown directives onto the kit's
+ * `Tabs` widget. Children that carry no label are not tabs, so a group with
+ * none of them degrades to a plain wrapper instead of an empty tablist.
+ */
 export function DocsTabs({ children }: { children?: ReactNode }) {
-  const [activeIdx, setActiveIdx] = useState(0);
-  const tablistRef = useRef<HTMLDivElement>(null);
-  // Stable per-instance prefix so IDs are unique across multiple tab groups.
-  const prefix = useId();
   const tabs = extractTabs(children);
 
   if (tabs.length === 0) {
-    return <div className={styles.tabs}>{children}</div>;
+    return <div>{children}</div>;
   }
 
-  const moveFocus = (next: number) => {
-    setActiveIdx(next);
-    const els = tablistRef.current?.querySelectorAll<HTMLElement>("[role='tab']");
-    els?.[next]?.focus();
-  };
+  // Label-derived ids keep panel ids stable across renders; repeated labels
+  // within one group get a numeric suffix so ids stay unique.
+  const used = new Set<string>();
+  const items: TabItem[] = tabs.map(({ label, children: content }, idx) => {
+    const base = slugify(label, idx);
+    let id = base;
+    for (let n = 2; used.has(id); n += 1) id = `${base}-${n}`;
+    used.add(id);
+    return { id, label, content };
+  });
 
-  const handleKeyDown = (e: React.KeyboardEvent, idx: number) => {
-    const len = tabs.length;
-    if (e.key === "ArrowRight") { e.preventDefault(); moveFocus((idx + 1) % len); }
-    else if (e.key === "ArrowLeft") { e.preventDefault(); moveFocus((idx - 1 + len) % len); }
-    else if (e.key === "Home") { e.preventDefault(); moveFocus(0); }
-    else if (e.key === "End") { e.preventDefault(); moveFocus(len - 1); }
-  };
-
-  return (
-    <div className={styles.tabs}>
-      <div role="tablist" ref={tablistRef} className={styles.tablist}>
-        {tabs.map(({ label }, idx) => (
-          <button
-            key={`${idx}-${label}`}
-            type="button"
-            role="tab"
-            id={`${prefix}-tab-${idx}`}
-            aria-selected={idx === activeIdx}
-            aria-controls={`${prefix}-panel-${idx}`}
-            tabIndex={idx === activeIdx ? 0 : -1}
-            className={styles.tab}
-            onClick={() => setActiveIdx(idx)}
-            onKeyDown={(e) => handleKeyDown(e, idx)}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-      {tabs.map(({ label, children: tabChildren }, idx) => (
-        <div
-          key={`${idx}-${label}`}
-          role="tabpanel"
-          id={`${prefix}-panel-${idx}`}
-          aria-labelledby={`${prefix}-tab-${idx}`}
-          tabIndex={idx === activeIdx ? 0 : -1}
-          className={styles.panel}
-          hidden={idx !== activeIdx}
-        >
-          {tabChildren}
-        </div>
-      ))}
-    </div>
-  );
+  return <Tabs items={items} />;
 }

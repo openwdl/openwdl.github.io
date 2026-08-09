@@ -1,3 +1,4 @@
+import { Button } from "@openwdl/ui";
 import type { RefObject } from "react";
 import type { SetupState, WizardScreen } from "../model/types";
 import { buildSetupIssueUrl } from "../model/issue";
@@ -128,20 +129,21 @@ export function WizardResult(props: WizardResultProps) {
         </div>
 
         <div className={styles.actions}>
-          <button
+          <Button
             type="button"
+            variant="secondary"
+            className={styles.touchTarget}
             onClick={onBack}
-            className={styles.backButton}
           >
             Back
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            className={styles.touchTarget}
             onClick={onContinue}
-            className={styles.continueButton}
           >
             Continue
-          </button>
+          </Button>
         </div>
       </div>
     );
@@ -169,21 +171,24 @@ export function WizardResult(props: WizardResultProps) {
       )}
 
       <div className={styles.unsupportedActions}>
-        <button
+        <Button
           type="button"
+          variant="secondary"
+          className={styles.touchTarget}
           onClick={onBack}
-          className={styles.changeAnswersButton}
         >
           Change answers
-        </button>
-        <a
+        </Button>
+        <Button
+          as="a"
           href={issueUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className={styles.setupRequestLink}
+          variant="secondary"
+          className={styles.touchTarget}
         >
           File a setup request
-        </a>
+        </Button>
       </div>
     </div>
   );

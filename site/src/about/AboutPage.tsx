@@ -1,4 +1,4 @@
-import { Footer, NavBar, ToastProvider } from "@openwdl/ui";
+import { Button, Footer, NavBar, ToastProvider } from "@openwdl/ui";
 import { FiBookOpen, FiCompass, FiUsers } from "react-icons/fi";
 import { docHref } from "../docs/docHref";
 import styles from "./AboutPage.module.css";
@@ -185,19 +185,30 @@ export function AboutPage() {
             is the latest stable specification release.
           </p>
           <div className={styles.actions} aria-label="WDL resources">
-            <a className={styles.action}
-              href={docHref("/docs/start/your-first-workflow/")}>
-              <FiBookOpen aria-hidden="true" />
+            <Button
+              as="a"
+              href={docHref("/docs/start/your-first-workflow/")}
+              variant="secondary"
+              leadingIcon={<FiBookOpen />}
+            >
               Start learning WDL
-            </a>
-            <a className={styles.action} href={docHref("/docs/start/ecosystem/")}>
-              <FiCompass aria-hidden="true" />
+            </Button>
+            <Button
+              as="a"
+              href={docHref("/docs/start/ecosystem/")}
+              variant="secondary"
+              leadingIcon={<FiCompass />}
+            >
               Explore the WDL ecosystem
-            </a>
-            <a className={styles.action} href={docHref("/community/")}>
-              <FiUsers aria-hidden="true" />
+            </Button>
+            <Button
+              as="a"
+              href={docHref("/community/")}
+              variant="secondary"
+              leadingIcon={<FiUsers />}
+            >
               Meet the community
-            </a>
+            </Button>
           </div>
         </section>
       </main>
