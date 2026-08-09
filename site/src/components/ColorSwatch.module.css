@@ -1,0 +1,20 @@
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-mono);
+}
+.chip {
+  display: block;
+  height: 96px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.shade { font-size: 0.8rem; color: var(--text); }
+.hex { font-size: 0.7rem; color: var(--text-muted); }
+.swatch:hover .chip { outline: 2px solid var(--accent); }

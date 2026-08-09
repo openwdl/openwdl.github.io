@@ -1,0 +1,100 @@
+.body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  max-width: 82ch;
+}
+
+.localImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Allow code blocks to overflow the prose measure. */
+.body :global(.shiki),
+.body > :global(pre),
+.body :global([class*="CodeBlock"]) {
+  max-width: 840px;
+}
+
+.headingAlias {
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.inlineWdlKeyword {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.tabFallback {
+  margin: 1rem 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.tableScroll {
+  width: 100%;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.tableScroll:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.body :global(table) {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.body :global(th),
+.body :global(td) {
+  max-width: 32rem;
+  padding: 0.75rem 0.875rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.body :global(th) {
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.body :global(tbody tr:last-child td) {
+  border-bottom: 0;
+}
+
+.body :global(tbody tr:hover) {
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+}
+
+/* Prose defaults */
+.body :global(p) { margin: 1rem 0; line-height: 1.7; }
+.body :global(h2) { margin: 2rem 0 0.75rem; font-size: 1.35rem; }
+.body :global(h3) { margin: 1.5rem 0 0.5rem; font-size: 1.1rem; }
+.body :global(h2), .body :global(h3) {
+  scroll-margin-top: calc(var(--nav-h) + var(--docs-section-nav-h) + 1rem);
+}
+.body :global(ul), .body :global(ol) { padding-left: 1.5rem; margin: 1rem 0; }
+.body :global(li) { margin: 0.5rem 0; line-height: 1.7; }
+.body :global(a) { color: var(--accent); text-decoration: underline; }
+.body :global(a:hover) { opacity: 0.85; }
+.body :global(hr) { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+.body :global(blockquote) {
+  border-left: 3px solid var(--border);
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  color: var(--text-muted);
+}

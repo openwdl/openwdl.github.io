@@ -1,0 +1,13 @@
+.section {
+  padding: 4rem 0;
+}
+
+.content {
+  margin-left: 4.5rem;
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,21 @@
+name: Lint & Test
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci
+      - run: npm run build:content -w @openwdl/brand
+      - run: npm run lint -w @openwdl/brand
+      - run: npm test -w @openwdl/brand -- --run
+      - run: OPENWDL_BASE=/ npm run build -w @openwdl/brand
+      - run: OPENWDL_BASE=/ npm run test:static -w @openwdl/brand

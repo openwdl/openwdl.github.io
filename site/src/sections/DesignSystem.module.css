@@ -1,0 +1,147 @@
+.section {
+  padding: 4rem 0;
+}
+
+.content {
+  margin-left: 4.5rem;
+}
+
+.families {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.family {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.family h3 {
+  margin: 0;
+}
+
+.family p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.row,
+.cards {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.cards > * {
+  min-width: 9rem;
+  flex: 1;
+}
+
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.mark {
+  margin-right: auto;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.chromeAction {
+  padding: 0.35rem 0.5rem;
+  border-radius: var(--radius-control);
+  background: var(--accent);
+  color: var(--gray-900);
+  font-weight: 700;
+  transition: transform var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.storybook {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle, var(--gray-600) 1px, transparent 1px),
+    var(--surface);
+  background-size: 12px 12px;
+}
+
+.storybook h3 {
+  margin: 0.35rem 0;
+}
+
+.storybook p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+}
+
+.storybookLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex: none;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    color var(--motion-control-duration) var(--motion-control-ease),
+    border-color var(--motion-control-duration) var(--motion-control-ease),
+    transform var(--motion-control-duration) var(--motion-control-ease),
+    box-shadow var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.storybookLink:hover {
+  transition-delay: var(--motion-control-delay);
+  transform: translateY(var(--motion-control-lift));
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 5px 14px color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.storybookLink:active {
+  transition-delay: 0ms;
+  transition-duration: var(--motion-control-press-duration);
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .families {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+  }
+
+  .storybook {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

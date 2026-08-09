@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-server
+*.local
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+public/assets
+public/brand-guidelines.pdf
+src/generated/docs.generated.ts
+src/generated/docs.generated.js
+src/generated/docs.generated.d.ts
+public/search/
+scripts/**/*.js
+scripts/**/*.d.ts
+.prerender-test-*

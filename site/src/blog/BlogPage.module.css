@@ -1,0 +1,216 @@
+/* The OpenWDL blog index page. */
+
+.page {
+  padding: 3rem 0 5rem;
+}
+
+.masthead {
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.description {
+  margin: 0;
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+
+/* Featured entry — the current record. The dotted grid is decorative and
+   scoped to this zone only (see the design's low-density texture guidance). */
+.featured {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
+  grid-template-areas:
+    "chip chip"
+    "title author"
+    "summary author"
+    "action author";
+  column-gap: 3rem;
+  overflow: hidden;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.featured::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, var(--dot-color) var(--dot-radius), transparent var(--dot-radius)),
+    radial-gradient(circle, var(--dot-color) var(--dot-radius), transparent var(--dot-radius));
+  background-size:
+    var(--dot-gap) var(--grid-cell),
+    var(--grid-cell) var(--dot-gap);
+  opacity: 0.6;
+}
+
+.featured > * {
+  position: relative;
+  z-index: 1;
+}
+
+.featuredChip {
+  grid-area: chip;
+  margin-bottom: 1rem;
+  justify-self: start;
+}
+
+.featuredTitle {
+  grid-area: title;
+  margin: 0 0 0.75rem;
+  font-size: 2rem;
+  line-height: 1.15;
+}
+
+.standfirst {
+  grid-area: summary;
+  margin: 0 0 1.5rem;
+  max-width: 60ch;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.featuredLink {
+  grid-area: action;
+  justify-self: start;
+  display: inline-block;
+  color: var(--accent-contrast, var(--bg));
+  background: var(--accent);
+  padding: 0.65rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.featuredByline {
+  grid-area: author;
+  align-self: start;
+  max-width: max-content;
+}
+
+/* Complete register. */
+.register {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.registerItem {
+  border-top: 1px solid var(--border);
+}
+
+.registerItem:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 100px minmax(250px, 1fr) 210px max-content;
+  grid-template-areas: "record entry author meta";
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+}
+
+.recordCell {
+  grid-area: record;
+}
+
+.entryCell {
+  grid-area: entry;
+  min-width: 0;
+}
+
+.authorCell {
+  grid-area: author;
+}
+
+.metaCell {
+  grid-area: meta;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.title {
+  display: inline-block;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.title:hover,
+.title:focus-visible {
+  color: var(--accent);
+}
+
+.summary {
+  margin: 0.3rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+}
+
+.meta {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .featured {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "chip"
+      "title"
+      "summary"
+      "author"
+      "action";
+    padding: 1.5rem;
+  }
+
+  .featuredByline {
+    margin-bottom: 1.75rem;
+  }
+
+  .featuredTitle {
+    font-size: 1.5rem;
+  }
+
+  .row {
+    grid-template-columns: 75px 1fr;
+    grid-template-areas:
+      "record entry"
+      "record author"
+      "record meta";
+    row-gap: 0.5rem;
+  }
+
+  .recordCell {
+    align-self: start;
+  }
+}

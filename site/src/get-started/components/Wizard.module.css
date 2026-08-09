@@ -1,0 +1,741 @@
+/* ── Wizard card ─────────────────────────────────────────────────────────── */
+
+.card {
+  max-width: 50rem;
+  margin-inline: auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 2rem;
+}
+
+/* ── Progress indicator ──────────────────────────────────────────────────── */
+
+.progress {
+  margin-bottom: 2rem;
+}
+
+.progressList {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  counter-reset: wizard-step;
+  isolation: isolate;
+}
+
+.progressStep {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  color: var(--text-muted);
+  position: relative;
+  counter-increment: wizard-step;
+  padding-block: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.progressStep::before {
+  content: counter(wizard-step);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  font-weight: 600;
+  position: relative;
+  z-index: 1;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Connector line between steps */
+.progressStep + .progressStep::after {
+  content: "";
+  position: absolute;
+  top: 1.5rem;
+  right: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+
+.progressCurrent {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.progressCurrent::before {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.progressDone {
+  color: var(--text-muted);
+}
+
+.progressDone::before {
+  background: var(--teal-700);
+  color: var(--text);
+}
+
+/* ── Question ────────────────────────────────────────────────────────────── */
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.stageEyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  margin: 0;
+}
+
+/* Visually hidden but available to screen readers. */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.legend {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  font-family: var(--font-sans);
+  margin-bottom: 0.25rem;
+  padding: 0;
+  float: none;
+  width: 100%;
+}
+
+.questionDescription {
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  margin: 0;
+}
+
+.options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.option {
+  display: flex;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  width: 100%;
+  padding: 0.6875rem 0.875rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  cursor: pointer;
+  background: transparent;
+  min-height: 44px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.optionLabel:hover {
+  border-color: var(--teal-700);
+  background: var(--gray-700);
+}
+
+.optionLabel:has(.optionRadio:checked) {
+  border-color: var(--accent);
+  background: var(--gray-700);
+}
+
+.optionLabel:has(.optionRadio:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.optionRadio {
+  margin-top: 0.1875rem;
+  flex-shrink: 0;
+  accent-color: var(--accent);
+  width: 1rem;
+  height: 1rem;
+}
+
+.optionText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.optionTitle {
+  font-family: var(--font-sans);
+  color: var(--text);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.optionDescription {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* ── Validation alert ────────────────────────────────────────────────────── */
+
+.validation {
+  margin: 0;
+  padding: 0.625rem 1rem;
+  background: var(--gray-600);
+  border: 1px solid var(--teal-900);
+  border-left: 4px solid var(--teal-500);
+  border-radius: 0.375rem;
+  color: var(--text);
+  font-size: 0.875rem;
+}
+
+/* ── Actions row ─────────────────────────────────────────────────────────── */
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.backButton {
+  min-height: 44px;
+  padding-inline: 1.25rem;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition:
+    border-color var(--motion-control-duration) var(--motion-control-ease),
+    color var(--motion-control-duration) var(--motion-control-ease),
+    transform var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.backButton:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.continueButton {
+  min-height: 44px;
+  padding-inline: 1.5rem;
+  border-radius: var(--radius-control);
+  border: none;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--motion-control-duration) var(--motion-control-ease),
+    transform var(--motion-control-duration) var(--motion-control-ease),
+    box-shadow var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.continueButton:hover:not([aria-disabled="true"]) {
+  background: var(--teal-400);
+}
+
+.continueButton[aria-disabled="true"] {
+  background: var(--gray-500);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+/* ── Result card ─────────────────────────────────────────────────────────── */
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.resultHeading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+}
+
+.engineMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.engineLabel {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+}
+
+.serviceLabel {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.rationale {
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.prerequisites {
+  list-style: disc;
+  padding-inline-start: 1.5rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.resultLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.resultLink {
+  color: var(--accent);
+  text-decoration: underline;
+  font-size: 0.875rem;
+}
+
+.resultLink:hover {
+  color: var(--teal-300);
+}
+
+/* Unsupported */
+
+.unsupportedHeading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.acceptedAnswers {
+  list-style: none;
+  padding: 0.75rem 1rem;
+  margin: 0;
+  background: var(--gray-700);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.acceptedAnswer {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.acceptedAnswerLabel {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.unsupportedActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.changeAnswersButton {
+  min-height: 44px;
+  padding-inline: 1.25rem;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    border-color var(--motion-control-duration) var(--motion-control-ease),
+    transform var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.changeAnswersButton:hover {
+  border-color: var(--text-muted);
+}
+
+.setupRequestLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 1.25rem;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--teal-700);
+  color: var(--accent);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background var(--motion-control-duration) var(--motion-control-ease),
+    transform var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.setupRequestLink:hover {
+  background: var(--gray-700);
+}
+
+/* ── Checklist ───────────────────────────────────────────────────────────── */
+
+.checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.checklistSteps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: checklist-step;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.checklistStep {
+  display: flex;
+  gap: 1rem;
+  counter-increment: checklist-step;
+}
+
+.checklistStep::before {
+  content: counter(checklist-step);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  min-width: 2rem;
+  border-radius: 50%;
+  background: var(--gray-600);
+  border: 2px solid var(--border);
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 0.1875rem;
+}
+
+.checklistStepBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.checklistStepTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.checklistInstruction {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.installOption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--gray-700);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+}
+
+.installOptionLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+}
+
+.installOptionPrereqs {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.checklistLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.checklistLink {
+  color: var(--accent);
+  font-size: 0.875rem;
+  text-decoration: underline;
+}
+
+.checklistLink:hover {
+  color: var(--teal-300);
+}
+
+/* ── Responsive: mobile ──────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .card {
+    padding: 1rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .progressList {
+    gap: 0;
+  }
+
+  .progressStep {
+    font-size: 0.6875rem;
+  }
+
+  .options {
+    gap: 0.5rem;
+  }
+
+  .optionLabel {
+    min-height: 44px;
+    padding: 0.75rem;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .backButton,
+  .continueButton {
+    width: 100%;
+    text-align: center;
+    min-height: 44px;
+  }
+
+  .unsupportedActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .changeAnswersButton,
+  .setupRequestLink {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  .checklistLink,
+  .resultLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .progressStep,
+  .progressStep::before,
+  .optionLabel,
+  .backButton,
+  .continueButton,
+  .changeAnswersButton,
+  .setupRequestLink,
+  .resultLink {
+    transition: none;
+  }
+}
+
+/* ── Wizard wrapper ──────────────────────────────────────────────────────── */
+
+.wizard {
+  width: 100%;
+}
+
+/* ── Normalisation notice ────────────────────────────────────────────────── */
+
+.notice {
+  background: var(--warning-bg, #fff3cd);
+  border: 1px solid var(--warning-border, #ffc107);
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text, #1a1a1a);
+}
+
+/* ── Checklist heading ────────────────────────────────────────────────────── */
+
+.checklistHeading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  color: var(--text, #1a1a1a);
+  outline: none;
+}
+
+/* ── Start over section ──────────────────────────────────────────────────── */
+
+.startOver {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.startOverButton {
+  background: none;
+  border: none;
+  color: var(--text-muted, #666);
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  border-radius: var(--radius-control);
+  transition:
+    color var(--motion-control-duration) var(--motion-control-ease),
+    transform var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.startOverButton:hover {
+  color: var(--text, #1a1a1a);
+}
+
+.startOverConfirm {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border, #ddd);
+  border-radius: 0.375rem;
+  background: var(--surface, #fff);
+  text-align: center;
+}
+
+.startOverConfirmText {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: var(--text, #1a1a1a);
+}
+
+.startOverConfirmActions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.startOverConfirmButton,
+.startOverCancelButton {
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-control);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    background var(--motion-control-duration) var(--motion-control-ease),
+    color var(--motion-control-duration) var(--motion-control-ease),
+    transform var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.backButton:hover,
+.continueButton:hover:not([aria-disabled="true"]),
+.changeAnswersButton:hover,
+.setupRequestLink:hover,
+.startOverButton:hover,
+.startOverConfirmButton:hover,
+.startOverCancelButton:hover {
+  transition-delay: var(--motion-control-delay);
+  transform: translateY(var(--motion-control-lift));
+}
+
+.backButton:active,
+.continueButton:active,
+.changeAnswersButton:active,
+.setupRequestLink:active,
+.startOverButton:active,
+.startOverConfirmButton:active,
+.startOverCancelButton:active {
+  transition-delay: 0ms;
+  transition-duration: var(--motion-control-press-duration);
+  transform: translateY(0);
+}
+
+.startOverConfirmButton {
+  background: var(--danger-bg, #dc3545);
+  color: #fff;
+  border-color: var(--danger-bg, #dc3545);
+}
+
+.startOverConfirmButton:hover {
+  background: var(--danger-hover, #b02a37);
+}
+
+.startOverCancelButton {
+  background: transparent;
+  color: var(--text, #1a1a1a);
+  border-color: var(--border, #ddd);
+}
+
+.startOverCancelButton:hover {
+  background: var(--surface-hover, #f5f5f5);
+}

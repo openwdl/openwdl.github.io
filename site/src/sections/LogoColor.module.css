@@ -1,0 +1,12 @@
+.section { padding: 4rem 0; }
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-left: 4.5rem; }
+.card { min-width: 0; border: 1px solid var(--border); border-radius: 14px; padding: 1rem; }
+.swatch { display: flex; align-items: center; justify-content: center; min-height: 110px; margin-bottom: 0.75rem; padding-inline: 1rem; border-radius: 10px; }
+.swatch img { max-width: 100%; height: auto; }
+.note { color: var(--text-muted); font-size: 0.85rem; }
+.tester { margin: 2rem 0 0 4.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.tester > p { max-width: 65ch; color: var(--text-muted); }
+@media (max-width: 768px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-left: 0; }
+  .tester { margin-left: 0; }
+}

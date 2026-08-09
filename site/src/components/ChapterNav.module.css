@@ -1,0 +1,106 @@
+.nav {
+  position: sticky;
+  top: 6rem;
+  align-self: start;
+  padding: 2rem 1.5rem;
+  border-right: 1px solid var(--chrome-border);
+}
+
+.title {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.toggle {
+  display: none;
+}
+
+.links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links a {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: 0.4rem;
+  padding: 0.55rem 0;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.links a span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.links a:hover,
+.links a[aria-current="location"] {
+  color: var(--accent);
+}
+
+@media (max-width: 1100px) {
+  .nav {
+    position: static;
+    padding: 1rem 0;
+    border-right: 0;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .toggle {
+    display: flex;
+    width: 100%;
+    min-height: 44px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+    background: var(--surface);
+    color: var(--text);
+    font-family: var(--font-mono);
+    transition:
+      color var(--motion-control-duration) var(--motion-control-ease),
+      border-color var(--motion-control-duration) var(--motion-control-ease),
+      transform var(--motion-control-duration) var(--motion-control-ease);
+  }
+
+  .toggle:hover {
+    transition-delay: var(--motion-control-delay);
+    transform: translateY(var(--motion-control-lift));
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .toggle:active {
+    transition-delay: 0ms;
+    transition-duration: var(--motion-control-press-duration);
+    transform: translateY(0);
+  }
+
+  .links {
+    display: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-top: 0;
+    border-radius: 0 0 8px 8px;
+  }
+
+  .links[data-open="true"] {
+    display: block;
+  }
+
+  .links a {
+    min-height: 44px;
+    align-items: center;
+  }
+}

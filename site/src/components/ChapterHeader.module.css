@@ -1,0 +1,38 @@
+.header {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.number,
+.label {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header h2 {
+  max-width: none;
+  margin: 0.4rem 0 0.75rem;
+  font-size: clamp(1.75rem, 3.5vw, 2.125rem);
+}
+
+.lead {
+  max-width: 72ch;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.lead p {
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .header {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,104 @@
+/* Shared styles for AuthorAvatar and AuthorByline. */
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--surface);
+  border: 2px solid var(--bg);
+}
+
+.accentRing {
+  border-color: var(--accent);
+}
+
+.portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.initials {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  user-select: none;
+}
+
+.byline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.bylineLabel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.portraits {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* A negative trailing margin preserves the 14px overlap without pulling the
+   first portrait on a wrapped line outside the byline. */
+.portraitWrap:not(:last-child) {
+  margin-right: -14px;
+}
+
+.names {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.name a {
+  color: var(--accent);
+}
+
+.authorIdentity {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  vertical-align: middle;
+}
+
+.socialLinks {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.name .socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--text-muted);
+  transition:
+    border-color 120ms ease,
+    color 120ms ease,
+    background 120ms ease;
+}
+
+.name .socialLink:hover,
+.name .socialLink:focus-visible {
+  border-color: var(--accent);
+  background: var(--surface);
+  color: var(--accent);
+}

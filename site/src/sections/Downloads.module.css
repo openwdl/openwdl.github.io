@@ -1,0 +1,25 @@
+.section { padding: 4rem 0; }
+.content { margin-left: 4.5rem; }
+.toolbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.8rem; }
+.all { display: inline-flex; align-items: center; gap: 0.45rem; font-family: var(--font-mono); background: var(--accent); color: var(--gray-900); border: none; border-radius: var(--radius-control); padding: 0.7rem 1rem; cursor: pointer; transition: filter var(--motion-control-duration) var(--motion-control-ease), transform var(--motion-control-duration) var(--motion-control-ease), box-shadow var(--motion-control-duration) var(--motion-control-ease); }
+.all:hover:not(:disabled) { transition-delay: var(--motion-control-delay); transform: translateY(var(--motion-control-lift)); filter: brightness(1.08); box-shadow: 0 5px 14px color-mix(in srgb, var(--accent) 22%, transparent); }
+.all:active:not(:disabled) { transition-delay: 0ms; transition-duration: var(--motion-control-press-duration); transform: translateY(0); }
+.all:disabled { opacity: 0.6; cursor: default; }
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.card { display: grid; grid-template-rows: 6.5rem minmax(2.5rem, auto) auto; gap: 0.6rem; min-width: 0; border: 1px solid var(--border); border-radius: 14px; padding: 1rem; }
+.preview { display: flex; align-items: center; justify-content: center; height: 100%; padding-inline: 1rem; border-radius: 10px; }
+.preview img { max-width: 100%; height: auto; }
+.name { font-size: 0.85rem; }
+.actions { display: flex; gap: 0.5rem; }
+.guidance { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; padding: 1rem; border: 1px solid var(--border); border-radius: 12px; }
+.guidance h3 { margin-top: 0; font-size: 1rem; }
+.guidance p { margin-bottom: 0; color: var(--text-muted); font-size: 0.85rem; }
+.pdf { display: inline-flex; min-height: 44px; align-items: center; gap: 0.45rem; margin-top: 1rem; color: var(--text-muted); }
+@media (max-width: 768px) {
+  .content { margin-left: 0; }
+  .toolbar { align-items: flex-start; flex-direction: column; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .guidance { grid-template-columns: 1fr; }
+  .all { min-height: 44px; }
+  .actions a { display: inline-flex; min-height: 44px; align-items: center; }
+}

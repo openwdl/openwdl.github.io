@@ -1,0 +1,55 @@
+/* Site-specific dot-grid tokens (used by body::before). */
+:root {
+  --dot-color: var(--gray-700);
+  --dot-radius: 2px;
+  --dot-gap: 8px;
+  --grid-cell: 216px;
+}
+
+/* Full-screen dot-grid background anchored to the page top, fading out by the
+   first viewport bottom so it reads as a textural accent, not a wallpaper. */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle, var(--dot-color) var(--dot-radius), transparent var(--dot-radius)),
+    radial-gradient(circle, var(--dot-color) var(--dot-radius), transparent var(--dot-radius));
+  background-size:
+    var(--dot-gap) var(--grid-cell),
+    var(--grid-cell) var(--dot-gap);
+  -webkit-mask-image: linear-gradient(to bottom, #000 30%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 30%, transparent 100%);
+}
+
+/* The setup wizard is a dense form surface; the dot grid competes with it. */
+body:has(main[data-page="get-started"])::before {
+  display: none;
+}
+
+/* Heading margin overrides for the brand-guidelines page layout. */
+h2 { margin-bottom: 0.75rem; }
+h3 { margin: 1.5rem 0 0.5rem; }
+
+/* Section anchors need clearance for the sticky nav. */
+section { scroll-margin-top: 5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

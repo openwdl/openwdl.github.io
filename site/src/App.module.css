@@ -1,0 +1,39 @@
+.fieldGuide {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  border-top: 1px solid var(--border);
+}
+
+.chapters {
+  min-width: 0;
+  padding-left: 3rem;
+}
+
+.chapters > section {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+}
+
+.chapters > section[data-revealed="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chapters > section {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .fieldGuide {
+    grid-template-columns: 1fr;
+  }
+
+  .chapters {
+    padding-left: 0;
+  }
+}

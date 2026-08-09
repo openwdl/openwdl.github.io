@@ -1,0 +1,6 @@
+.section { padding-bottom: 2rem; }
+.subhead { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem; }
+.subhead h3 { margin: 0; }
+.subhead span { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.75rem; }
+.table { margin: 0 0 2.5rem; border-top: 1px solid var(--border); }
+@media (max-width: 768px) { .subhead { align-items: start; flex-direction: column; } }

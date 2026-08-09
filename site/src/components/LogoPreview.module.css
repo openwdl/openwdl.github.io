@@ -1,0 +1,12 @@
+.wrap { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+.stage { display: flex; align-items: center; justify-content: center; min-height: 220px; border-radius: 14px; border: 1px solid var(--border); }
+.controls { display: flex; flex-direction: column; gap: 1rem; font-family: var(--font-mono); font-size: 0.85rem; }
+.label { display: flex; flex-direction: column; gap: 0.5rem; }
+.presets { display: flex; gap: 0.5rem; }
+.presets button { font-family: var(--font-mono); background: transparent; color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-control); padding: 0.3rem 0.8rem; cursor: pointer; transition: color var(--motion-control-duration) var(--motion-control-ease), border-color var(--motion-control-duration) var(--motion-control-ease), transform var(--motion-control-duration) var(--motion-control-ease); }
+.presets button:hover { transition-delay: var(--motion-control-delay); transform: translateY(var(--motion-control-lift)); color: var(--accent); border-color: var(--accent); }
+.presets button:active { transition-delay: 0ms; transition-duration: var(--motion-control-press-duration); transform: translateY(0); }
+@media (max-width: 768px) {
+  .wrap { grid-template-columns: 1fr; }
+  .presets button { min-height: 44px; }
+}

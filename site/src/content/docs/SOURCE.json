@@ -1,0 +1,33 @@
+{
+  "repository": "openwdl/docs",
+  "commit": "f2c60b74b7c1e4e77ac3de65721de4e113ccb3fb",
+  "migrations": {
+    "overview.md": "learn/overview.md",
+    "getting-started/quickstart.md": "learn/your-first-workflow.md",
+    "getting-started/getting-help.md": "learn/getting-help.md",
+    "getting-started/contributing.md": "learn/contributing.md",
+    "getting-started/ecosystem.md": "run/ecosystem.md",
+    "language-guide/variables.md": "write/variables.md",
+    "language-guide/structs.md": "write/structs.md",
+    "language-guide/enumerations.md": "write/enumerations.md",
+    "language-guide/tasks.md": "write/tasks.md",
+    "language-guide/workflows.md": "write/workflows.md",
+    "language-guide/imports.md": "write/imports.md",
+    "language-guide/versions.md": "write/versions.md",
+    "design-patterns/linear-chaining/index.md": "write/patterns/linear-chaining.md",
+    "design-patterns/multiple-io/index.md": "write/patterns/multiple-io.md",
+    "design-patterns/branch-and-merge/index.md": "write/patterns/branch-and-merge.md",
+    "design-patterns/task-aliasing/index.md": "write/patterns/task-aliasing.md",
+    "design-patterns/conditional-statement/index.md": "write/patterns/conditional-statement.md",
+    "design-patterns/scatter-gather/index.md": "write/patterns/scatter-gather.md",
+    "reference/upgrade-guide.md": "reference/upgrade-guide.md",
+    "reference/stdlib/numeric.md": "reference/stdlib/numeric.md",
+    "reference/stdlib/string.md": "reference/stdlib/string.md",
+    "reference/stdlib/file.md": "reference/stdlib/file.md",
+    "reference/stdlib/string-array.md": "reference/stdlib/string-array.md",
+    "reference/stdlib/array.md": "reference/stdlib/array.md",
+    "reference/stdlib/map.md": "reference/stdlib/map.md",
+    "reference/stdlib/enum.md": "reference/stdlib/enum.md",
+    "reference/stdlib/other.md": "reference/stdlib/other.md"
+  }
+}

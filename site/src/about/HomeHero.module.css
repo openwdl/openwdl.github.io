@@ -1,0 +1,318 @@
+/* ─── hero: content-width opening section ────────────────────── */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  min-height: calc(100svh - var(--nav-h));
+  max-width: var(--maxw);
+  margin-inline: auto;
+  overflow: hidden;
+  padding: 2.5rem max(1rem, 2rem);
+  isolation: isolate;
+}
+
+/* ─── copy: introduction above the specimen ──────────────────── */
+
+.copy {
+  width: 100%;
+  max-width: 50rem;
+  margin-inline: auto;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.22;
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--text-muted) 55%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+
+/* ─── specimen: bordered two-pane reference card ─────────────── */
+
+.specimen {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  border: 1px solid var(--chrome-border, var(--border));
+  border-radius: var(--radius-control);
+  overflow: hidden;
+}
+
+/* ─── left pane: copy ────────────────────────────────────────── */
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.copy h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(1rem, 5vw, 2.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.titleLine {
+  display: block;
+  white-space: nowrap;
+}
+
+.lede {
+  max-width: 36.25rem;
+  margin: 0 auto 1.25rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  padding: 0.625rem 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background-color var(--motion-control-duration) var(--motion-control-ease),
+    border-color var(--motion-control-duration) var(--motion-control-ease),
+    color var(--motion-control-duration) var(--motion-control-ease),
+    filter var(--motion-control-duration) var(--motion-control-ease);
+}
+
+.primaryAction {
+  color: var(--accent-contrast);
+  background: var(--accent);
+}
+
+.primaryAction:hover {
+  filter: brightness(1.06);
+}
+
+.secondaryAction {
+  border-color: var(--chrome-border, var(--border));
+  color: var(--text);
+  background: transparent;
+}
+
+.secondaryAction:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ─── right pane: graph (internal divider, no outer border) ──── */
+
+.graphPane {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--chrome-border, var(--border));
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.graphLabel {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--chrome-border, var(--border));
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+}
+
+.graphBody {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  padding: 0.75rem;
+}
+
+.graphTargets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-top: 1px solid var(--chrome-border, var(--border));
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.graphTargets span + span::before {
+  margin-right: 0.5rem;
+  content: "·";
+}
+
+/* WDL source panel — left pane, no outer border (shares .specimen frame) */
+.source {
+  margin: 0;
+  overflow: hidden;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.sourceHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--chrome-border, var(--border));
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 600;
+}
+
+.sourceCode {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  margin: 0;
+  overflow: auto;
+  padding: 0.875rem 1rem;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 0.9vw, 0.75rem);
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.lineNumbers {
+  padding-right: 0.75rem;
+  border-right: 1px solid var(--chrome-border, var(--border));
+  color: var(--text-muted);
+  text-align: right;
+  user-select: none;
+}
+
+.sourceCode code {
+  min-width: 0;
+  padding-left: 0.75rem;
+}
+
+.keyword {
+  color: var(--accent);
+}
+
+.type {
+  color: color-mix(in srgb, var(--accent) 70%, var(--text-muted));
+}
+
+/* Execution graph — static, fluid, always visible */
+.graph {
+  display: block;
+  width: 100%;
+  max-width: 22.5rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.edge {
+  fill: none;
+  stroke: color-mix(in srgb, var(--text-muted) 42%, var(--border));
+  stroke-width: 1.5;
+}
+
+.graphAnnotation {
+  fill: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* One slow neutral trace animation — no glow, no filter */
+.traceEdge {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  stroke-dasharray: 9 8;
+  animation: traceEdge 6s linear infinite;
+}
+
+.node rect {
+  rx: 3px;
+  fill: var(--surface);
+  stroke: color-mix(in srgb, var(--text-muted) 50%, var(--border));
+  stroke-width: 1;
+}
+
+.node text {
+  fill: var(--text);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+/* ─── animation ──────────────────────────────────────────────── */
+
+@keyframes traceEdge {
+  to {
+    stroke-dashoffset: -68;
+  }
+}
+
+/* ─── 768 px: stack panes, graph stays visible ───────────────── */
+
+@media (max-width: 768px) {
+  .specimen {
+    grid-template-columns: 1fr;
+  }
+
+  .graphPane {
+    border-left: none;
+    border-top: 1px solid var(--chrome-border, var(--border));
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-inline: 1rem;
+  }
+}
+
+/* ─── reduced motion: disable traceEdge only ─────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .traceEdge {
+    animation: none;
+  }
+}

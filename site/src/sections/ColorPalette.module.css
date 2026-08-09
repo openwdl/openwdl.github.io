@@ -1,0 +1,15 @@
+.section { padding-top: 1rem; }
+.tag { color: var(--text-muted); font-weight: 400; }
+.subhead { display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
+.subhead h3 { margin-bottom: 0; }
+.subhead > span { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.75rem; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 2.5rem;
+}
+@media (max-width: 768px) {
+  .grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .subhead { align-items: start; flex-direction: column; }
+}
