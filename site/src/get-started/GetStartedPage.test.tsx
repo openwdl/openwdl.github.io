@@ -104,8 +104,13 @@ describe("GetStartedPage — background", () => {
     expect(document.querySelector('main[data-page="get-started"]')).not.toBeNull();
 
     const css = readFileSync(resolve(__dirname, "../styles/global.css"), "utf8");
+    // The rule is a selector list — the blog index opts out of the grid too —
+    // so match the selector and its shared declaration separately rather than
+    // requiring the two to be adjacent.
+    expect(css).toMatch(/body:has\(main\[data-page="get-started"\]\)::before/);
+    expect(css).toMatch(/body:has\(main\[data-page="blog"\]\)::before/);
     expect(css).toMatch(
-      /body:has\(main\[data-page="get-started"\]\)::before\s*\{[^}]*display:\s*none/s,
+      /body:has\(main\[data-page="get-started"\]\)::before,\s*body:has\(main\[data-page="blog"\]\)::before\s*\{[^}]*display:\s*none/s,
     );
   });
 });

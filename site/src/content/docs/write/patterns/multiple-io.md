@@ -7,7 +7,6 @@ group: "Design patterns"
 order: 20
 kind: pattern
 legacy:
-  - /docs/write/patterns/multiple-io/
   - /design-patterns/multiple-io
   - /design-patterns/multiple-io.html
   - /design-patterns/multiple-io/

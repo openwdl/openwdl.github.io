@@ -92,8 +92,8 @@ export function DesignSystem() {
             <h3>Shared site chrome</h3>
             <div className={styles.chrome} aria-label="Static site chrome preview">
               <span className={styles.mark}>OpenWDL</span>
-              <span>Modules</span>
               <span>Docs</span>
+              <span>Blog</span>
               <span className={styles.chromeAction}>Get started</span>
             </div>
             <p>

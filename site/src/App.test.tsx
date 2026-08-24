@@ -7,12 +7,14 @@ describe("App navigation", () => {
     const navigation = screen.getByRole("navigation", { name: "Primary navigation" });
 
     expect(within(navigation).queryByRole("link", { name: "About" })).not.toBeInTheDocument();
-    expect(within(navigation).getByRole("link", { name: "Docs" }))
+    expect(within(navigation).getByRole("link", { name: "Documentation" }))
       .toBeInTheDocument();
     expect(within(navigation).queryByRole("link", { name: "Brand" }))
       .not.toBeInTheDocument();
-    expect(within(navigation).getByRole("link", { name: "Modules" }))
-      .toHaveAttribute("href", "https://registry.openwdl.org");
+    expect(within(navigation).queryByRole("link", { name: "Modules" }))
+      .not.toBeInTheDocument();
+    expect(within(navigation).getAllByRole("link").map((a) => a.textContent))
+      .toEqual(["Documentation", "Blog", "OpenWDL on GitHub"]);
     // The "Get started" action link sits in the site header but outside the <nav>
     expect(within(navigation.closest("header") as HTMLElement).getByRole("link", { name: "Get started" })).toBeInTheDocument();
     expect(within(navigation).queryByRole("link", { name: "Logo system" })).toBeNull();

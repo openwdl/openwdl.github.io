@@ -7,7 +7,6 @@ group: "Language guide"
 order: 50
 kind: guide
 legacy:
-  - /docs/write/workflows/
   - /language-guide/workflows
   - /language-guide/workflows.html
   - /language-guide/workflows/

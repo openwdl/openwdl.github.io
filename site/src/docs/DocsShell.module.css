@@ -104,8 +104,19 @@
 
 .article {
   width: 100%;
-  max-width: 82ch;
+  max-width: 75ch;
   font-size: 1.0625rem;
+  letter-spacing: 0.005em;
+}
+
+.article > h1 {
+  max-width: 18ch;
+  margin: 0 0 1.5rem;
+  font-size: clamp(2.5rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
 }
 
 /* Page outline placement — the kit `Toc` styles itself but leaves placement

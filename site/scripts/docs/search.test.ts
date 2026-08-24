@@ -15,7 +15,7 @@ const tasksPage: CompiledDocPage = {
   title: "Tasks",
   description: "Define a portable unit of computation.",
   slug: "/docs/start/language/tasks/",
-  section: "write",
+  section: "learn",
   group: "Language guide",
   order: 40,
   kind: "guide",
@@ -28,7 +28,33 @@ const tasksPage: CompiledDocPage = {
   ],
 };
 
-const pages: CompiledDocPage[] = [tasksPage];
+const stdlibPage: CompiledDocPage = {
+  ...tasksPage,
+  title: "Array",
+  description: "Standard library array functions.",
+  slug: "/docs/stdlib/array/",
+  section: "stdlib",
+  group: "Standard library",
+  sourcePath: "reference/stdlib/array.md",
+  body: "## `range`\n\nCreate an integer array.",
+  headings: [{ depth: 2, id: "range", text: "range" }],
+};
+
+const referencePage: CompiledDocPage = {
+  ...tasksPage,
+  title: "Upgrade guide",
+  description: "Upgrade between WDL versions.",
+  slug: "/docs/reference/upgrade-guide/",
+  section: "reference",
+  group: "Upgrading",
+  sourcePath: "reference/upgrade-guide.md",
+  body: "## Changes\n\nUpgrade details.",
+  headings: [{ depth: 2, id: "changes", text: "Changes" }],
+};
+
+const pages: CompiledDocPage[] = [tasksPage, stdlibPage, referencePage];
+
+const SECTION_KEYS = ["learn", "stdlib", "reference"] as const;
 
 let output: string;
 
@@ -42,7 +68,7 @@ it("indexes headings with direct fragment URLs", () => {
     expect.objectContaining({
       title: "Inputs",
       url: "/docs/start/language/tasks/#inputs",
-      section: "write",
+      section: "learn",
     }),
   );
 });
@@ -53,11 +79,10 @@ it("indexes the page itself with its canonical URL", () => {
     expect.objectContaining({
       title: "Tasks",
       url: "/docs/start/language/tasks/",
-      section: "write",
+      section: "learn",
     }),
   );
 });
-
 it("indexes body text in heading records instead of duplicating it on the page record", () => {
   const records = buildSearchRecords([tasksPage]);
   const pageRecord = records.find((r) => r.url === "/docs/start/language/tasks/");
@@ -119,24 +144,41 @@ it("keeps the compressed complete index at or below 500 KB", async () => {
   expect(bytes).toBeLessThanOrEqual(500 * 1024);
 });
 
-it("writes manifest.json with section metadata", async () => {
+it("writes manifest.json with metadata for every section", async () => {
   await writeSearchChunks(pages, output);
   const manifest = JSON.parse(await readFile(join(output, "manifest.json"), "utf8"));
-  expect(manifest.sections.write.documentCount).toBeGreaterThan(0);
-  expect(manifest.sections.write.filename).toBe("section-write.json");
+  expect(Object.keys(manifest.sections).sort()).toEqual([...SECTION_KEYS].sort());
+  for (const section of SECTION_KEYS) {
+    expect(manifest.sections[section].documentCount).toBeGreaterThan(0);
+    expect(manifest.sections[section].filename).toBe(`section-${section}.json`);
+  }
   expect(manifest.gzipBytes).toBeGreaterThan(0);
 });
 
-it("writes per-section chunk files", async () => {
+it("writes non-empty per-section chunk files", async () => {
   await writeSearchChunks(pages, output);
-  const chunk = await readFile(join(output, "section-write.json"), "utf8");
-  const parsed = JSON.parse(chunk);
-  expect(parsed).toBeDefined();
+  for (const section of SECTION_KEYS) {
+    const chunk = await readFile(join(output, `section-${section}.json`), "utf8");
+    expect(chunk).not.toBe("");
+    expect(JSON.parse(chunk)).toBeDefined();
+  }
+});
+
+it("includes standard-library records in the stdlib chunk", async () => {
+  await writeSearchChunks(pages, output);
+  const chunk = await readFile(join(output, "section-stdlib.json"), "utf8");
+  const index = MiniSearch.loadJSON<SearchRecord>(chunk, {
+    fields: ["title", "description", "text"],
+    storeFields: ["title", "description", "text", "section", "url"],
+  });
+  expect(index.search("range")).toEqual(
+    expect.arrayContaining([expect.objectContaining({ section: "stdlib" })]),
+  );
 });
 
 it("stores searchable body text so result snippets can show matching context", async () => {
   await writeSearchChunks(pages, output);
-  const chunk = await readFile(join(output, "section-write.json"), "utf8");
+  const chunk = await readFile(join(output, "section-learn.json"), "utf8");
   const index = MiniSearch.loadJSON<SearchRecord>(chunk, {
     fields: ["title", "description", "text"],
     storeFields: ["title", "description", "text", "section", "url"],

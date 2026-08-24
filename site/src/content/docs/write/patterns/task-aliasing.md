@@ -7,7 +7,6 @@ group: "Design patterns"
 order: 40
 kind: pattern
 legacy:
-  - /docs/write/patterns/task-aliasing/
   - /design-patterns/task-aliasing
   - /design-patterns/task-aliasing.html
   - /design-patterns/task-aliasing/

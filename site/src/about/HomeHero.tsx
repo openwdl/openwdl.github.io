@@ -12,7 +12,11 @@ function WorkflowSource() {
       <figcaption className={styles.sourceHeader}>
         <span>workflow.wdl</span>
       </figcaption>
-      <pre className={styles.sourceCode}>
+      <pre
+        className={styles.sourceCode}
+        tabIndex={0}
+        aria-label="WDL source code"
+      >
         <span className={styles.lineNumbers} aria-hidden="true">
           {"1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13"}
         </span>

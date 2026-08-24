@@ -7,7 +7,6 @@ group: "Design patterns"
 order: 60
 kind: pattern
 legacy:
-  - /docs/write/patterns/scatter-gather/
   - /design-patterns/scatter-gather
   - /design-patterns/scatter-gather.html
   - /design-patterns/scatter-gather/

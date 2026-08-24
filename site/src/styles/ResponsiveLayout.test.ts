@@ -1,9 +1,14 @@
 import { readFileSync, readdirSync } from "node:fs";
+import { createRequire } from "node:module";
 import { relative, resolve } from "node:path";
 import { tokens } from "@openwdl/ui";
 
 const SRC = resolve(__dirname, "..");
-const KIT_THEME = resolve(SRC, "../node_modules/@openwdl/ui/dist/theme.css");
+// Resolve through the package export map rather than a literal node_modules
+// path: npm hoists `@openwdl/ui` to the repo root or nests it under `site/`
+// depending on how the pinned git ref was last installed, and a hardcoded
+// path silently breaks when that changes.
+const KIT_THEME = createRequire(__filename).resolve("@openwdl/ui/theme.css");
 
 function stylesheet(path: string) {
   return readFileSync(resolve(__dirname, path), "utf8");

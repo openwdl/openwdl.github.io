@@ -4,11 +4,12 @@ import { resolve } from "node:path";
 const css = readFileSync(resolve(__dirname, "AboutPage.module.css"), "utf8");
 
 describe("homepage workflow problem section", () => {
-  it("visibly separates consecutive origin paragraphs", () => {
+  it("reveals a high-contrast skip link on keyboard focus", () => {
     expect(css).toMatch(
-      /\.originContinuation\s*\{[^}]*margin-top:\s*1rem/s,
+      /\.skip:focus\s*\{(?=[^}]*position:\s*fixed)(?=[^}]*background:\s*var\(--accent\))(?=[^}]*color:\s*var\(--accent-contrast\))[^}]*\}/s,
     );
   });
+
 
   it("keeps concise timeline entries on one desktop line", () => {
     expect(css).toMatch(
@@ -31,6 +32,13 @@ describe("homepage workflow problem section", () => {
     );
     expect(css).toMatch(
       /\.today\s*\{[^}]*padding:\s*clamp\(3rem,\s*6vw,\s*4rem\)/s,
+    );
+  });
+
+  it("keeps homepage actions touch-sized and removes artificial mobile height", () => {
+    expect(css).toMatch(/\.actions > \*\s*\{[^}]*min-height:\s*44px/s);
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.section,\s*\.approach,\s*\.timelineSection\s*\{[^}]*min-height:\s*auto/s,
     );
   });
 

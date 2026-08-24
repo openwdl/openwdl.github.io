@@ -25,10 +25,10 @@ const COMMUNITY_ICONS: Record<CommunityPath["id"], IconType> = {
 export function CommunityPage() {
   return (
     <ToastProvider>
-      <NavBar
-        active="community"
-        baseHref={import.meta.env.BASE_URL}
-      />
+      {/* No `active`: the community destination is unlinked from shared chrome,
+          so no navbar item corresponds to this page. The page still resolves
+          for anyone holding the URL. */}
+      <NavBar baseHref={import.meta.env.BASE_URL} />
       <main className={styles.page}>
         <header className={styles.hero}>
           <p className={styles.eyebrow}>OpenWDL community</p>

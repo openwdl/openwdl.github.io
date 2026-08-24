@@ -1,12 +1,13 @@
 ---
 title: "String functions"
 description: "Standard library functions for string operations: find, matches, split, and sub."
-slug: /docs/reference/stdlib/string/
-section: reference
+slug: /docs/stdlib/string/
+section: stdlib
 group: "Standard library"
 order: 20
 kind: reference
 legacy:
+  - /docs/reference/stdlib/string/
   - /reference/stdlib/string
   - /reference/stdlib/string.html
   - /reference/stdlib/string/

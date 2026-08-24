@@ -1,12 +1,13 @@
 ---
 title: "String array functions"
 description: "Standard library functions for string-array operations: prefix, suffix, and quote."
-slug: /docs/reference/stdlib/string-array/
-section: reference
+slug: /docs/stdlib/string-array/
+section: stdlib
 group: "Standard library"
 order: 40
 kind: reference
 legacy:
+  - /docs/reference/stdlib/string-array/
   - /reference/stdlib/string-array
   - /reference/stdlib/string-array.html
   - /reference/stdlib/string-array/

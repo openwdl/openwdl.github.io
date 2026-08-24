@@ -14,7 +14,7 @@ import {
 } from "@openwdl/ui";
 import { DocsTabs } from "./DocsTabs";
 import { docHref } from "./docHref";
-import { markdownDirectives } from "./markdownDirectives";
+import { markdownDirectives } from "@openwdl/ui/markdown";
 import styles from "./MarkdownBody.module.css";
 
 const CALLOUT_VARIANTS = new Set<string>(["note", "tip", "warning", "danger"]);

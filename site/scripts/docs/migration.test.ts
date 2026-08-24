@@ -29,7 +29,9 @@ const EXPECTED_SOURCE_PATHS = [
   "design-patterns/task-aliasing/index.md",
   "design-patterns/conditional-statement/index.md",
   "design-patterns/scatter-gather/index.md",
-  "reference/upgrade-guide.md",
+  "reference/upgrade-guide.md#overview",
+  "reference/upgrade-guide.md#v1.3",
+  "reference/upgrade-guide.md#v1.2",
   "reference/stdlib/numeric.md",
   "reference/stdlib/string.md",
   "reference/stdlib/file.md",
@@ -59,15 +61,17 @@ const EXPECTED_SLUGS = [
   "/docs/start/patterns/task-aliasing/",
   "/docs/start/patterns/conditional-statement/",
   "/docs/start/patterns/scatter-gather/",
-  "/docs/reference/upgrade-guide/",
-  "/docs/reference/stdlib/numeric/",
-  "/docs/reference/stdlib/string/",
-  "/docs/reference/stdlib/file/",
-  "/docs/reference/stdlib/string-array/",
-  "/docs/reference/stdlib/array/",
-  "/docs/reference/stdlib/map/",
-  "/docs/reference/stdlib/enum/",
-  "/docs/reference/stdlib/other/",
+  "/docs/upgrading/",
+  "/docs/upgrading/v1-3/",
+  "/docs/upgrading/v1-2/",
+  "/docs/stdlib/numeric/",
+  "/docs/stdlib/string/",
+  "/docs/stdlib/file/",
+  "/docs/stdlib/string-array/",
+  "/docs/stdlib/array/",
+  "/docs/stdlib/map/",
+  "/docs/stdlib/enum/",
+  "/docs/stdlib/other/",
 ] as const;
 
 interface SourceJson {
@@ -76,7 +80,7 @@ interface SourceJson {
   migrations: Record<string, string>;
 }
 
-it("SOURCE.json lists all 27 source paths exactly once", async () => {
+it("SOURCE.json lists all 29 source paths exactly once", async () => {
   const raw = await readFile(join(contentRoot, "SOURCE.json"), "utf8");
   const source = JSON.parse(raw) as SourceJson;
 
@@ -93,7 +97,7 @@ it("SOURCE.json commit is the exact provenance SHA", async () => {
   expect(source.commit).toBe("f2c60b74b7c1e4e77ac3de65721de4e113ccb3fb");
 });
 
-it("all 27 target markdown files exist", async () => {
+it("all 29 target markdown files exist", async () => {
   const raw = await readFile(join(contentRoot, "SOURCE.json"), "utf8");
   const source = JSON.parse(raw) as SourceJson;
 
@@ -104,9 +108,9 @@ it("all 27 target markdown files exist", async () => {
   );
 });
 
-it("compiles all 27 pages with no errors", async () => {
+it("compiles all 29 pages with no errors", async () => {
   const result = await compileDocs({ contentRoot, generatedFile, searchRoot });
-  expect(result.pages).toHaveLength(27);
+  expect(result.pages).toHaveLength(29);
 });
 
 it("every expected slug is present", async () => {

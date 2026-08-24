@@ -19,8 +19,11 @@ body::before {
   mask-image: linear-gradient(to bottom, #000 30%, transparent 100%);
 }
 
-/* The setup wizard is a dense form surface; the dot grid competes with it. */
-body:has(main[data-page="get-started"])::before {
+/* Surfaces the dot grid competes with rather than orients: the dense wizard
+   form, and the blog index whose featured card and register already carry the
+   page's structure. */
+body:has(main[data-page="get-started"])::before,
+body:has(main[data-page="blog"])::before {
   display: none;
 }
 

@@ -1,12 +1,13 @@
 ---
 title: "File functions"
 description: "Standard library functions for file operations: basename, join_paths, glob, size, and I/O helpers."
-slug: /docs/reference/stdlib/file/
-section: reference
+slug: /docs/stdlib/file/
+section: stdlib
 group: "Standard library"
 order: 30
 kind: reference
 legacy:
+  - /docs/reference/stdlib/file/
   - /reference/stdlib/file
   - /reference/stdlib/file.html
   - /reference/stdlib/file/

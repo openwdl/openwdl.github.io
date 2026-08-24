@@ -1,12 +1,13 @@
 ---
 title: "Other functions"
 description: "Standard library utility functions: defined, length, and more."
-slug: /docs/reference/stdlib/other/
-section: reference
+slug: /docs/stdlib/other/
+section: stdlib
 group: "Standard library"
 order: 80
 kind: reference
 legacy:
+  - /docs/reference/stdlib/other/
   - /reference/stdlib/other
   - /reference/stdlib/other.html
   - /reference/stdlib/other/

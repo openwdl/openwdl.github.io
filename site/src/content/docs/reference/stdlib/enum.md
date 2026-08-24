@@ -1,12 +1,13 @@
 ---
 title: "Enum functions"
 description: "Standard library functions for enumeration types: the value() function (WDL v1.3+)."
-slug: /docs/reference/stdlib/enum/
-section: reference
+slug: /docs/stdlib/enum/
+section: stdlib
 group: "Standard library"
 order: 70
 kind: reference
 legacy:
+  - /docs/reference/stdlib/enum/
   - /reference/stdlib/enum
   - /reference/stdlib/enum.html
   - /reference/stdlib/enum/

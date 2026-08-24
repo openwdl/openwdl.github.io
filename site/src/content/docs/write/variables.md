@@ -7,7 +7,6 @@ group: "Language guide"
 order: 10
 kind: guide
 legacy:
-  - /docs/write/variables/
   - /language-guide/variables
   - /language-guide/variables.html
   - /language-guide/variables/

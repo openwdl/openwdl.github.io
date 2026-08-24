@@ -9,9 +9,11 @@ import type {
   DocHeading,
   DocHeadingPart,
   DocFrontmatter,
+  StdlibIndexEntry,
 } from "./types";
 import { frontmatterSchema } from "./schema";
 import { writeSearchChunks } from "./search";
+import { parseStdlibFunctions } from "./stdlib";
 
 /** ATX heading pattern: 1–3 `#` chars followed by the heading text. */
 const HEADING_RE = /^(#{1,3})\s+(.+?)(?:\s+#+)?$/;
@@ -143,9 +145,8 @@ function extractHeadings(body: string): DocHeading[] {
 /** Sort order mirrors the generated navigation order. */
 const SECTION_ORDER: Record<string, number> = {
   learn: 0,
-  write: 1,
-  run: 2,
-  reference: 3,
+  stdlib: 1,
+  reference: 2,
 };
 
 const LEARN_GROUP_ORDER: Record<string, number> = {
@@ -210,6 +211,7 @@ export async function compileDocs(options: CompileDocsOptions): Promise<Compiled
       sourcePath: relative(contentRoot, filePath),
       body,
       headings,
+      ...(fm.section === "stdlib" ? { functions: parseStdlibFunctions(content) } : {}),
     });
   }
 
@@ -280,13 +282,21 @@ export async function compileDocs(options: CompileDocsOptions): Promise<Compiled
     }
   }
 
-  // ── Write generated TypeScript module ────────────────────────────────
-  // Use an explicit type annotation so the empty-array case doesn't narrow
-  // to `readonly []` (which yields `never` element type on iteration).
+  const stdlibIndex: StdlibIndexEntry[] = pages.flatMap((page) =>
+    (page.functions ?? []).map((fn) => ({
+      ...fn,
+      pageSlug: page.slug,
+      pageTitle: page.title,
+      group: page.title.replace(/\s+functions?$/i, ""),
+    })),
+  );
+
   const moduleSource = [
-    'import type { CompiledDocPage } from "../../scripts/docs/types";',
+    'import type { CompiledDocPage, StdlibIndexEntry } from "../../scripts/docs/types";',
     "",
     `export const DOC_PAGES: readonly CompiledDocPage[] = ${JSON.stringify(pages, null, 2)};`,
+    "",
+    `export const STDLIB_INDEX: readonly StdlibIndexEntry[] = ${JSON.stringify(stdlibIndex, null, 2)};`,
     "",
   ].join("\n");
   await writeFile(generatedFile, moduleSource);

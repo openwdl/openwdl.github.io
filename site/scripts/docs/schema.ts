@@ -9,7 +9,7 @@ export const frontmatterSchema = z
     title: z.string().trim().min(1),
     description: z.string().trim().min(1),
     slug: z.string().regex(/^\/docs\/(?:[a-z0-9-]+\/)*$/),
-    section: z.enum(["learn", "write", "run", "reference"]),
+    section: z.enum(["learn", "stdlib", "reference"]),
     group: z.string().trim().min(1),
     order: z.number().int().nonnegative(),
     kind: z.enum(["tutorial", "guide", "pattern", "reference"]),

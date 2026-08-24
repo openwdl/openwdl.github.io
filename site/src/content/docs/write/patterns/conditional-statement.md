@@ -7,7 +7,6 @@ group: "Design patterns"
 order: 50
 kind: pattern
 legacy:
-  - /docs/write/patterns/conditional-statement/
   - /design-patterns/conditional-statement
   - /design-patterns/conditional-statement.html
   - /design-patterns/conditional-statement/

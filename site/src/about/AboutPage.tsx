@@ -1,5 +1,5 @@
 import { Button, Footer, NavBar, ToastProvider } from "@openwdl/ui";
-import { FiBookOpen, FiCompass, FiUsers } from "react-icons/fi";
+import { FiBookOpen, FiCompass } from "react-icons/fi";
 import { docHref } from "../docs/docHref";
 import styles from "./AboutPage.module.css";
 import { HomeHero } from "./HomeHero";
@@ -56,10 +56,13 @@ const milestones = [
 export function AboutPage() {
   return (
     <ToastProvider>
+      <a href="#main-content" className={styles.skip}>
+        Skip to main content
+      </a>
       <NavBar
         baseHref={import.meta.env.BASE_URL}
       />
-      <main className={styles.page}>
+      <main id="main-content" className={styles.page} tabIndex={-1}>
         <HomeHero />
 
         <section className={styles.section} aria-labelledby="workflow-problem">
@@ -138,26 +141,6 @@ export function AboutPage() {
           </div>
         </section>
 
-        <section className={styles.section} aria-labelledby="wdl-origin">
-          <p className={styles.eyebrow}>Where WDL came from</p>
-          <h2 id="wdl-origin">Born in genomics.</h2>
-          <p>
-            WDL came out of the{" "}
-            <a href="https://www.broadinstitute.org/">Broad Institute</a>,
-            where genome-analysis pipelines had to run at scale and still make
-            sense to the next person who picked them up.
-          </p>
-          <p className={styles.originContinuation}>
-            Researchers across science face the same need. As WDL found users
-            elsewhere, stewardship moved to{" "}
-            <a href="https://github.com/openwdl">OpenWDL</a>. Changes to the
-            specification are now discussed in public through the{" "}
-            <a href="https://github.com/openwdl/governance/blob/main/RFC.md">
-              RFC process
-            </a>{" "}
-            and community governance.
-          </p>
-        </section>
 
         <section className={styles.timelineSection} aria-labelledby="wdl-history">
           <p className={styles.eyebrow}>A short history</p>
@@ -200,14 +183,6 @@ export function AboutPage() {
               leadingIcon={<FiCompass />}
             >
               Explore the WDL ecosystem
-            </Button>
-            <Button
-              as="a"
-              href={docHref("/community/")}
-              variant="secondary"
-              leadingIcon={<FiUsers />}
-            >
-              Meet the community
             </Button>
           </div>
         </section>

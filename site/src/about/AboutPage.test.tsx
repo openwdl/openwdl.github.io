@@ -1,7 +1,16 @@
 import { render, screen, within } from "@testing-library/react";
 import { AboutPage } from "./AboutPage";
 
-it("explains the problem, WDL approach, origin, history, and present", () => {
+it("offers keyboard users a direct route to the main content", () => {
+  render(<AboutPage />);
+
+  expect(screen.getByRole("link", { name: "Skip to main content" }))
+    .toHaveAttribute("href", "#main-content");
+  expect(screen.getByRole("main")).toHaveAttribute("id", "main-content");
+  expect(screen.getByRole("main")).toHaveAttribute("tabindex", "-1");
+});
+
+it("explains the problem, WDL approach, history, and present", () => {
   render(<AboutPage />);
 
   expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
@@ -19,36 +28,12 @@ it("explains the problem, WDL approach, origin, history, and present", () => {
   })).toBeInTheDocument();
   expect(screen.getByRole("heading", {
     level: 2,
-    name: "Born in genomics.",
-  })).toBeInTheDocument();
-  expect(screen.getByRole("heading", {
-    level: 2,
     name: "From an internal tool to an open standard.",
   })).toBeInTheDocument();
   expect(screen.getByRole("heading", { level: 2, name: "WDL today" }))
     .toBeInTheDocument();
 });
 
-it("separates WDL's genomic origin from its broader use", () => {
-  render(<AboutPage />);
-
-  const heading = screen.getByRole("heading", {
-    level: 2,
-    name: "Born in genomics.",
-  });
-  const section = heading.closest("section");
-
-  expect(section).not.toBeNull();
-  expect(section?.querySelectorAll(":scope > p")).toHaveLength(3);
-  expect(section?.querySelector(":scope > p + p")?.className)
-    .toContain("originContinuation");
-  expect(section).toHaveTextContent(
-    "WDL came out of the Broad Institute, where genome-analysis pipelines had to run at scale and still make sense to the next person who picked them up.",
-  );
-  expect(section).toHaveTextContent(
-    "Researchers across science face the same need. As WDL found users elsewhere, stewardship moved to OpenWDL. Changes to the specification are now discussed in public through the RFC process and community governance.",
-  );
-});
 
 it("diagnoses the four ways an analysis outgrows its scripts", () => {
   render(<AboutPage />);
@@ -190,6 +175,8 @@ it("presents WDL source as the homepage product object", () => {
   expect(screen.getByText("Execution structure")).toBeInTheDocument();
 
   const source = screen.getByRole("region", { name: "Example WDL workflow" });
+  expect(within(source).getByLabelText("WDL source code"))
+    .toHaveAttribute("tabindex", "0");
   expect(within(source).getByText("workflow.wdl")).toBeInTheDocument();
   expect(source).toHaveTextContent("workflow example");
   expect(source).toHaveTextContent("Array[File] inputs");
@@ -299,18 +286,18 @@ it("uses sourced milestones and base-aware next steps", () => {
     "WDL 1.3.0",
     "Start learning WDL",
     "Explore the WDL ecosystem",
-    "Meet the community",
   ]);
   expect(within(today as HTMLElement).getByRole("link", {
     name: "Explore the WDL ecosystem",
   }).className).toContain("Button_secondary");
   expect(within(today as HTMLElement).getByRole("link", { name: "Start learning WDL" }))
     .toHaveAttribute("href", "/docs/start/your-first-workflow/");
-  expect(within(today as HTMLElement).getByRole("link", { name: "Meet the community" }))
-    .toHaveAttribute("href", "/community/");
+  // The community page is unlinked from the site, so About no longer offers it.
+  expect(within(today as HTMLElement).queryByRole("link", { name: "Meet the community" }))
+    .toBeNull();
   // Each resource link carries a decorative glyph hidden from assistive tech by
   // the kit Button's aria-hidden icon wrapper.
-  for (const name of ["Start learning WDL", "Meet the community"]) {
+  for (const name of ["Start learning WDL", "Explore the WDL ecosystem"]) {
     const icon = within(today as HTMLElement)
       .getByRole("link", { name })
       .querySelector("svg");

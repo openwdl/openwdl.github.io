@@ -7,7 +7,6 @@ group: "Design patterns"
 order: 10
 kind: pattern
 legacy:
-  - /docs/write/patterns/linear-chaining/
   - /design-patterns/linear-chaining
   - /design-patterns/linear-chaining.html
   - /design-patterns/linear-chaining/

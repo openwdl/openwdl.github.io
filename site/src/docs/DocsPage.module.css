@@ -6,7 +6,9 @@
 }
 
 .breadcrumbs {
-  margin-bottom: 0.75rem;
+  /* More room above the h1 than the 1.5rem below it, so the title reads as
+     starting a new block rather than trailing the breadcrumb trail. */
+  margin-bottom: 1.75rem;
   color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: 0.75rem;

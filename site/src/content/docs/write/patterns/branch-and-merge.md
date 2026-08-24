@@ -7,7 +7,6 @@ group: "Design patterns"
 order: 30
 kind: pattern
 legacy:
-  - /docs/write/patterns/branch-and-merge/
   - /design-patterns/branch-and-merge
   - /design-patterns/branch-and-merge.html
   - /design-patterns/branch-and-merge/

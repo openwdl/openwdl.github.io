@@ -7,7 +7,6 @@ group: "Language guide"
 order: 40
 kind: guide
 legacy:
-  - /docs/write/tasks/
   - /language-guide/tasks
   - /language-guide/tasks.html
   - /language-guide/tasks/

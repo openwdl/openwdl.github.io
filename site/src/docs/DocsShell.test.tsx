@@ -32,6 +32,13 @@ const sectionPages: CompiledDocPage[] = [
   tasksPage,
   {
     ...tasksPage,
+    title: "Array",
+    slug: "/docs/stdlib/array/",
+    section: "stdlib",
+    group: "Standard library",
+  },
+  {
+    ...tasksPage,
     title: "Ecosystem",
     slug: "/docs/start/ecosystem/",
     section: "learn",
@@ -88,7 +95,7 @@ it("places the search control in the section navigation", () => {
   expect(screen.queryByText("OpenWDL Docs")).not.toBeInTheDocument();
 });
 
-it("links Getting Started and Reference without separate Learn WDL or Run sections", () => {
+it("links Getting started, Standard library, and Upgrading in order", () => {
   render(
     <DocsShell page={tasksPage} pages={sectionPages}>
       <h1>Tasks</h1>
@@ -98,17 +105,16 @@ it("links Getting Started and Reference without separate Learn WDL or Run sectio
   const sections = screen.getByRole("navigation", {
     name: "Documentation sections",
   });
-  expect(
-    within(sections).getByRole("link", { name: "Getting started" }),
-  ).toHaveAttribute(
-    "href",
-    "/docs/start/overview/",
-  );
-  expect(
-    within(sections).getByRole("link", { name: "Reference" }),
-  ).toHaveAttribute("href", "/docs/reference/upgrade-guide/");
-  expect(within(sections).queryByRole("link", { name: "Learn" })).toBeNull();
-  expect(within(sections).queryByRole("link", { name: "Run" })).toBeNull();
+  const links = within(sections).getAllByRole("link");
+  expect(links.map((link) => link.textContent)).toEqual([
+    "Getting started",
+    "Standard library",
+    "Upgrading",
+  ]);
+  expect(links[0]).toHaveAttribute("href", "/docs/start/overview/");
+  expect(links[1]).toHaveAttribute("href", "/docs/stdlib/array/");
+  expect(links[2]).toHaveAttribute("href", "/docs/reference/upgrade-guide/");
+  expect(within(sections).queryByRole("link", { name: "Reference" })).toBeNull();
   expect(within(sections).queryByRole("link", { name: "Learn WDL" })).toBeNull();
   expect(within(sections).queryByRole("link", { name: "Patterns" })).toBeNull();
   expect(within(sections).queryByRole("link", { name: "Ecosystem" })).toBeNull();

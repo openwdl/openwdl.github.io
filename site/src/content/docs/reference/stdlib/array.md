@@ -1,12 +1,13 @@
 ---
 title: "Array functions"
 description: "Standard library functions for array operations: range, transpose, cross, zip, and more."
-slug: /docs/reference/stdlib/array/
-section: reference
+slug: /docs/stdlib/array/
+section: stdlib
 group: "Standard library"
 order: 50
 kind: reference
 legacy:
+  - /docs/reference/stdlib/array/
   - /reference/stdlib/array
   - /reference/stdlib/array.html
   - /reference/stdlib/array/

@@ -7,7 +7,6 @@ group: "Language guide"
 order: 60
 kind: guide
 legacy:
-  - /docs/write/imports/
   - /language-guide/imports
   - /language-guide/imports.html
   - /language-guide/imports/

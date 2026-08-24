@@ -17,12 +17,18 @@ describe("blog content collection", () => {
   });
 
   it("selects WDL 1.3.0 as the featured post", () => {
-    expect(getFeaturedPost().slug).toBe("announcing-wdl-1-3-0");
+    expect(getFeaturedPost()?.slug).toBe("announcing-wdl-1-3-0");
   });
 
   it("falls back to the newest post when none is featured", () => {
     const posts = getPosts().map((post) => ({ ...post, featured: false }));
-    expect(selectFeaturedPost(posts).slug).toBe("announcing-wdl-1-2-1");
+    expect(selectFeaturedPost(posts)?.slug).toBe("announcing-wdl-1-2-1");
+  });
+
+  it("returns undefined for an empty collection instead of throwing", () => {
+    // Previously this handed back an absent element typed as present, so the
+    // caller threw on its first property access.
+    expect(selectFeaturedPost([])).toBeUndefined();
   });
 
   it("has unique slugs and legacy paths across the collection", () => {

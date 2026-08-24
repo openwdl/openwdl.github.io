@@ -23,10 +23,23 @@ vi.mock("../generated/docs.generated", () => ({
       group: "Language guide",
       order: 10,
       kind: "guide",
-      legacy: ["/docs/write/tasks/"],
+      legacy: [],
       sourcePath: "write/tasks.md",
       body: "# Tasks\n",
       headings: [{ depth: 1, id: "tasks", text: "Tasks" }],
+    },
+    {
+      title: "Array",
+      description: "Array functions.",
+      slug: "/docs/stdlib/array/",
+      section: "stdlib",
+      group: "Standard library",
+      order: 10,
+      kind: "reference",
+      legacy: ["/docs/reference/stdlib/array/"],
+      sourcePath: "reference/stdlib/array.md",
+      body: "# Array\n",
+      headings: [],
     },
   ],
 }));
@@ -37,7 +50,7 @@ describe("resolveSiteRoute", () => {
   it.each([
     ["/brand/docs/start/language/tasks/", "/brand/", "docs:/docs/start/language/tasks/"],
     ["/docs/start/language/tasks/", "/", "docs:/docs/start/language/tasks/"],
-    ["/docs/write/tasks/", "/", "docs-legacy:/docs/write/tasks/"],
+    ["/docs/reference/stdlib/array/", "/", "docs-legacy:/docs/reference/stdlib/array/"],
     ["/brand/about/", "/brand/", "about-redirect"],
     ["/about/", "/", "about-redirect"],
     ["/brand/brand/", "/brand/", "brand"],
@@ -92,7 +105,7 @@ describe("SITE_ROUTES", () => {
     expect(ids).toContain("brand");
     expect(ids).toContain("docs:index");
     expect(ids).toContain("docs:/docs/start/language/tasks/");
-    expect(ids).toContain("docs-legacy:/docs/write/tasks/");
+    expect(ids).toContain("docs-legacy:/docs/reference/stdlib/array/");
     expect(ids).toContain("get-started");
     expect(ids).toContain("about-redirect");
     expect(ids).toContain("community");
@@ -118,18 +131,18 @@ describe("SITE_ROUTES", () => {
     });
   });
 
-  it("redirects old section URLs to their new canonical locations", () => {
+  it("redirects old section and stdlib URLs to canonical locations", () => {
     expect(resolveSiteRoute("/docs/learn/overview/", "/")).toEqual({
       id: "docs-legacy:/docs/learn/overview/",
       kind: "redirect",
       path: "/docs/learn/overview/",
       target: "/docs/start/overview/",
     });
-    expect(resolveSiteRoute("/docs/write/tasks/", "/")).toEqual({
-      id: "docs-legacy:/docs/write/tasks/",
+    expect(resolveSiteRoute("/docs/reference/stdlib/array/", "/")).toEqual({
+      id: "docs-legacy:/docs/reference/stdlib/array/",
       kind: "redirect",
-      path: "/docs/write/tasks/",
-      target: "/docs/start/language/tasks/",
+      path: "/docs/reference/stdlib/array/",
+      target: "/docs/stdlib/array/",
     });
   });
 

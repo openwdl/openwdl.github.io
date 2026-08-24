@@ -1,12 +1,13 @@
 ---
 title: "Map functions"
 description: "Standard library functions for map operations: as_pairs, as_map, keys, and collect_by_key."
-slug: /docs/reference/stdlib/map/
-section: reference
+slug: /docs/stdlib/map/
+section: stdlib
 group: "Standard library"
 order: 60
 kind: reference
 legacy:
+  - /docs/reference/stdlib/map/
   - /reference/stdlib/map
   - /reference/stdlib/map.html
   - /reference/stdlib/map/

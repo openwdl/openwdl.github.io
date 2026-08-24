@@ -20,7 +20,6 @@
     "design-patterns/task-aliasing/index.md": "write/patterns/task-aliasing.md",
     "design-patterns/conditional-statement/index.md": "write/patterns/conditional-statement.md",
     "design-patterns/scatter-gather/index.md": "write/patterns/scatter-gather.md",
-    "reference/upgrade-guide.md": "reference/upgrade-guide.md",
     "reference/stdlib/numeric.md": "reference/stdlib/numeric.md",
     "reference/stdlib/string.md": "reference/stdlib/string.md",
     "reference/stdlib/file.md": "reference/stdlib/file.md",
@@ -28,6 +27,9 @@
     "reference/stdlib/array.md": "reference/stdlib/array.md",
     "reference/stdlib/map.md": "reference/stdlib/map.md",
     "reference/stdlib/enum.md": "reference/stdlib/enum.md",
-    "reference/stdlib/other.md": "reference/stdlib/other.md"
+    "reference/stdlib/other.md": "reference/stdlib/other.md",
+    "reference/upgrade-guide.md#overview": "upgrading/overview.md",
+    "reference/upgrade-guide.md#v1.3": "upgrading/v1-3.md",
+    "reference/upgrade-guide.md#v1.2": "upgrading/v1-2.md"
   }
 }

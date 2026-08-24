@@ -7,7 +7,6 @@ group: "Language guide"
 order: 30
 kind: guide
 legacy:
-  - /docs/write/enumerations/
   - /language-guide/enumerations
   - /language-guide/enumerations.html
   - /language-guide/enumerations/

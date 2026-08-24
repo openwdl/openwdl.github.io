@@ -2,6 +2,7 @@ import { Pagination } from "@openwdl/ui";
 import type { CompiledDocPage } from "../../scripts/docs/types";
 import { DocsShell } from "./DocsShell";
 import { MarkdownBody } from "./MarkdownBody";
+import { StdlibPage } from "./StdlibPage";
 import { docHref } from "./docHref";
 import { docSectionLabel } from "./docsSections";
 import styles from "./DocsPage.module.css";
@@ -15,9 +16,10 @@ export interface DocsPageProps {
 }
 
 /**
- * Composes {@link DocsShell} with a rendered {@link MarkdownBody}. Renders
- * the page title as the sole `h1` and passes the remaining markdown body to
- * the Markdown renderer.
+ * Composes {@link DocsShell} with a rendered page body. Renders the page title
+ * as the sole `h1`; standard-library pages render as searchable signature
+ * cards through {@link StdlibPage}, and every other section renders its
+ * markdown through {@link MarkdownBody}.
  */
 export function DocsPage({ page, pages }: DocsPageProps) {
   const titleId = page.headings.find((heading) => heading.depth === 1)?.id;
@@ -73,7 +75,11 @@ export function DocsPage({ page, pages }: DocsPageProps) {
         />
       ))}
       <h1 id={titleId}>{page.title}</h1>
-      <MarkdownBody source={page.body} headingAliases={page.headingAliases} />
+      {page.section === "stdlib" ? (
+        <StdlibPage page={page} />
+      ) : (
+        <MarkdownBody source={page.body} headingAliases={page.headingAliases} />
+      )}
       <Pagination
         aria-label="Documentation pagination"
         prev={

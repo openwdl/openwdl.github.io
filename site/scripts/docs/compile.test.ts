@@ -22,8 +22,8 @@ async function writeInvalidFixture(name: string): Promise<void> {
   const valid = `---
 title: Tasks
 description: Define a task.
-slug: /docs/write/tasks/
-section: write
+slug: /docs/start/language/tasks/
+section: learn
 group: Language guide
 order: 10
 kind: guide
@@ -32,7 +32,7 @@ legacy: []
 # Tasks
 `;
   if (name === "unknown section") {
-    await writeFixture("invalid.md", valid.replace("section: write", "section: unknown"));
+    await writeFixture("invalid.md", valid.replace("section: learn", "section: unknown"));
     return;
   }
   if (name === "empty description") {
@@ -48,7 +48,7 @@ legacy: []
     "two.md",
     valid
       .replace("title: Tasks", "title: Workflows")
-      .replace("slug: /docs/write/tasks/", "slug: /docs/write/workflows/"),
+      .replace("slug: /docs/start/language/tasks/", "slug: /docs/start/language/workflows/"),
   );
 }
 
@@ -56,8 +56,8 @@ it("compiles valid frontmatter and stable heading IDs", async () => {
   await writeFixture("tasks.md", `---
 title: Tasks
 description: Define a portable unit of computation.
-slug: /docs/write/tasks/
-section: write
+slug: /docs/start/language/tasks/
+section: learn
 group: Language guide
 order: 40
 kind: guide
@@ -72,8 +72,8 @@ legacy:
   const result = await compileDocs({ contentRoot, generatedFile, searchRoot });
 
   expect(result.pages[0]).toMatchObject({
-    slug: "/docs/write/tasks/",
-    section: "write",
+    slug: "/docs/start/language/tasks/",
+    section: "learn",
     headings: [
       { depth: 1, id: "tasks", text: "Tasks" },
       { depth: 2, id: "inputs", text: "Inputs" },
@@ -115,8 +115,8 @@ it("removes the Markdown title heading rendered by the docs shell", async () => 
   await writeFixture("tasks.md", `---
 title: Tasks
 description: Define a portable unit of computation.
-slug: /docs/write/tasks/
-section: write
+slug: /docs/start/language/tasks/
+section: learn
 group: Language guide
 order: 40
 kind: guide
@@ -174,8 +174,8 @@ it("does not treat h1-like lines in fenced code as page headings", async () => {
   await writeFixture("tasks.md", `---
 title: Tasks
 description: Define a portable unit of computation.
-slug: /docs/write/tasks/
-section: write
+slug: /docs/start/language/tasks/
+section: learn
 group: Language guide
 order: 40
 kind: guide
@@ -279,8 +279,8 @@ it("heading extraction preserves underscores in function names (parity with rehy
   await writeFixture("functions.md", `---
 title: Stdlib test
 description: Compiler parity test.
-slug: /docs/reference/stdlib/test/
-section: reference
+slug: /docs/stdlib/test/
+section: stdlib
 group: Standard library
 order: 1
 kind: reference
@@ -308,8 +308,8 @@ it("heading extraction strips emphasis version annotations without corrupting ad
   await writeFixture("functions.md", `---
 title: Stdlib test
 description: Compiler parity test.
-slug: /docs/reference/stdlib/test/
-section: reference
+slug: /docs/stdlib/test/
+section: stdlib
 group: Standard library
 order: 1
 kind: reference
@@ -333,8 +333,8 @@ it("rejects headingAliases whose target does not exist", async () => {
   await writeFixture("tasks.md", `---
 title: Tasks
 description: Define a portable unit of computation.
-slug: /docs/write/tasks/
-section: write
+slug: /docs/start/language/tasks/
+section: learn
 group: Language guide
 order: 40
 kind: guide

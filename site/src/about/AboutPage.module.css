@@ -3,6 +3,29 @@
   background: var(--bg);
 }
 
+.skip {
+  position: absolute;
+  inset-block-start: auto;
+  inset-inline-start: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip:focus {
+  position: fixed;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: var(--z-overlay);
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 var(--radius) 0;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 700;
+}
+
 .section,
 .approach,
 .timelineSection,
@@ -19,9 +42,6 @@
   line-height: 1.75;
 }
 
-.originContinuation {
-  margin-top: 1rem;
-}
 
 .eyebrow {
   margin: 0;
@@ -61,6 +81,13 @@
   line-height: 1.08;
 }
 
+.section h2,
+.approach h2,
+.timelineSection h2,
+.today h2 {
+  text-wrap: balance;
+}
+
 .problemGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -73,6 +100,11 @@
   border: 1px solid var(--border);
   border-top: 2px solid var(--accent);
   background: var(--surface);
+}
+
+.problem {
+  border-radius: var(--radius);
+  overflow: hidden;
 }
 
 .problemVisual {
@@ -134,7 +166,7 @@
 .principleItem {
   position: relative;
   padding-block: 1.5rem;
-  padding-left: 3rem;
+  padding-inline-start: 3rem;
   border-top: 1px solid var(--border);
 }
 
@@ -142,7 +174,7 @@
   content: attr(data-principle);
   position: absolute;
   top: 1.4rem;
-  left: 0;
+  inset-inline-start: 0;
   display: grid;
   width: 1.75rem;
   height: 1.75rem;
@@ -195,9 +227,14 @@
   white-space: nowrap;
 }
 
+.timeline li:last-child {
+  border-bottom: 1px solid var(--border);
+}
+
 .today {
   padding: clamp(3rem, 6vw, 4rem);
-  border: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
   background: var(--surface);
 }
 
@@ -212,6 +249,10 @@
   gap: 0.75rem;
   margin-top: 2rem;
   padding: 0;
+}
+
+.actions > * {
+  min-height: 44px;
 }
 
 .section p a:focus-visible,
@@ -237,6 +278,30 @@
 }
 
 @media (max-width: 640px) {
+  .section,
+  .approach,
+  .timelineSection {
+    min-height: auto;
+  }
+
+  .timeline li {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .today {
+    padding: 2rem 1.5rem;
+  }
+
+  .actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .actions > * {
+    width: 100%;
+  }
+
   .problemGrid {
     grid-template-columns: 1fr;
     row-gap: 1.25rem;

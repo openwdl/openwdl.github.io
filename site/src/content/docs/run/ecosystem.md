@@ -7,7 +7,6 @@ group: "Overview"
 order: 35
 kind: reference
 legacy:
-  - /docs/run/ecosystem/
   - /getting-started/ecosystem
   - /getting-started/ecosystem.html
   - /getting-started/ecosystem/

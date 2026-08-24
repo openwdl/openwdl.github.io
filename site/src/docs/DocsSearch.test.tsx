@@ -143,12 +143,12 @@ it("shows and highlights the matching context for each result", async () => {
     title: "Tasks",
     description: "Define a portable unit of computation.",
     text: "A task defines a reusable unit of work with typed inputs and outputs.",
-    section: "write",
+    section: "learn",
     url: "/docs/start/language/tasks/",
   });
 
   const manifest = JSON.stringify({
-    sections: { write: { filename: "section-write.json", documentCount: 1 } },
+    sections: { learn: { filename: "section-learn.json", documentCount: 1 } },
     gzipBytes: 1024,
   });
   vi.mocked(global.fetch).mockImplementation(async (input) => {

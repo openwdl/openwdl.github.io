@@ -37,24 +37,25 @@ it("uses quiet navigation rails around an open reading column", () => {
   );
 });
 
-it("pins fixed rails to the viewport edges around broader centered prose", () => {
+it("pins fixed rails around a restrained reading measure", () => {
   expect(shellCss).toMatch(
     /\.layout\s*\{(?=[^}]*grid-template-columns:\s*var\(--sidebar-w\)\s+minmax\(0,\s*1fr\)\s+var\(--sidebar-w\))(?=[^}]*width:\s*100%)(?=[^}]*max-width:\s*none)[^}]*\}/s,
   );
   expect(shellCss).toMatch(
-    /\.article\s*\{(?=[^}]*width:\s*100%)(?=[^}]*max-width:\s*82ch)[^}]*\}/s,
+    /\.article\s*\{(?=[^}]*width:\s*100%)(?=[^}]*max-width:\s*75ch)(?=[^}]*letter-spacing:\s*0\.005em)[^}]*\}/s,
   );
-  // The markdown column's own measure is the kit `Prose` default
-  // (`--prose-measure: 82ch`), matched by `.article` above.
   expect(navCss).toMatch(/@media\s*\(max-width:\s*900px\)/);
   expect(shellCss).toMatch(
     /@media\s*\(max-width:\s*900px\)[\s\S]*?\.layout > \.toc\s*\{(?=[^}]*position:\s*static)(?=[^}]*grid-column:\s*auto)[^}]*\}/s,
   );
 });
 
-it("uses comfortable documentation and rail text sizes", () => {
+it("uses a compact docs title and comfortable reading size", () => {
   expect(shellCss).toMatch(
     /\.article\s*\{(?=[^}]*font-size:\s*1\.0625rem)[^}]*\}/s,
+  );
+  expect(shellCss).toMatch(
+    /\.article > h1\s*\{(?=[^}]*font-size:\s*clamp\(2\.5rem,\s*4vw,\s*3rem\))(?=[^}]*line-height:\s*1\.06)(?=[^}]*letter-spacing:\s*-0\.035em)[^}]*\}/s,
   );
   expect(navCss).toMatch(
     /\.nav\s*\{(?=[^}]*font-size:\s*0\.9375rem)[^}]*\}/s,
@@ -70,14 +71,18 @@ it("separates sidebar section headings from their menu items", () => {
   );
 });
 
-it("leaves markdown typography and table styling to the kit", () => {
-  // `Prose` owns typography and `TableScroll` owns every table rule, so the
-  // old `.body` container and `.tableScroll` region keep no local rules.
+it("tunes docs prose roles on top of the kit and leaves tables to TableScroll", () => {
+  expect(bodyCss).toMatch(
+    /\.markdown h2\s*\{(?=[^}]*font-size:\s*1\.75rem)(?=[^}]*line-height:\s*1\.2)[^}]*\}/s,
+  );
+  expect(bodyCss).toMatch(
+    /\.markdown h3\s*\{(?=[^}]*font-size:\s*1\.25rem)(?=[^}]*line-height:\s*1\.3)[^}]*\}/s,
+  );
+  expect(bodyCss).toMatch(
+    /\.markdown p\s*\{(?=[^}]*margin-block:\s*1\.125rem)(?=[^}]*line-height:\s*1\.75)[^}]*\}/s,
+  );
   expect(bodyCss).not.toMatch(/\.body\b/);
   expect(bodyCss).not.toMatch(/\.tableScroll\b/);
-  expect(bodyCss).not.toMatch(
-    /:global\((?:p|h2|h3|ul|ol|li|a|hr|blockquote|table|th|td|tbody)\b/,
-  );
 });
 
 it("stretches local documentation images to the full content width", () => {

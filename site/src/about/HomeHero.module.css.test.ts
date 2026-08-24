@@ -10,12 +10,19 @@ describe("homepage hero specimen layout", () => {
     );
   });
 
-  it("centers the introduction at a measure wide enough for both title lines", () => {
+  it("provides legacy viewport and WebKit mask fallbacks", () => {
+    expect(css).toMatch(
+      /\.hero\s*\{(?=[^}]*min-height:\s*calc\(100vh\s*-\s*var\(--nav-h\)\))(?=[^}]*min-height:\s*calc\(100svh\s*-\s*var\(--nav-h\)\))[^}]*\}/s,
+    );
+    expect(css).toMatch(/-webkit-mask-image:\s*linear-gradient/s);
+  });
+
+  it("centers the introduction at a generous display measure", () => {
     expect(css).toMatch(
       /\.hero\s*\{(?=[^}]*max-width:\s*var\(--maxw\))(?=[^}]*margin-inline:\s*auto)[^}]*\}/s,
     );
     expect(css).toMatch(
-      /\.copy\s*\{(?=[^}]*max-width:\s*50rem)(?=[^}]*margin-inline:\s*auto)(?=[^}]*margin-bottom:\s*4rem)(?=[^}]*text-align:\s*center)[^}]*\}/s,
+      /\.copy\s*\{(?=[^}]*max-width:\s*64rem)(?=[^}]*margin-inline:\s*auto)(?=[^}]*margin-bottom:\s*3rem)(?=[^}]*text-align:\s*center)[^}]*\}/s,
     );
     expect(css).toMatch(
       /\.lede\s*\{(?=[^}]*max-width:\s*36\.25rem)(?=[^}]*margin:\s*0 auto 1\.25rem)[^}]*\}/s,
@@ -28,22 +35,23 @@ describe("homepage hero specimen layout", () => {
     expect(css).not.toMatch(/composes/);
   });
 
-  it("keeps both intentional title lines intact across practical viewport widths", () => {
+  it("keeps intentional title lines on wide screens and restores readable wrapping on mobile", () => {
     expect(css).toMatch(
       /\.titleLine\s*\{(?=[^}]*display:\s*block)(?=[^}]*white-space:\s*nowrap)[^}]*\}/s,
     );
     expect(css).toMatch(
-      /\.copy h1\s*\{[^}]*font-size:\s*clamp\(1rem,\s*5vw,\s*2\.75rem\)/s,
+      /\.copy h1\s*\{[^}]*font-size:\s*clamp\(2\.5rem,\s*4\.4vw,\s*3\.5rem\)/s,
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*480px\)[\s\S]*?\.hero\s*\{[^}]*padding-inline:\s*1rem/s,
+      /@media\s*\(max-width:\s*768px\)[\s\S]*?\.titleLine\s*\{[^}]*white-space:\s*normal/s,
     );
   });
 
-  it("leaves the introduction actions to the kit Button, keeping only their row", () => {
+  it("leaves action chrome to the kit Button and guarantees touch targets", () => {
     expect(css).toMatch(
       /\.links\s*\{(?=[^}]*display:\s*flex)(?=[^}]*flex-wrap:\s*wrap)(?=[^}]*justify-content:\s*center)(?=[^}]*gap:\s*0\.75rem)[^}]*\}/s,
     );
+    expect(css).toMatch(/\.links > \*\s*\{[^}]*min-height:\s*44px/s);
     expect(css).not.toMatch(/\.(?:primaryAction|secondaryAction)\b/);
   });
 
@@ -59,6 +67,18 @@ describe("homepage hero specimen layout", () => {
     );
     expect(css).toMatch(
       /\.lineNumbers\s*\{(?=[^}]*padding-right:\s*0\.75rem)(?=[^}]*border-right:\s*1px solid)(?=[^}]*color:\s*var\(--text-muted\))[^}]*\}/s,
+    );
+  });
+
+  it("keeps the scrollable WDL source left-to-right", () => {
+    expect(css).toMatch(
+      /\.sourceCode\s*\{(?=[^}]*direction:\s*ltr)(?=[^}]*text-align:\s*left)[^}]*\}/s,
+    );
+  });
+
+  it("shows keyboard focus on the scrollable source", () => {
+    expect(css).toMatch(
+      /\.sourceCode:focus-visible\s*\{(?=[^}]*outline:\s*2px solid var\(--accent\))(?=[^}]*outline-offset:\s*-2px)[^}]*\}/s,
     );
   });
 

@@ -7,7 +7,6 @@ group: "Language guide"
 order: 20
 kind: guide
 legacy:
-  - /docs/write/structs/
   - /language-guide/structs
   - /language-guide/structs.html
   - /language-guide/structs/

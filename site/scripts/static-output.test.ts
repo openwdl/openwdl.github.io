@@ -156,6 +156,21 @@ it("/docs/ redirects to the base-aware Overview route", async () => {
   );
   expect(html).toContain('<meta name="robots" content="noindex">');
 });
+it("prerenders the canonical stdlib route and its legacy redirect", async () => {
+  const canonical = await readBuiltRoute(dist, "/docs/stdlib/array/");
+  expect(canonical).toContain('data-page-id="docs:/docs/stdlib/array/"');
+  // The template emits a self-closing tag, so match the attribute rather than
+  // a hand-written tag string — same convention as the metadata test below.
+  expect(canonical).toContain(
+    `<link rel="canonical" href="https://openwdl.org${base}docs/stdlib/array/" />`,
+  );
+
+  const legacy = await readBuiltRoute(dist, "/docs/reference/stdlib/array/");
+  expect(legacy).toContain('<meta name="robots" content="noindex">');
+  expect(legacy).toContain(
+    `<meta http-equiv="refresh" content="0; url=${base}docs/stdlib/array/">`,
+  );
+});
 
 // ── Home, About redirect, and Community pages ─────────────────────────────────
 

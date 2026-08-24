@@ -53,7 +53,9 @@ it("uses canonical chrome", () => {
   const primaryNav = screen.getByRole("navigation", {
     name: "Primary navigation",
   });
-  expect(within(primaryNav).getByRole("link", { name: "Community" }))
-    .toHaveAttribute("aria-current", "page");
+  // The page is unlinked from shared chrome, so no navbar item corresponds to
+  // it and nothing is marked current. It still renders the canonical chrome.
+  expect(within(primaryNav).queryByRole("link", { name: "Community" })).toBeNull();
+  expect(within(primaryNav).queryByRole("link", { current: "page" })).toBeNull();
   expect(screen.getByRole("contentinfo")).toBeInTheDocument();
 });

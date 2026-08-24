@@ -1,12 +1,13 @@
 ---
 title: "Numeric functions"
 description: "Standard library functions for numeric operations: floor, ceil, round, min, and max."
-slug: /docs/reference/stdlib/numeric/
-section: reference
+slug: /docs/stdlib/numeric/
+section: stdlib
 group: "Standard library"
 order: 10
 kind: reference
 legacy:
+  - /docs/reference/stdlib/numeric/
   - /reference/stdlib/numeric
   - /reference/stdlib/numeric.html
   - /reference/stdlib/numeric/

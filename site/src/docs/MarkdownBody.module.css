@@ -16,6 +16,47 @@ div.markdown {
   --prose-scroll-offset: calc(var(--docs-section-nav-h) + 1rem);
 }
 
+.markdown p {
+  margin-block: 1.125rem;
+  line-height: 1.75;
+}
+
+.markdown li {
+  line-height: 1.7;
+}
+
+.markdown h2 {
+  margin: 3rem 0 0.875rem;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.markdown h3 {
+  margin: 2.25rem 0 0.625rem;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.markdown h4 {
+  margin: 1.75rem 0 0.5rem;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.markdown h4 {
+  scroll-margin-top: calc(var(--nav-h) + var(--prose-scroll-offset));
+}
+
+.markdown a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+}
+
 /* Local documentation screenshots stretch to the full measure. `Prose` already
    supplies display/max-width/height for every image; only the stretch is ours. */
 .localImage {

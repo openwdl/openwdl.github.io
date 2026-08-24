@@ -7,7 +7,6 @@ group: "Language guide"
 order: 70
 kind: guide
 legacy:
-  - /docs/write/versions/
   - /language-guide/versions
   - /language-guide/versions.html
   - /language-guide/versions/
