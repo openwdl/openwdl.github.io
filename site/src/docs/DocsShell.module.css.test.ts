@@ -21,19 +21,19 @@ it("covers the site-wide grid with an opaque documentation surface", () => {
 
 it("uses quiet navigation rails around an open reading column", () => {
   expect(shellCss).toMatch(
-    /\.main\s*\{(?=[^}]*display:\s*flex)(?=[^}]*justify-content:\s*center)(?=[^}]*padding:\s*3rem\s+2\.5rem)[^}]*\}/s,
+    /\.main\s*\{(?=[^}]*display:\s*flex)(?=[^}]*justify-content:\s*center)(?=[^}]*padding:\s*clamp\(2\.5rem,\s*5vw,\s*4rem\)\s+clamp\(1\.5rem,\s*4vw,\s*3rem\)\s+5rem)[^}]*\}/s,
   );
   expect(shellCss).toMatch(
-    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.main\s*\{[^}]*padding:\s*2rem\s+1rem/s,
+    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.main\s*\{[^}]*padding:\s*2rem\s+1\.25rem\s+4rem/s,
   );
   expect(navCss).toMatch(
     /\.nav\s*\{(?=[^}]*border-right:\s*1px solid var\(--chrome-border\))(?=[^}]*background:\s*var\(--surface\))[^}]*\}/s,
   );
   expect(navCss).toMatch(
-    /\.link\s*\{(?=[^}]*margin:\s*0\s+0\.5rem\s+0\s+1rem)(?=[^}]*border-left:\s*2px solid transparent)[^}]*\}/s,
+    /\.link\s*\{(?=[^}]*margin:\s*0\s+0\.75rem\s+0\s+1rem)(?=[^}]*border-left:\s*1px solid transparent)[^}]*\}/s,
   );
   expect(navCss).toMatch(
-    /\.link\[aria-current="page"\]\s*\{(?=[^}]*border-left-color:\s*var\(--accent\))(?=[^}]*background:\s*transparent)[^}]*\}/s,
+    /\.link\[aria-current="page"\]\s*\{(?=[^}]*border-left-color:\s*var\(--accent\))(?=[^}]*background:\s*color-mix\(in srgb,\s*var\(--accent\)\s*7%,\s*transparent\))[^}]*\}/s,
   );
 });
 
@@ -42,7 +42,7 @@ it("pins fixed rails around a restrained reading measure", () => {
     /\.layout\s*\{(?=[^}]*grid-template-columns:\s*var\(--sidebar-w\)\s+minmax\(0,\s*1fr\)\s+var\(--sidebar-w\))(?=[^}]*width:\s*100%)(?=[^}]*max-width:\s*none)[^}]*\}/s,
   );
   expect(shellCss).toMatch(
-    /\.article\s*\{(?=[^}]*width:\s*100%)(?=[^}]*max-width:\s*75ch)(?=[^}]*letter-spacing:\s*0\.005em)[^}]*\}/s,
+    /\.article\s*\{(?=[^}]*width:\s*100%)(?=[^}]*max-width:\s*72ch)(?=[^}]*letter-spacing:\s*0)[^}]*\}/s,
   );
   expect(navCss).toMatch(/@media\s*\(max-width:\s*900px\)/);
   expect(shellCss).toMatch(
@@ -67,7 +67,7 @@ it("separates sidebar section headings from their menu items", () => {
     /\.groupLabel\s*\{(?=[^}]*font-size:\s*0\.875rem)(?=[^}]*text-transform:\s*none)(?=[^}]*margin-bottom:\s*0\.25rem)(?=[^}]*padding:\s*0\.45rem\s+0\.5rem)[^}]*\}/s,
   );
   expect(navCss).toMatch(
-    /\.link\s*\{(?=[^}]*padding:\s*0\.2rem\s+0\.5rem)[^}]*\}/s,
+    /\.link\s*\{(?=[^}]*padding:\s*0\.2rem\s+0\.625rem)[^}]*\}/s,
   );
 });
 
@@ -106,6 +106,9 @@ it("keeps the section bar and desktop rails visible while reading", () => {
   expect(shellCss).toMatch(
     /\.sectionNav\s*\{(?=[^}]*position:\s*sticky)(?=[^}]*top:\s*var\(--nav-h\))[^}]*\}/s,
   );
+  expect(shellCss).toMatch(
+    /@media\s*\(max-width:\s*900px\)[\s\S]*?\.page\s*\{[^}]*--docs-section-nav-h:\s*0px[^}]*\}[\s\S]*?\.sectionNav\s*\{[^}]*position:\s*static/s,
+  );
   expect(navCss).toMatch(
     /\.nav\s*\{(?=[^}]*position:\s*sticky)(?=[^}]*top:\s*calc\(var\(--nav-h\) \+ var\(--docs-section-nav-h\)\))(?=[^}]*height:\s*calc\(100vh - var\(--nav-h\) - var\(--docs-section-nav-h\)\))[^}]*\}/s,
   );
@@ -139,6 +142,9 @@ it("presents search as a substantial input with a composed empty state", () => {
   );
   expect(searchCss).toMatch(
     /\.emptyState\s*\{(?=[^}]*min-height:\s*12rem)(?=[^}]*text-align:\s*center)[^}]*\}/s,
+  );
+  expect(searchCss).toMatch(
+    /\.closeBtn\s*\{(?=[^}]*display:\s*grid)(?=[^}]*width:\s*2\.75rem)(?=[^}]*height:\s*2\.75rem)[^}]*\}/s,
   );
 });
 

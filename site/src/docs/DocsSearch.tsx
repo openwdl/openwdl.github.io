@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import type MiniSearch from "minisearch";
-import { FiSearch } from "react-icons/fi";
+import { FiSearch, FiX } from "react-icons/fi";
 import { docHref } from "./docHref";
 import styles from "./DocsSearch.module.css";
 
@@ -400,7 +400,7 @@ export function DocsSearch() {
               onClick={handleClose}
               aria-label="Close search"
             >
-              ✕
+              <FiX aria-hidden="true" focusable="false" />
             </button>
           </div>
 

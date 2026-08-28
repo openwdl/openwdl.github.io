@@ -46,10 +46,8 @@ div.markdown {
   font-size: 1.0625rem;
   font-weight: 700;
   line-height: 1.4;
-}
-
-.markdown h4 {
   scroll-margin-top: calc(var(--nav-h) + var(--prose-scroll-offset));
+  text-wrap: balance;
 }
 
 .markdown a {

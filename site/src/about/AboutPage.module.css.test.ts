@@ -10,7 +10,6 @@ describe("homepage workflow problem section", () => {
     );
   });
 
-
   it("keeps concise timeline entries on one desktop line", () => {
     expect(css).toMatch(
       /\.timeline p\s*\{(?=[^}]*white-space:\s*nowrap)[^}]*\}/s,
@@ -20,51 +19,55 @@ describe("homepage workflow problem section", () => {
     );
   });
 
-  it("groups the WDL today actions inside the surface section", () => {
+  it("gives the WDL today actions a clear desktop hierarchy", () => {
     expect(css).toMatch(
-      /\.actions\s*\{(?=[^}]*margin-top:\s*2rem)(?=[^}]*padding:\s*0)[^}]*\}/s,
+      /\.today\s*\{(?=[^}]*display:\s*grid)(?=[^}]*grid-template-columns:\s*minmax\(0,\s*3fr\)\s+minmax\(16rem,\s*1fr\))(?=[^}]*background:\s*var\(--surface\))[^}]*\}/s,
+    );
+    expect(css).toMatch(
+      /\.actions\s*\{(?=[^}]*grid-column:\s*2)(?=[^}]*grid-row:\s*1\s*\/\s*span\s*3)(?=[^}]*flex-direction:\s*column)(?=[^}]*margin-top:\s*0)[^}]*\}/s,
+    );
+    expect(css).toMatch(
+      /@media\s*\(max-width:\s*900px\)[\s\S]*?\.actions\s*\{(?=[^}]*grid-column:\s*1)(?=[^}]*grid-row:\s*auto)(?=[^}]*margin-top:\s*2rem)[^}]*\}/s,
     );
   });
 
   it("gives below-hero sections more vertical breathing room", () => {
     expect(css).toMatch(
-      /\.section,\s*\.approach,\s*\.timelineSection,\s*\.today\s*\{[^}]*padding-block:\s*clamp\(4rem,\s*8vw,\s*6rem\)/s,
+      /\.section,\s*\.approach,\s*\.timelineSection,\s*\.today\s*\{[^}]*padding-block:\s*clamp\(5rem,\s*8vw,\s*7\.5rem\)/s,
     );
     expect(css).toMatch(
-      /\.today\s*\{[^}]*padding:\s*clamp\(3rem,\s*6vw,\s*4rem\)/s,
+      /\.today\s*\{[^}]*padding:\s*clamp\(3rem,\s*6vw,\s*4\.5rem\)/s,
     );
   });
 
-  it("keeps homepage actions touch-sized and removes artificial mobile height", () => {
+  it("keeps homepage actions touch-sized without artificial viewport height", () => {
     expect(css).toMatch(/\.actions > \*\s*\{[^}]*min-height:\s*44px/s);
-    expect(css).toMatch(
-      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.section,\s*\.approach,\s*\.timelineSection\s*\{[^}]*min-height:\s*auto/s,
-    );
+    expect(css).not.toMatch(/min-height:\s*82svh/);
   });
 
-  it("centers the main below-hero sections without including today or actions", () => {
+  it("uses a consistent wide measure and restrained intro width", () => {
     expect(css).toMatch(
-      /\.section,\s*\.approach,\s*\.timelineSection\s*\{[^}]*min-height:\s*82svh[^}]*box-sizing:\s*border-box[^}]*display:\s*flex[^}]*flex-direction:\s*column[^}]*justify-content:\s*center/s,
+      /\.section,\s*\.approach,\s*\.timelineSection,\s*\.today\s*\{(?=[^}]*width:\s*min\(100%\s*-\s*3rem,\s*var\(--maxw\)\))(?=[^}]*margin-inline:\s*auto)[^}]*\}/s,
     );
-    expect(css).not.toMatch(/\.today\s*\{[^}]*min-height:\s*82svh/s);
-    expect(css).not.toMatch(/\.actions\s*\{[^}]*min-height:\s*82svh/s);
+    expect(css).toMatch(/\.sectionIntro\s*\{[^}]*max-width:\s*52rem/s);
   });
 
-  it("uses quiet four-column cards with a thin accent edge", () => {
+  it("uses an editorial two-column problem register", () => {
     expect(css).toMatch(
-      /\.problemGrid\s*\{(?=[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\))(?=[^}]*gap:\s*1\.5rem)(?=[^}]*margin-top:\s*4rem)[^}]*\}/s,
+      /\.problemGrid\s*\{(?=[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\))(?=[^}]*gap:\s*0)(?=[^}]*border-block:\s*1px solid var\(--border\))[^}]*\}/s,
     );
     expect(css).toMatch(
-      /\.problem\s*\{(?=[^}]*padding:\s*3rem\s+1\.5rem)(?=[^}]*border:\s*1px solid var\(--border\))(?=[^}]*background:\s*var\(--surface\))[^}]*\}/s,
+      /\.problem\s*\{(?=[^}]*display:\s*grid)(?=[^}]*grid-template-columns:\s*4\.75rem\s+minmax\(0,\s*1fr\))(?=[^}]*column-gap:\s*1\.25rem)[^}]*\}/s,
     );
     expect(css).toMatch(
-      /\.problem\s*\{[^}]*border-top:\s*2px solid var\(--accent\)/s,
+      /\.problem:nth-child\(odd\)\s*\{[^}]*border-right:\s*1px solid var\(--border\)/s,
     );
+    expect(css).not.toMatch(/\.problem\s*\{[^}]*(?:background|border-top):/s);
   });
 
-  it("centers technical diagrams above left-aligned problem copy", () => {
+  it("places technical diagrams beside left-aligned problem copy", () => {
     expect(css).toMatch(
-      /\.problemVisual\s*\{(?=[^}]*display:\s*grid)(?=[^}]*height:\s*3rem)(?=[^}]*place-items:\s*center)(?=[^}]*margin-bottom:\s*1\.5rem)[^}]*\}/s,
+      /\.problemVisual\s*\{(?=[^}]*grid-area:\s*visual)(?=[^}]*width:\s*4\.75rem)(?=[^}]*height:\s*4\.75rem)(?=[^}]*place-items:\s*center)(?=[^}]*background:\s*var\(--surface\))[^}]*\}/s,
     );
     expect(css).toMatch(
       /\.problemIllustration\s*\{(?=[^}]*display:\s*block)(?=[^}]*width:\s*4rem)(?=[^}]*height:\s*2\.75rem)(?=[^}]*color:\s*var\(--accent\))(?=[^}]*stroke-width:\s*1\.75)[^}]*\}/s,
@@ -80,27 +83,24 @@ describe("homepage workflow problem section", () => {
     );
   });
 
-  it("reduces the problem grid to two columns and then one", () => {
+  it("reduces the problem register to one column on small screens", () => {
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*900px\)[\s\S]*?\.problemGrid\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s,
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.problemGrid\s*\{[^}]*grid-template-columns:\s*1fr[^}]*\}/s,
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.problemGrid\s*\{(?=[^}]*grid-template-columns:\s*1fr)(?=[^}]*row-gap:\s*1\.25rem)[^}]*\}/s,
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.problem\s*\{[^}]*padding:\s*2rem\s+0/s,
     );
     expect(css).toMatch(
-      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.problem\s*\{[^}]*padding-block:\s*2\.25rem/s,
+      /@media\s*\(max-width:\s*640px\)[\s\S]*?\.problem:nth-child\(odd\)\s*\{[^}]*border-right:\s*0/s,
     );
   });
 
   it("uses an open page with an anchored lead beside equal principle rows", () => {
     expect(css).toMatch(
-      /\.section,\s*\.approach,\s*\.timelineSection,\s*\.today\s*\{(?=[^}]*width:\s*min\(100%\s*-\s*2rem,\s*70rem\))(?=[^}]*margin-inline:\s*auto)[^}]*\}/s,
+      /\.approachLayout\s*\{(?=[^}]*display:\s*grid)(?=[^}]*grid-template-columns:\s*minmax\(0,\s*2fr\)\s+minmax\(0,\s*3fr\))(?=[^}]*gap:\s*clamp\(2rem,\s*5vw,\s*4rem\))(?=[^}]*align-items:\s*center)[^}]*\}/s,
     );
     expect(css).not.toMatch(
       /\.approach\s*\{[^}]*(?:width:\s*auto|padding-inline:|background:\s*color-mix\()/s,
-    );
-    expect(css).toMatch(
-      /\.approachLayout\s*\{(?=[^}]*display:\s*grid)(?=[^}]*grid-template-columns:\s*minmax\(0,\s*2fr\)\s+minmax\(0,\s*3fr\))(?=[^}]*gap:\s*clamp\(2rem,\s*5vw,\s*4rem\))[^}]*\}/s,
     );
     expect(css).toMatch(
       /\.principles\s*\{(?=[^}]*display:\s*grid)(?=[^}]*align-content:\s*center)[^}]*\}/s,
@@ -108,11 +108,9 @@ describe("homepage workflow problem section", () => {
     expect(css).not.toMatch(/\.approachLead\s*\{[^}]*order:/s);
     expect(css).not.toMatch(/\.principles\s*\{[^}]*order:/s);
     expect(css).toMatch(
-      /\.principleItem\s*\{(?=[^}]*padding-block:\s*1\.5rem)(?=[^}]*border-top:\s*1px solid var\(--border\))[^}]*\}/s,
+      /\.principleItem\s*\{(?=[^}]*padding-block:\s*1\.75rem)(?=[^}]*border-top:\s*1px solid var\(--border\))[^}]*\}/s,
     );
-    expect(css).toMatch(
-      /\.principleItem::before\s*\{(?=[^}]*content:\s*attr\(data-principle\))(?=[^}]*border:\s*1px solid var\(--accent\))(?=[^}]*border-radius:\s*50%)[^}]*\}/s,
-    );
+    expect(css).not.toMatch(/\.principleItem::before\s*\{/);
     expect(css).not.toMatch(
       /\.principleItem h3\s*\{[^}]*border-left:/s,
     );

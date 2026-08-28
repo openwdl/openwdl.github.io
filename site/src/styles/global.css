@@ -25,6 +25,16 @@ body:has(main[data-page="blog"])::before {
   display: none;
 }
 
+/* The homepage hero owns its dotted field so the texture is not doubled. */
+body:has(main[data-page="home"])::before {
+  display: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 82%, transparent);
+  color: var(--accent-contrast);
+}
+
 
 /* Section anchors need clearance for the sticky nav. */
 section { scroll-margin-top: 5rem; }

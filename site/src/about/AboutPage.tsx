@@ -48,7 +48,7 @@ const milestones = [
   ],
   [
     "2026",
-    "WDL 1.3 adds enums and improves type safety, retries, and cross-engine consistency.",
+    "WDL 1.3 adds enums, else-if branches, and dynamic retry resources.",
   ],
 ] as const;
 
@@ -62,20 +62,27 @@ export function AboutPage() {
       <NavBar
         baseHref={import.meta.env.BASE_URL}
       />
-      <main id="main-content" className={styles.page} tabIndex={-1}>
+      <main
+        id="main-content"
+        className={styles.page}
+        data-page="home"
+        tabIndex={-1}
+      >
         <HomeHero />
 
         <section className={styles.section} aria-labelledby="workflow-problem">
-          <p className={styles.eyebrow}>The problem</p>
-          <h2 id="workflow-problem">
-            In science, an analysis often outgrows the scripts that started it.
-          </h2>
-          <p>
-            Scripts are a natural place to begin. As an analysis grows, its
-            dependencies, data flow, parallel work, and resource needs become
-            harder to see, while the details needed to run it spread across
-            scripts, inputs, and platform configuration.
-          </p>
+          <div className={styles.sectionIntro}>
+            <p className={styles.eyebrow}>The problem</p>
+            <h2 id="workflow-problem">
+              In science, an analysis often outgrows the scripts that started it.
+            </h2>
+            <p>
+              Scripts are a natural place to begin. As an analysis grows, its
+              dependencies, data flow, parallel work, and resource needs become
+              harder to see, while the details needed to run it spread across
+              scripts, inputs, and platform configuration.
+            </p>
+          </div>
           <div className={styles.problemGrid}>
             {problems.map(([title, description, illustration]) => (
               <article key={title} className={styles.problem}>
@@ -93,7 +100,7 @@ export function AboutPage() {
           <div className={styles.approachLayout}>
             <div className={styles.approachLead}>
               <p className={styles.eyebrow}>The WDL approach</p>
-              <h2 id="wdl-approach">Four principles shape WDL.</h2>
+              <h2 id="wdl-approach">Four principles guide WDL.</h2>
               <p>
                 WDL is designed for the people who author analyses, the systems
                 that execute them, and the community that evolves the standard.
@@ -103,7 +110,7 @@ export function AboutPage() {
               </p>
             </div>
             <div className={styles.principles}>
-              <article className={styles.principleItem} data-principle="1">
+              <article className={styles.principleItem}>
                 <h3>Human-readable and writable</h3>
                 <p>
                   A concise, declarative grammar helps software engineers,
@@ -111,7 +118,7 @@ export function AboutPage() {
                   workflow description.
                 </p>
               </article>
-              <article className={styles.principleItem} data-principle="2">
+              <article className={styles.principleItem}>
                 <h3>Powerful abstractions</h3>
                 <p>
                   Typed inputs and outputs, explicit data dependencies,
@@ -120,7 +127,7 @@ export function AboutPage() {
                   directly.
                 </p>
               </article>
-              <article className={styles.principleItem} data-principle="3">
+              <article className={styles.principleItem}>
                 <h3>Portability</h3>
                 <p>
                   A task or workflow that conforms to the WDL specification can
@@ -129,7 +136,7 @@ export function AboutPage() {
                   environment-specific assumptions.
                 </p>
               </article>
-              <article className={styles.principleItem} data-principle="4">
+              <article className={styles.principleItem}>
                 <h3>Open standard</h3>
                 <p>
                   A public specification and open governance process let users
@@ -140,11 +147,11 @@ export function AboutPage() {
             </div>
           </div>
         </section>
-
-
         <section className={styles.timelineSection} aria-labelledby="wdl-history">
-          <p className={styles.eyebrow}>A short history</p>
-          <h2 id="wdl-history">From an internal tool to an open standard.</h2>
+          <div className={styles.sectionIntro}>
+            <p className={styles.eyebrow}>A short history</p>
+            <h2 id="wdl-history">From an internal tool to an open standard.</h2>
+          </div>
           <ol className={styles.timeline} aria-label="WDL history">
             {milestones.map(([year, description]) => (
               <li key={year}>
@@ -171,7 +178,6 @@ export function AboutPage() {
             <Button
               as="a"
               href={docHref("/docs/start/your-first-workflow/")}
-              variant="secondary"
               leadingIcon={<FiBookOpen />}
             >
               Start learning WDL

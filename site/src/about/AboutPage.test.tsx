@@ -7,6 +7,7 @@ it("offers keyboard users a direct route to the main content", () => {
   expect(screen.getByRole("link", { name: "Skip to main content" }))
     .toHaveAttribute("href", "#main-content");
   expect(screen.getByRole("main")).toHaveAttribute("id", "main-content");
+  expect(screen.getByRole("main")).toHaveAttribute("data-page", "home");
   expect(screen.getByRole("main")).toHaveAttribute("tabindex", "-1");
 });
 
@@ -24,7 +25,7 @@ it("explains the problem, WDL approach, history, and present", () => {
   })).toBeInTheDocument();
   expect(screen.getByRole("heading", {
     level: 2,
-    name: "Four principles shape WDL.",
+    name: "Four principles guide WDL.",
   })).toBeInTheDocument();
   expect(screen.getByRole("heading", {
     level: 2,
@@ -117,7 +118,7 @@ it("presents the four WDL principles as equal pillars", () => {
 
   const heading = screen.getByRole("heading", {
     level: 2,
-    name: "Four principles shape WDL.",
+    name: "Four principles guide WDL.",
   });
   const section = heading.closest("section");
   expect(section).not.toBeNull();
@@ -131,8 +132,8 @@ it("presents the four WDL principles as equal pillars", () => {
 
   const articles = within(section).getAllByRole("article");
   expect(articles).toHaveLength(4);
-  expect(articles.map((article) => article.getAttribute("data-principle")))
-    .toEqual(["1", "2", "3", "4"]);
+  expect(articles.every((article) => !article.hasAttribute("data-principle")))
+    .toBe(true);
   expect(articles[0]).toHaveTextContent(
     "Human-readable and writableA concise, declarative grammar helps software engineers, domain experts, and platform operators reason from the same workflow description.",
   );
@@ -271,7 +272,7 @@ it("uses sourced milestones and base-aware next steps", () => {
     ["2018", "WDL 1.0 becomes the official specification."],
     ["2021", "WDL 1.1 adds standard runtime attributes, JSON I/O, and struct literals."],
     ["2024", "WDL 1.2 adds directories, multi-line strings, requirements, and hints."],
-    ["2026", "WDL 1.3 adds enums and improves type safety, retries, and cross-engine consistency."],
+    ["2026", "WDL 1.3 adds enums, else-if branches, and dynamic retry resources."],
   ];
   for (const [year, description] of milestones) {
     expect(within(timeline).getByText(year)).toBeInTheDocument();
@@ -290,8 +291,11 @@ it("uses sourced milestones and base-aware next steps", () => {
   expect(within(today as HTMLElement).getByRole("link", {
     name: "Explore the WDL ecosystem",
   }).className).toContain("Button_secondary");
-  expect(within(today as HTMLElement).getByRole("link", { name: "Start learning WDL" }))
-    .toHaveAttribute("href", "/docs/start/your-first-workflow/");
+  const startLearning = within(today as HTMLElement).getByRole("link", {
+    name: "Start learning WDL",
+  });
+  expect(startLearning).toHaveAttribute("href", "/docs/start/your-first-workflow/");
+  expect(startLearning.className).toContain("Button_primary");
   // The community page is unlinked from the site, so About no longer offers it.
   expect(within(today as HTMLElement).queryByRole("link", { name: "Meet the community" }))
     .toBeNull();

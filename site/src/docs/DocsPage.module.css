@@ -12,6 +12,7 @@
   color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: 0.75rem;
+  line-height: 1.5;
 }
 
 .breadcrumbs ol {
@@ -36,6 +37,12 @@
 
 .breadcrumbs a:hover {
   color: var(--text);
+}
+
+.breadcrumbs a:focus-visible {
+  border-radius: var(--radius-control);
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .breadcrumbs [aria-current="page"] {

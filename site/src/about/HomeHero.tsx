@@ -1,4 +1,5 @@
 import { Button } from "@openwdl/ui";
+import { FiBookOpen, FiExternalLink } from "react-icons/fi";
 import { docHref } from "../docs/docHref";
 import styles from "./HomeHero.module.css";
 
@@ -128,13 +129,18 @@ export function HomeHero() {
           platforms.
         </p>
         <div className={styles.links}>
-          <Button as="a" href={docHref("/docs/start/overview/")}>
+          <Button
+            as="a"
+            href={docHref("/docs/start/overview/")}
+            leadingIcon={<FiBookOpen />}
+          >
             Read the language guide
           </Button>
           <Button
             as="a"
             href="https://github.com/openwdl/wdl/blob/wdl-1.3/SPEC.md"
             variant="secondary"
+            leadingIcon={<FiExternalLink />}
           >
             View the specification
           </Button>

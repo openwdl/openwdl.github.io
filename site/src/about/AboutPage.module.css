@@ -30,11 +30,11 @@
 .approach,
 .timelineSection,
 .today {
-  width: min(100% - 2rem, 70rem);
+  width: min(100% - 3rem, var(--maxw));
   margin-inline: auto;
 }
 
-.section > p:not(.eyebrow),
+.sectionIntro > p:not(.eyebrow),
 .today > p:not(.eyebrow) {
   max-width: 47rem;
   color: var(--text-muted);
@@ -57,18 +57,12 @@
 .approach,
 .timelineSection,
 .today {
-  padding-block: clamp(4rem, 8vw, 6rem);
+  padding-block: clamp(5rem, 8vw, 7.5rem);
   border-top: 1px solid var(--border);
 }
 
-.section,
-.approach,
-.timelineSection {
-  min-height: 82svh;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.sectionIntro {
+  max-width: 52rem;
 }
 
 .section h2,
@@ -90,28 +84,39 @@
 
 .problemGrid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1.5rem;
-  margin-top: 4rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  border-block: 1px solid var(--border);
 }
 
 .problem {
-  padding: 3rem 1.5rem;
-  border: 1px solid var(--border);
-  border-top: 2px solid var(--accent);
-  background: var(--surface);
+  display: grid;
+  grid-template-areas:
+    "visual title"
+    "visual body";
+  grid-template-columns: 4.75rem minmax(0, 1fr);
+  column-gap: 1.25rem;
+  align-content: start;
+  padding: clamp(1.75rem, 4vw, 2.5rem);
 }
 
-.problem {
-  border-radius: var(--radius);
-  overflow: hidden;
+.problem:nth-child(odd) {
+  border-right: 1px solid var(--border);
+}
+
+.problem:nth-child(-n + 2) {
+  border-bottom: 1px solid var(--border);
 }
 
 .problemVisual {
+  grid-area: visual;
   display: grid;
-  height: 3rem;
+  width: 4.75rem;
+  height: 4.75rem;
   place-items: center;
-  margin-bottom: 1.5rem;
+  border-radius: var(--radius);
+  background: var(--surface);
 }
 
 .problemIllustration {
@@ -131,11 +136,13 @@
 }
 
 .problem h3 {
+  grid-area: title;
   margin: 0 0 0.5rem;
   text-align: left;
 }
 
 .problem p {
+  grid-area: body;
   margin: 0;
   color: var(--text-muted);
   line-height: 1.6;
@@ -146,6 +153,7 @@
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
   gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
 }
 
 .approachLead {
@@ -164,27 +172,8 @@
 }
 
 .principleItem {
-  position: relative;
-  padding-block: 1.5rem;
-  padding-inline-start: 3rem;
+  padding-block: 1.75rem;
   border-top: 1px solid var(--border);
-}
-
-.principleItem::before {
-  content: attr(data-principle);
-  position: absolute;
-  top: 1.4rem;
-  inset-inline-start: 0;
-  display: grid;
-  width: 1.75rem;
-  height: 1.75rem;
-  place-items: center;
-  border: 1px solid var(--accent);
-  border-radius: 50%;
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
 }
 
 .principleItem:last-child {
@@ -193,6 +182,7 @@
 
 .principleItem h3 {
   margin: 0 0 0.5rem;
+  color: var(--text);
 }
 
 .principleItem p {
@@ -203,16 +193,18 @@
 .timeline {
   display: grid;
   gap: 0;
-  margin: 2rem 0 0;
+  margin: clamp(2.5rem, 5vw, 4rem) 0 0;
   padding: 0;
+  border-bottom: 1px solid var(--border);
   list-style: none;
 }
 
 .timeline li {
   display: grid;
-  grid-template-columns: 6rem minmax(0, 1fr);
-  gap: 1rem;
-  padding-block: 1rem;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: baseline;
+  padding-block: 1.25rem;
   border-top: 1px solid var(--border);
 }
 
@@ -220,6 +212,7 @@
   color: var(--accent);
   font-family: var(--font-mono);
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .timeline p {
@@ -227,15 +220,22 @@
   white-space: nowrap;
 }
 
-.timeline li:last-child {
-  border-bottom: 1px solid var(--border);
-}
-
 .today {
-  padding: clamp(3rem, 6vw, 4rem);
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(16rem, 1fr);
+  column-gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+  margin-block: clamp(2rem, 5vw, 4rem) clamp(5rem, 9vw, 8rem);
+  padding: clamp(3rem, 6vw, 4.5rem);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   background: var(--surface);
+}
+
+.today .eyebrow,
+.today h2,
+.today > p {
+  grid-column: 1;
 }
 
 .section p a,
@@ -245,9 +245,12 @@
 
 .actions {
   display: flex;
-  flex-wrap: wrap;
+  grid-column: 2;
+  grid-row: 1 / span 3;
+  align-items: stretch;
+  flex-direction: column;
   gap: 0.75rem;
-  margin-top: 2rem;
+  margin-top: 0;
   padding: 0;
 }
 
@@ -262,12 +265,19 @@
 }
 
 @media (max-width: 900px) {
-  .problemGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .timeline p {
     white-space: normal;
+  }
+
+  .today {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    grid-column: 1;
+    grid-row: auto;
+    flex-flow: row wrap;
+    margin-top: 2rem;
   }
 }
 
@@ -278,12 +288,6 @@
 }
 
 @media (max-width: 640px) {
-  .section,
-  .approach,
-  .timelineSection {
-    min-height: auto;
-  }
-
   .timeline li {
     grid-template-columns: 4.5rem minmax(0, 1fr);
     gap: 0.75rem;
@@ -304,14 +308,22 @@
 
   .problemGrid {
     grid-template-columns: 1fr;
-    row-gap: 1.25rem;
   }
 
   .problem {
-    padding-block: 2.25rem;
+    padding: 2rem 0;
+  }
+
+  .problem:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .problem:not(:last-child) {
+    border-bottom: 1px solid var(--border);
   }
 
   .problemVisual {
-    margin-bottom: 1.25rem;
+    width: 4rem;
+    height: 4rem;
   }
 }

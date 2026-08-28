@@ -7,10 +7,9 @@ const stylesheet = (path: string) =>
 it("collapses the About comparison and problem grid without overflow", () => {
   const css = stylesheet("../about/AboutPage.module.css");
 
-  expect(css).toMatch(/\.section\s*>\s*p:not\(\.eyebrow\)/);
+  expect(css).toMatch(/\.sectionIntro\s*>\s*p:not\(\.eyebrow\)/);
   expect(css).toMatch(/\.today\s*>\s*p:not\(\.eyebrow\)/);
-  expect(css).toMatch(/grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)/);
-  expect(css).toMatch(/@media \(max-width:\s*900px\)[\s\S]*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
+  expect(css).toMatch(/grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/);
   expect(css).toMatch(/@media \(max-width:\s*860px\)[\s\S]*\.approachLayout[\s\S]*grid-template-columns:\s*1fr/);
   expect(css).toMatch(/@media \(max-width:\s*640px\)[\s\S]*\.problemGrid[\s\S]*grid-template-columns:\s*1fr/);
 });
