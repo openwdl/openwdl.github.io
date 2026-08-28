@@ -62,14 +62,8 @@ See [EDITING.md](EDITING.md) for how to add a blog post or a documentation page.
 
 `Lint & Test` runs on every pull request and on pushes to `main`.
 
-`Deploy site to Pages` builds `site/dist` and publishes it to GitHub Pages. It
-is currently **manual only** (`workflow_dispatch`) so that staging work on
-`main` cannot replace the live site by accident. At cutover:
-
-1. Run `Deploy site to Pages` from the Actions tab and confirm the result.
-2. Make `main` the default branch.
-3. Add a `push: branches: [main]` trigger to
-   `.github/workflows/deploy-pages.yml` so deployments become automatic.
+`Deploy site to Pages` builds `site/dist` and publishes it to GitHub Pages on
+every push to `main`. It can also be started manually with `workflow_dispatch`.
 
 ## Contributing
 

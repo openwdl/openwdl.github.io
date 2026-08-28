@@ -1,13 +1,8 @@
 name: Deploy site to Pages
 
-# The redesigned site is staged on `main` while `master` remains the default
-# branch and continues to serve the live site. Deployment is therefore manual
-# for now. At cutover, make `main` the default branch and add:
-#
-#   push:
-#     branches: [main]
-#
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
