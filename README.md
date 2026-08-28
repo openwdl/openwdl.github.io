@@ -21,8 +21,7 @@ hydrates into a client-side app on load.
 | `site/src/content/docs/` | Documentation pages, compiled into routes and a search index.  |
 | `site/src/routes/`       | The route manifest, including legacy-URL redirects.            |
 | `site/public/`           | Static files copied verbatim into the build output.            |
-| `assets/`                | Brand assets (logos, icons); copied into the build.            |
-| `brand-guidelines.pdf`   | The downloadable brand guidelines, served from the site.       |
+| `assets/`                | Repository-level assets copied into `site/public/assets/`.     |
 
 ## Getting started
 
@@ -33,22 +32,24 @@ npm ci        # install dependencies (run from the repository root)
 npm run dev -w @openwdl/site
 ```
 
-`dev` regenerates the docs and blog route data, then starts Vite on
-`http://localhost:5173`.
+`dev` regenerates the docs, blog route data, and search index, then starts Vite
+on `http://localhost:5173`.
 
 ### Other commands
 
 All commands run from the repository root.
 
 ```sh
+npm run build:content -w @openwdl/site # regenerate docs, routes, and search data
 npm run build -w @openwdl/site        # full static build into site/dist
 npm test -w @openwdl/site             # unit and component tests
 npm run test:static -w @openwdl/site  # assertions against the built output
 npm run lint -w @openwdl/site         # eslint
 ```
 
-The build honors `OPENWDL_BASE` for the public base path. It defaults to `/`,
-which is what this repository deploys.
+The full build copies repository-level assets, regenerates content, type-checks
+the project, builds the client and server bundles, and prerenders the site.
+It honors `OPENWDL_BASE` for the public base path, which defaults to `/`.
 
 ## Editing the site
 
@@ -60,6 +61,7 @@ See [EDITING.md](EDITING.md) for how to add a blog post or a documentation page.
 
 `Deploy site to Pages` builds `site/dist` and publishes it to GitHub Pages on
 every push to `main`. It can also be started manually with `workflow_dispatch`.
+The workflow runs the unit and static-output tests as part of the build.
 
 ## Contributing
 
