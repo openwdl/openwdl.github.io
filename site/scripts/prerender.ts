@@ -36,7 +36,15 @@ function buildPageMeta(
   const origin = "https://openwdl.org";
   const basePath = base.endsWith("/") ? base.slice(0, -1) : base;
   const canonical = `${origin}${basePath}${route.path}`;
-  const image = `${origin}${base}social-card.png`;
+  const imagePath =
+    route.kind === "blog-index"
+      ? "blog/social-card.png"
+      : route.kind === "blog-post"
+        ? `blog/${route.blogSlug}/social-card.png`
+        : route.kind === "docs-page"
+          ? `${route.path.slice(1)}social-card.png`
+          : "social-card.png";
+  const image = `${origin}${base}${imagePath}`;
 
   if (route.kind === "home") {
     return {
@@ -144,10 +152,10 @@ export async function prerender(options: PrerenderOptions): Promise<void> {
       : "";
 
     const html = template
-      .replace("<!--page-title-->", () => escapeHtml(meta.title))
-      .replace("<!--page-description-->", () => escapeHtml(meta.description))
-      .replace("<!--page-canonical-->", () => escapeHtml(meta.canonical))
-      .replace("<!--page-image-->", () => escapeHtml(meta.image))
+      .replaceAll("<!--page-title-->", () => escapeHtml(meta.title))
+      .replaceAll("<!--page-description-->", () => escapeHtml(meta.description))
+      .replaceAll("<!--page-canonical-->", () => escapeHtml(meta.canonical))
+      .replaceAll("<!--page-image-->", () => escapeHtml(meta.image))
       .replace("<!--page-robots-->", robotsMeta)
       .replace("<!--page-redirect-->", redirectMeta)
       .replace(

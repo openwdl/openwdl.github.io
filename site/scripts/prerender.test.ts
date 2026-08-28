@@ -82,6 +82,9 @@ const template = `<!doctype html>
 <title><!--page-title--></title>
 <meta name="description" content="<!--page-description-->" />
 <link rel="canonical" href="<!--page-canonical-->" />
+<meta property="og:title" content="<!--page-title-->" />
+<meta property="og:description" content="<!--page-description-->" />
+<meta property="og:url" content="<!--page-canonical-->" />
 <meta property="og:image" content="<!--page-image-->" />
 <!--page-robots-->
 <!--page-redirect-->
@@ -232,6 +235,14 @@ it("writes the home page with page-specific metadata", async () => {
     'content="Learn why WDL exists, how it separates workflow logic from execution, and how it became an open community standard."',
   );
   expect(home).toContain(
+    'property="og:title" content="OpenWDL | Workflow Description Language"',
+  );
+  expect(home).toContain(
+    'property="og:description" content="Learn why WDL exists, how it separates workflow logic from execution, and how it became an open community standard."',
+  );
+  expect(home).not.toContain("<!--page-title-->");
+  expect(home).not.toContain("<!--page-description-->");
+  expect(home).toContain(
     'href="https://openwdl.org/brand/"',
   );
   expect(home).toContain(
@@ -262,6 +273,9 @@ it("prerenders the blog index, article metadata, and legacy redirect", async () 
   );
   expect(article).toContain("<title>Announcing WDL 1.3.0 | OpenWDL</title>");
   expect(article).toContain('content="The WDL 1.3 release."');
+  expect(article).toContain(
+    'content="https://openwdl.org/brand/blog/announcing-wdl-1-3-0/social-card.png"',
+  );
   expect(article).toContain(
     'href="https://openwdl.org/brand/blog/announcing-wdl-1-3-0/"',
   );
