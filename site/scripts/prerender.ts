@@ -29,12 +29,14 @@ function buildPageMeta(
   title: string;
   description: string;
   canonical: string;
+  image: string;
   noindex: boolean;
   redirect?: string;
 } {
   const origin = "https://openwdl.org";
   const basePath = base.endsWith("/") ? base.slice(0, -1) : base;
   const canonical = `${origin}${basePath}${route.path}`;
+  const image = `${origin}${base}social-card.png`;
 
   if (route.kind === "home") {
     return {
@@ -42,6 +44,7 @@ function buildPageMeta(
       description:
         "Learn why WDL exists, how it separates workflow logic from execution, and how it became an open community standard.",
       canonical,
+      image,
       noindex: false,
     };
   }
@@ -52,6 +55,7 @@ function buildPageMeta(
       title: "Page Moved | OpenWDL",
       description: "",
       canonical: `${origin}${basePath}${route.target}`,
+      image,
       noindex: true,
       redirect: target,
     };
@@ -62,6 +66,7 @@ function buildPageMeta(
       title: "The OpenWDL Blog",
       description: "Releases, tooling, and reports from the open standard.",
       canonical,
+      image,
       noindex: false,
     };
   }
@@ -72,6 +77,7 @@ function buildPageMeta(
       title: post ? `${post.title} | OpenWDL` : `${route.path} | OpenWDL`,
       description: post?.standfirst ?? "",
       canonical,
+      image,
       noindex: false,
     };
   }
@@ -81,6 +87,7 @@ function buildPageMeta(
       title: "Page Not Found | OpenWDL",
       description: "",
       canonical,
+      image,
       noindex: true,
     };
   }
@@ -90,6 +97,7 @@ function buildPageMeta(
     title: page ? `${page.title} | OpenWDL` : `${route.path} | OpenWDL`,
     description: page?.description ?? "",
     canonical,
+    image,
     noindex: false,
   };
 }
@@ -107,6 +115,7 @@ export async function prerender(options: PrerenderOptions): Promise<void> {
     "<!--page-title-->",
     "<!--page-description-->",
     "<!--page-canonical-->",
+    "<!--page-image-->",
     "<!--page-robots-->",
     "<!--page-redirect-->",
     '<div id="root"><!--app-html--></div>',
@@ -138,6 +147,7 @@ export async function prerender(options: PrerenderOptions): Promise<void> {
       .replace("<!--page-title-->", () => escapeHtml(meta.title))
       .replace("<!--page-description-->", () => escapeHtml(meta.description))
       .replace("<!--page-canonical-->", () => escapeHtml(meta.canonical))
+      .replace("<!--page-image-->", () => escapeHtml(meta.image))
       .replace("<!--page-robots-->", robotsMeta)
       .replace("<!--page-redirect-->", redirectMeta)
       .replace(

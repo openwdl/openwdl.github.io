@@ -82,6 +82,7 @@ const template = `<!doctype html>
 <title><!--page-title--></title>
 <meta name="description" content="<!--page-description-->" />
 <link rel="canonical" href="<!--page-canonical-->" />
+<meta property="og:image" content="<!--page-image-->" />
 <!--page-robots-->
 <!--page-redirect-->
 </head>
@@ -232,6 +233,9 @@ it("writes the home page with page-specific metadata", async () => {
   );
   expect(home).toContain(
     'href="https://openwdl.org/brand/"',
+  );
+  expect(home).toContain(
+    'content="https://openwdl.org/brand/social-card.png"',
   );
   expect(home).not.toContain('name="robots" content="noindex"');
 });
