@@ -59,9 +59,7 @@ export function AboutPage() {
       <a href="#main-content" className={styles.skip}>
         Skip to main content
       </a>
-      <NavBar
-        baseHref={import.meta.env.BASE_URL}
-      />
+      <NavBar />
       <main
         id="main-content"
         className={styles.page}

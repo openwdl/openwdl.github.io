@@ -35,7 +35,7 @@ export function CommunityPage() {
   return (
     <ToastProvider>
       {/* No `active`: no navbar item corresponds to this page. */}
-      <NavBar baseHref={import.meta.env.BASE_URL} />
+      <NavBar />
       <main className={styles.page}>
         <header className={styles.hero}>
           <p className={styles.eyebrow}>OpenWDL community</p>

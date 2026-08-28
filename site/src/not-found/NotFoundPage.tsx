@@ -37,7 +37,7 @@ export function NotFoundPage() {
   return (
     <ToastProvider>
       <div data-route="not-found">
-        <NavBar baseHref={import.meta.env.BASE_URL} />
+        <NavBar />
         <main className={styles.main}>
           <div className={styles.grid}>
             <section className={styles.message}>

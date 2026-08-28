@@ -5,10 +5,7 @@ import { Footer, NavBar, ToastProvider } from "@openwdl/ui";
 export function BlogShell({ children }: { children: ReactNode }) {
   return (
     <ToastProvider>
-      <NavBar
-        active="blog"
-        baseHref={import.meta.env.BASE_URL}
-      />
+      <NavBar active="blog" />
       {children}
       <Footer />
     </ToastProvider>

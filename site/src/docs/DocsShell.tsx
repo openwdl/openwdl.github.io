@@ -44,10 +44,7 @@ export function DocsShell({ page, pages, children }: DocsShellProps) {
       </a>
 
       {/* 2. Global navbar with Docs active */}
-      <NavBar
-        active="docs"
-        baseHref={import.meta.env.BASE_URL}
-      />
+      <NavBar active="docs" />
 
       {/* 3. Horizontal section navigation */}
       <nav aria-label="Documentation sections" className={styles.sectionNav}>
