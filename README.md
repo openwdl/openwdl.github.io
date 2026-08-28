@@ -12,10 +12,6 @@ The site is a [React](https://react.dev) application built with
 time and published to GitHub Pages, so the deployed site is fully static and
 hydrates into a client-side app on load.
 
-> [!NOTE]
-> The redesigned site lives on the `main` branch. `master` is still the default
-> branch and still serves the live site; see [Deployment](#deployment).
-
 ## Repository layout
 
 | Path                     | Contents                                                      |
