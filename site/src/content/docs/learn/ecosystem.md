@@ -138,7 +138,7 @@ The following is an incomplete list of large WDL workflow repositories sorted by
 [wdl-atlas]: https://github.com/lmtani/wdl-atlas
 [wdl-mode]: https://github.com/zhanxw/wdl-mode
 [wdl-packager]: https://github.com/biowdl/wdl-packager
-[wdl-sublime]: https://github.com/broadinstitutewdl-sublime/
+[wdl-sublime]: https://github.com/broadinstitute/wdl-sublime-syntax-highlighter
 [wdl-tests]: https://github.com/openwdl/wdl-tests
 [wdl-vim]: https://github.com/broadinstitute/vim-wdl
 [wdldoc]: https://github.com/stjudecloud/wdldoc
